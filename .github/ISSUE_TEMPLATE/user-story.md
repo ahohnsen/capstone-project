@@ -6,7 +6,7 @@ labels: enhancement
 assignees: ''
 ---
 
-## Value proposition
+## Value Proposition
 
 **As a**
 **I need**
