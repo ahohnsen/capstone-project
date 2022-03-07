@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import ListItem from './ListItem';
+import DiveWish from './DiveWish';
 
 describe('ListItem', () => {
   it('renders a destination and notes', () => {
     render(
-      <ListItem
+      <DiveWish
         destination="Maldives"
         notes="I want to go there for my next diving holiday"
       />

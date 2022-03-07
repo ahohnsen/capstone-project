@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-export default function Button({ handleClick, children }) {
-  return <StyledButton onClick={handleClick}>{children}</StyledButton>;
-}
-
-const StyledButton = styled.button`
+const Button = styled.button`
   width: 90%;
   margin: auto;
   padding: 10px;
@@ -16,3 +12,5 @@ const StyledButton = styled.button`
   font-weight: 500;
   font-size: 1rem;
 `;
+
+export default Button;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function ListItem({ destination, notes }) {
+export default function DiveWish({ destination, notes }) {
   return (
     <Wrapper>
       <Heading>{destination}</Heading>

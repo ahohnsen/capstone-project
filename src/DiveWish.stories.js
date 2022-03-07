@@ -1,11 +1,11 @@
-import ListItem from './ListItem';
+import DiveWish from './DiveWish.js';
 
 export default {
-  title: 'Component/ListItem',
-  component: ListItem,
+  title: 'Component/DiveWish',
+  component: DiveWish,
 };
 
-const Template = args => <ListItem {...args} />;
+const Template = args => <DiveWish {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

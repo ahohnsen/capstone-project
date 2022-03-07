@@ -3,22 +3,22 @@ import Wishlist from './Wishlist';
 
 describe('Wishlist', () => {
   it('renders wishlist with two sections', () => {
-    const listItems = [
+    const diveWishes = [
       { destination: 'Maldives', notes: '' },
       { destination: 'Lanzarote', notes: '' },
     ];
-    render(<Wishlist listItems={listItems} />);
+    render(<Wishlist diveWishes={diveWishes} />);
 
-    const listItem1 = screen.getByText('Maldives');
-    const listItem2 = screen.getByText('Lanzarote');
+    const diveWish1 = screen.getByText('Maldives');
+    const diveWish2 = screen.getByText('Lanzarote');
 
-    expect(listItem1).toBeInTheDocument();
-    expect(listItem2).toBeInTheDocument();
+    expect(diveWish1).toBeInTheDocument();
+    expect(diveWish2).toBeInTheDocument();
   });
 
   it('renders a message to the user when wishlist is empty', () => {
-    const listItems = [];
-    render(<Wishlist listItems={listItems} />);
+    const diveWishes = [];
+    render(<Wishlist diveWishes={diveWishes} />);
 
     const message = screen.getByText(
       /You currently have nothing on your wishlist./i

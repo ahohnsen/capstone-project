@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import ListItem from './ListItem.js';
+import DiveWish from './DiveWish.js';
 
-export default function Wishlist({ listItems }) {
+export default function Wishlist({ diveWishes }) {
   return (
     <Wrapper>
-      {listItems.length > 0 ? (
-        listItems.map((listItem, index) => (
-          <ListItem
+      {diveWishes.length > 0 ? (
+        diveWishes.map((wish, index) => (
+          <DiveWish
             key={index}
-            destination={listItem.destination}
-            notes={listItem.notes}
+            destination={wish.destination}
+            notes={wish.notes}
           />
         ))
       ) : (

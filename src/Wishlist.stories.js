@@ -9,7 +9,7 @@ const Template = args => <Wishlist {...args} />;
 
 export const WishlistDefault = Template.bind({});
 WishlistDefault.args = {
-  listItems: [
+  diveWishes: [
     {
       destination: 'Maldives',
       notes:
@@ -24,5 +24,5 @@ WishlistDefault.args = {
 
 export const WishlistEmpty = Template.bind({});
 WishlistEmpty.args = {
-  listItems: [],
+  diveWishes: [],
 };

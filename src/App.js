@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Wishlist from './Wishlist.js';
-import AddListItem from './AddListItem.js';
+import AddDiveWish from './AddDiveWish.js';
 
 export default function App() {
-  const [listItems, setListItems] = useState([]);
+  const [diveWishes, setDiveWishes] = useState([]);
 
   return (
     <>
       <Heading>Diving Wishlist</Heading>
-      <AddListItem onAddItem={AddItem} />
-      <Wishlist listItems={listItems} />
+      <AddDiveWish onAddDiveWish={AddToWishlist} />
+      <Wishlist diveWishes={diveWishes} />
     </>
   );
 
-  function AddItem(destination, notes) {
-    setListItems([{ destination: destination, notes: notes }, ...listItems]);
+  function AddToWishlist(destination, notes) {
+    setDiveWishes([{ destination: destination, notes: notes }, ...diveWishes]);
   }
 }
 

@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AddListItem from './AddListItem';
+import AddDiveWish from './AddDiveWish.js';
 
 describe('AddListItem', () => {
   it('renders a form with the name "Add a dive destination to your wishlist"', () => {
-    render(<AddListItem />);
+    render(<AddDiveWish />);
 
     const form = screen.getByRole('form', {
       name: 'Add a dive destination to your wishlist',
@@ -13,7 +13,7 @@ describe('AddListItem', () => {
   });
 
   it('renders a form with one input field, a textarea and a button to submit the form', () => {
-    render(<AddListItem />);
+    render(<AddDiveWish />);
     const destinationInput = screen.getByLabelText('DESTINATION');
     const notesTextarea = screen.getByLabelText('NOTES');
     const submitButton = screen.getByRole('button');
@@ -24,7 +24,7 @@ describe('AddListItem', () => {
   });
 
   it('input and textarea are both required fields', () => {
-    render(<AddListItem />);
+    render(<AddDiveWish />);
     const destinationInput = screen.getByLabelText('DESTINATION');
     const notesTextarea = screen.getByLabelText('NOTES');
 
@@ -34,7 +34,7 @@ describe('AddListItem', () => {
 
   it('submits form data when every field is filled out', () => {
     const callback = jest.fn();
-    render(<AddListItem onAddItem={callback} />);
+    render(<AddDiveWish onAddDiveWish={callback} />);
 
     const destinationInput = screen.getByLabelText('DESTINATION');
     const notesTextarea = screen.getByLabelText('NOTES');
