@@ -1,5 +1,13 @@
-function App() {
-  return <div className="App"></div>;
+import styled from 'styled-components';
+
+export default function App() {
+  return (
+    <>
+      <Heading>Scuba Mate</Heading>
+    </>
+  );
 }
 
-export default App;
+const Heading = styled.h1`
+  text-align: center;
+`;
