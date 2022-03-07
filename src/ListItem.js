@@ -11,12 +11,12 @@ export default function ListItem({ destination, notes }) {
 
 const Wrapper = styled.section`
   background-color: var(--bg-color-section);
-  padding: 10px 15px 15px 15px;
-  max-width: 400px;
+  padding: 10px 15px 15px;
 `;
 
 const Heading = styled.h2`
   font-size: 1.2rem;
+  font-weight: 600;
   color: var(--font-color-heading);
 `;
 
