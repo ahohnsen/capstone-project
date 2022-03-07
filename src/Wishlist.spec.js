@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Wishlist from './Wishlist';
 
 describe('Wishlist', () => {
-  it('renders wishlist withtwo sections', () => {
+  it('renders wishlist with two sections', () => {
     const listItems = [
       { destination: 'Maldives', notes: '' },
       { destination: 'Lanzarote', notes: '' },
