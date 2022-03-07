@@ -5,7 +5,8 @@ export default function Button({ handleClick, children }) {
 }
 
 const StyledButton = styled.button`
-  width: 330px;
+  width: 90%;
+  margin: auto;
   padding: 10px;
   background-color: var(--bg-color-button);
   color: var(--font-color-action);

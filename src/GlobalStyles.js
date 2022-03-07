@@ -19,7 +19,6 @@ body {
 h1 {
   font-size: 1.7rem;
   color: var(--font-color-heading);
-  margin-bottom: 20px;
 }
 
 :root {
@@ -29,6 +28,7 @@ h1 {
   --font-color-heading: #011F26;
   --font-color-content: #2C2727;
   --font-color-action: #FFFFFF;
+  --font-color-label: #848588;
   --color-boxshadow: rgba(99, 93, 93, 0.25);
  }`;
 
