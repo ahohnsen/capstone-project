@@ -16,7 +16,7 @@ main {
   width: 360px;
   padding: 50px 20px 20px;
   margin: 0 auto;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 input {
