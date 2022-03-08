@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Wishlist from './Wishlist.js';
-import AddDiveWish from './AddDiveWish.js';
+import AddWishPage from './pages/AddWishPage.js';
 
 export default function App() {
   const [diveWishes, setDiveWishes] = useState([]);
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <>
       <Heading>Diving Wishlist</Heading>
-      <AddDiveWish onAddDiveWish={addToWishlist} />
+      <AddWishPage onAddDiveWish={addToWishlist} />
       <Wishlist diveWishes={diveWishes} />
     </>
   );
