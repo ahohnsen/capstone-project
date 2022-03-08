@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import Button from './Button.js';
 
-export default function AddListItem({ onAddDiveWish }) {
+export default function AddDiveWish({ onAddDiveWish }) {
   return (
     <Form
       aria-label="Add a dive destination to your wishlist"
-      onSubmit={handleAddDiveWish}
+      onSubmit={handleSubmit}
     >
       <Container>
         <Label htmlFor="destination">DESTINATION </Label>
@@ -19,14 +19,13 @@ export default function AddListItem({ onAddDiveWish }) {
     </Form>
   );
 
-  function handleAddDiveWish(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const input = form.elements.destination;
-    const textarea = form.elements.notes;
-    onAddDiveWish(input.value, textarea.value);
-    input.value = '';
-    textarea.value = '';
+    const { destination, notes } = form.elements;
+    onAddDiveWish({ destination: destination.value, notes: notes.value });
+    destination.value = '';
+    notes.value = '';
   }
 }
 

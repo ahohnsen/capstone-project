@@ -9,13 +9,13 @@ export default function App() {
   return (
     <>
       <Heading>Diving Wishlist</Heading>
-      <AddDiveWish onAddDiveWish={AddToWishlist} />
+      <AddDiveWish onAddDiveWish={addToWishlist} />
       <Wishlist diveWishes={diveWishes} />
     </>
   );
 
-  function AddToWishlist(destination, notes) {
-    setDiveWishes([{ destination: destination, notes: notes }, ...diveWishes]);
+  function addToWishlist({ destination, notes }) {
+    setDiveWishes([{ destination, notes }, ...diveWishes]);
   }
 }
 

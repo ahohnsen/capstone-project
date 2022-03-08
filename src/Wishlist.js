@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import { nanoid } from 'nanoid';
 import DiveWish from './DiveWish.js';
 
 export default function Wishlist({ diveWishes }) {
   return (
     <Wrapper>
       {diveWishes.length > 0 ? (
-        diveWishes.map((wish, index) => (
+        diveWishes.map(wish => (
           <DiveWish
-            key={index}
+            key={nanoid()}
             destination={wish.destination}
             notes={wish.notes}
           />

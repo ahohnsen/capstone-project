@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
 
 body {
   line-height: 1.5;
-  max-width: 500px;
+  width: 360px;
   padding: 20px;
   margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
