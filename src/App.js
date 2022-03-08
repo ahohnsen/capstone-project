@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { nanoid } from 'nanoid';
 import { Route, Routes } from 'react-router-dom';
+import useLocalStorage from './hooks/useLocalStorage.js';
 import Navigation from './Navigation.js';
 import WishlistPage from './pages/WishlistPage.js';
 import AddWishPage from './pages/AddWishPage.js';
 
 export default function App() {
-  const [diveWishes, setDiveWishes] = useState([]);
+  const [diveWishes, setDiveWishes] = useLocalStorage('DivingWishlist', []);
 
   return (
     <AppGrid>
@@ -27,7 +28,8 @@ export default function App() {
   );
 
   function addToWishlist({ destination, notes }) {
-    setDiveWishes([{ destination, notes }, ...diveWishes]);
+    const id = nanoid();
+    setDiveWishes([{ id, destination, notes }, ...diveWishes]);
   }
 }
 
