@@ -9,7 +9,7 @@ export default function AddDiveWish({ onAddDiveWish }) {
     >
       <Container>
         <Label htmlFor="destination">DESTINATION </Label>
-        <Input id="destination" name="destination" maxlength="25" required />
+        <Input id="destination" name="destination" maxLength={25} required />
       </Container>
       <Container>
         <Label htmlFor="notes">NOTES</Label>
