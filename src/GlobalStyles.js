@@ -16,6 +16,18 @@ body {
   background-color: var(--bg-color-main) ;
 }
 
+input {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+  color: var(--font-color-content);
+  font-size: 1rem;
+}
+
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+  color: var(--font-color-content);
+  font-size: 1rem;
+}
+
 h1 {
   font-size: 1.7rem;
   color: var(--font-color-heading);

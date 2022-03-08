@@ -9,7 +9,7 @@ export default function AddDiveWish({ onAddDiveWish }) {
     >
       <Container>
         <Label htmlFor="destination">DESTINATION </Label>
-        <Input id="destination" name="destination" required />
+        <Input id="destination" name="destination" maxlength="25" required />
       </Container>
       <Container>
         <Label htmlFor="notes">NOTES</Label>
@@ -47,7 +47,6 @@ const Input = styled.input`
   width: 100%;
   padding: 2px;
   border: 0;
-  font-size: 1rem;
 `;
 const Container = styled.div`
   position: relative;
@@ -61,5 +60,4 @@ const Textarea = styled.textarea`
   height: 300px;
   padding: 2px;
   border: 0;
-  font-size: 1rem;
 `;
