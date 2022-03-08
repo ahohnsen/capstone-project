@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AddDiveWish from './AddDiveWish.js';
+import AddDiveWish from './AddWishPage.js';
 
-describe('AddListItem', () => {
+describe('AddWishPage', () => {
   it('renders a form with the name "Add a dive destination to your wishlist"', () => {
     render(<AddDiveWish />);
 
@@ -47,9 +47,9 @@ describe('AddListItem', () => {
     );
     userEvent.click(submitButton);
 
-    expect(callback).toHaveBeenCalledWith(
-      'Maldives',
-      'I want to go again soon, maybe this summer!'
-    );
+    expect(callback).toHaveBeenCalledWith({
+      destination: 'Maldives',
+      notes: 'I want to go again soon, maybe this summer!',
+    });
   });
 });

@@ -23,7 +23,7 @@ export default function WishlistPage({ diveWishes }) {
   );
 }
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   display: grid;
   gap: 15px;
 `;

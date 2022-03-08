@@ -32,7 +32,6 @@ export default function AddWishPage({ onAddDiveWish }) {
 const Form = styled.form`
   display: grid;
   gap: 20px;
-  margin: 30px 0 20px;
 `;
 
 const Label = styled.label`
