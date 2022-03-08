@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Wishlist from './Wishlist.js';
+import WishlistPage from './pages/WishlistPage.js';
 import AddWishPage from './pages/AddWishPage.js';
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
     <>
       <Heading>Diving Wishlist</Heading>
       <AddWishPage onAddDiveWish={addToWishlist} />
-      <Wishlist diveWishes={diveWishes} />
+      <WishlistPage diveWishes={diveWishes} />
     </>
   );
 

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
-import DiveWish from './DiveWish.js';
+import DiveWish from '../DiveWish.js';
 
-export default function Wishlist({ diveWishes }) {
+export default function WishlistPage({ diveWishes }) {
   return (
     <Wrapper>
       {diveWishes.length > 0 ? (

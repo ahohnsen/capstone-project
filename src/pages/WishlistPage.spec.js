@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Wishlist from './Wishlist';
+import WishlistPage from './WishlistPage.js';
 
 describe('Wishlist', () => {
   it('renders wishlist with two sections', () => {
@@ -7,7 +7,7 @@ describe('Wishlist', () => {
       { destination: 'Maldives', notes: '' },
       { destination: 'Lanzarote', notes: '' },
     ];
-    render(<Wishlist diveWishes={diveWishes} />);
+    render(<WishlistPage diveWishes={diveWishes} />);
 
     const diveWish1 = screen.getByText('Maldives');
     const diveWish2 = screen.getByText('Lanzarote');
@@ -18,7 +18,7 @@ describe('Wishlist', () => {
 
   it('renders a message to the user when wishlist is empty', () => {
     const diveWishes = [];
-    render(<Wishlist diveWishes={diveWishes} />);
+    render(<WishlistPage diveWishes={diveWishes} />);
 
     const message = screen.getByText(
       /You currently have nothing on your wishlist./i

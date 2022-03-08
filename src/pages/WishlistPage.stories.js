@@ -1,14 +1,14 @@
-import Wishlist from './Wishlist';
+import WishlistPage from './WishlistPage';
 
 export default {
-  title: 'Component/Wishlist',
-  component: Wishlist,
+  title: 'Pages/WishlistPage',
+  component: WishlistPage,
 };
 
-const Template = args => <Wishlist {...args} />;
+const Template = args => <WishlistPage {...args} />;
 
-export const WishlistDefault = Template.bind({});
-WishlistDefault.args = {
+export const WishlistPageDefault = Template.bind({});
+WishlistPageDefault.args = {
   diveWishes: [
     {
       destination: 'Maldives',
@@ -22,7 +22,7 @@ WishlistDefault.args = {
   ],
 };
 
-export const WishlistEmpty = Template.bind({});
-WishlistEmpty.args = {
+export const WishlistPageEmpty = Template.bind({});
+WishlistPageEmpty.args = {
   diveWishes: [],
 };
