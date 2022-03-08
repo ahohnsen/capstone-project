@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Button from './Button.js';
+import Button from '../Button.js';
 
-export default function AddDiveWish({ onAddDiveWish }) {
+export default function AddWishPage({ onAddDiveWish }) {
   return (
     <Form
       aria-label="Add a dive destination to your wishlist"
@@ -32,7 +32,6 @@ export default function AddDiveWish({ onAddDiveWish }) {
 const Form = styled.form`
   display: grid;
   gap: 20px;
-  margin: 30px 0 20px;
 `;
 
 const Label = styled.label`
