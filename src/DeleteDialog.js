@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Button from './Button.js';
 
-export default function DeleteDialog({ handleKeep, handleDelete }) {
+export default function DeleteDialog({ confirmDeleteWish, cancelDeleteWish }) {
   return (
     <Dialog>
       Do you really want to delete this item from your wishlist?
       <Wrapper>
-        <Button onClick={handleDelete}>YES, DELETE</Button>
-        <Button onClick={handleKeep}>NO, KEEP IT</Button>
+        <Button onClick={cancelDeleteWish}>Cancel</Button>
+        <Button onClick={confirmDeleteWish}>Yes, delete</Button>
       </Wrapper>
     </Dialog>
   );
