@@ -1,10 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import AddDiveWish from './AddWishPage.js';
 
 describe('AddWishPage', () => {
   it('renders a form with the name "Add a dive destination to your wishlist"', () => {
-    render(<AddDiveWish />);
+    render(
+      <MemoryRouter>
+        <AddDiveWish />
+      </MemoryRouter>
+    );
 
     const form = screen.getByRole('form', {
       name: 'Add a dive destination to your wishlist',
@@ -13,7 +18,11 @@ describe('AddWishPage', () => {
   });
 
   it('renders a form with one input field, a textarea and a button to submit the form', () => {
-    render(<AddDiveWish />);
+    render(
+      <MemoryRouter>
+        <AddDiveWish />
+      </MemoryRouter>
+    );
     const destinationInput = screen.getByLabelText('DESTINATION');
     const notesTextarea = screen.getByLabelText('NOTES');
     const submitButton = screen.getByRole('button');
@@ -24,7 +33,11 @@ describe('AddWishPage', () => {
   });
 
   it('input and textarea are both required fields', () => {
-    render(<AddDiveWish />);
+    render(
+      <MemoryRouter>
+        <AddDiveWish />
+      </MemoryRouter>
+    );
     const destinationInput = screen.getByLabelText('DESTINATION');
     const notesTextarea = screen.getByLabelText('NOTES');
 
@@ -34,7 +47,11 @@ describe('AddWishPage', () => {
 
   it('submits form data when every field is filled out', () => {
     const callback = jest.fn();
-    render(<AddDiveWish onAddDiveWish={callback} />);
+    render(
+      <MemoryRouter>
+        <AddDiveWish onAddDiveWish={callback} />
+      </MemoryRouter>
+    );
 
     const destinationInput = screen.getByLabelText('DESTINATION');
     const notesTextarea = screen.getByLabelText('NOTES');
