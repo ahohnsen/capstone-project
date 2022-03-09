@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { nanoid } from 'nanoid';
 import DiveWish from '../DiveWish.js';
 
 export default function WishlistPage({ diveWishes }) {
@@ -8,7 +7,7 @@ export default function WishlistPage({ diveWishes }) {
       {diveWishes.length > 0 ? (
         diveWishes.map(wish => (
           <DiveWish
-            key={nanoid()}
+            key={wish.id}
             destination={wish.destination}
             notes={wish.notes}
           />
