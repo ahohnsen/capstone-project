@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import Button from './Button.js';
 
-export default function DiveWish({ destination, notes }) {
+export default function DiveWish({ destination, notes, showDeleteDialog }) {
   return (
     <Wrapper>
       <Heading>{destination}</Heading>
       <Notes>{notes}</Notes>
+      <Button onClick={showDeleteDialog}>Delete</Button>
     </Wrapper>
   );
 }
