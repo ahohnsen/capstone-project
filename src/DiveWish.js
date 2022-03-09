@@ -16,7 +16,7 @@ export default function DiveWish({
       <Notes>{notes}</Notes>
       <Bookmark onClick={toggleBookmark}>
         {isBookmarked ? (
-          <img src={BookmarkIconActive} alt="bookmarked" />
+          <img src={BookmarkIconActive} alt="is bookmarked" />
         ) : (
           <img src={BookmarkIconInactive} alt="not bookmarked" />
         )}
