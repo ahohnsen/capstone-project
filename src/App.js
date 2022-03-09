@@ -24,6 +24,7 @@ export default function App() {
             element={
               <WishlistPage
                 diveWishes={diveWishes}
+                toggleBookmark={toggleBookmark}
                 confirmDeleteWish={confirmDeleteWish}
                 cancelDeleteWish={cancelDeleteWish}
                 isDialogVisible={isDialogVisible}
@@ -56,6 +57,18 @@ export default function App() {
   function showDeleteDialog(id) {
     setIsDialogVisible(true);
     setCurrentWishId(id);
+  }
+
+  function toggleBookmark(id) {
+    setDiveWishes(
+      diveWishes.map(diveWish => {
+        if (id === diveWish.id) {
+          return { ...diveWish, isBookmarked: !diveWish.isBookmarked };
+        } else {
+          return diveWish;
+        }
+      })
+    );
   }
 }
 

@@ -4,6 +4,7 @@ import DeleteDialog from '../DeleteDialog.js';
 
 export default function WishlistPage({
   diveWishes,
+  toggleBookmark,
   confirmDeleteWish,
   cancelDeleteWish,
   isDialogVisible,
@@ -17,6 +18,8 @@ export default function WishlistPage({
             key={wish.id}
             destination={wish.destination}
             notes={wish.notes}
+            isBookmarked={wish.isBookmarked}
+            toggleBookmark={() => toggleBookmark(wish.id)}
             showDeleteDialog={() => showDeleteDialog(wish.id)}
           />
         ))

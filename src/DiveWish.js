@@ -1,11 +1,26 @@
 import styled from 'styled-components';
 import DeleteIcon from './images/DeleteIcon.svg';
+import BookmarkIconInactive from './images/BookmarkInactive.svg';
+import BookmarkIconActive from './images/BookmarkActive.svg';
 
-export default function DiveWish({ destination, notes, showDeleteDialog }) {
+export default function DiveWish({
+  destination,
+  notes,
+  isBookmarked,
+  showDeleteDialog,
+  toggleBookmark,
+}) {
   return (
     <Wrapper>
       <Heading>{destination}</Heading>
       <Notes>{notes}</Notes>
+      <Bookmark onClick={toggleBookmark}>
+        {isBookmarked ? (
+          <img src={BookmarkIconActive} alt="bookmarked" />
+        ) : (
+          <img src={BookmarkIconInactive} alt="not bookmarked" />
+        )}
+      </Bookmark>
       <DeleteButton onClick={showDeleteDialog}>
         <img src={DeleteIcon} alt="Delete" />
       </DeleteButton>
@@ -14,9 +29,9 @@ export default function DiveWish({ destination, notes, showDeleteDialog }) {
 }
 
 const Wrapper = styled.section`
-  background-color: var(--bg-color-section);
-  padding: 10px 15px 15px;
   position: relative;
+  background-color: var(--bg-color-section);
+  padding: 10px 15px;
 `;
 
 const Heading = styled.h2`
@@ -26,14 +41,22 @@ const Heading = styled.h2`
 `;
 
 const Notes = styled.p`
-  padding-top: 10px;
+  padding: 10px 0;
   color: var(--font-color-content);
 `;
 
 const DeleteButton = styled.button`
+  position: absolute;
   border: none;
   background-color: var(--bg-color-section);
+  right: 15px;
+  bottom: 5px;
+`;
+
+const Bookmark = styled.button`
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  border: none;
+  background-color: var(--bg-color-section);
+  top: 0px;
+  right: 0px;
 `;
