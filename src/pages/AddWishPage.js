@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import Button from '../Button.js';
+import { useNavigate } from 'react-router';
 
 export default function AddWishPage({ onAddDiveWish }) {
+  const navigate = useNavigate();
+
   return (
     <Form
       aria-label="Add a dive destination to your wishlist"
@@ -26,6 +29,7 @@ export default function AddWishPage({ onAddDiveWish }) {
     onAddDiveWish({ destination: destination.value, notes: notes.value });
     destination.value = '';
     notes.value = '';
+    navigate('/');
   }
 }
 
@@ -51,6 +55,7 @@ const Input = styled.input`
 const Container = styled.div`
   position: relative;
   padding: 10px;
+  border-radius: 4px;
   background-color: var(--bg-color-section);
   box-shadow: 1px 1px 4px var(--color-boxshadow);
 `;

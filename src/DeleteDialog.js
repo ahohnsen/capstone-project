@@ -6,8 +6,8 @@ export default function DeleteDialog({ confirmDeleteWish, cancelDeleteWish }) {
     <Dialog>
       Do you really want to delete this item from your wishlist?
       <Wrapper>
-        <Button onClick={cancelDeleteWish}>Cancel</Button>
         <Button onClick={confirmDeleteWish}>Yes, delete</Button>
+        <Button onClick={cancelDeleteWish}>Cancel</Button>
       </Wrapper>
     </Dialog>
   );
@@ -23,6 +23,7 @@ const Dialog = styled.div`
   margin-left: -150px;
   padding: 20px;
   background-color: var(--bg-color-section);
+  border-radius: 4px;
   box-shadow: 2px 2px 4px var(--color-boxshadow);
   text-align: center;
 `;
