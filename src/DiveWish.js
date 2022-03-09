@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from './Button.js';
 import DeleteIcon from './images/DeleteIcon.svg';
 
 export default function DiveWish({ destination, notes, showDeleteDialog }) {
