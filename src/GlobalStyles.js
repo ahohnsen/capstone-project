@@ -14,7 +14,7 @@ body {
 
 main {
   width: 360px;
-  padding: 50px 20px 20px;
+  padding: 50px 0 20px;
   margin: 0 auto;
   overflow-y: auto;
 }

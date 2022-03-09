@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import DiveWish from '../DiveWish.js';
+import DeleteDialog from '../DeleteDialog.js';
 
-export default function WishlistPage({ diveWishes }) {
+export default function WishlistPage({
+  diveWishes,
+  confirmDeleteWish,
+  cancelDeleteWish,
+  isDialogVisible,
+  showDeleteDialog,
+}) {
   return (
     <Wrapper>
       {diveWishes.length > 0 ? (
@@ -10,6 +17,7 @@ export default function WishlistPage({ diveWishes }) {
             key={wish.id}
             destination={wish.destination}
             notes={wish.notes}
+            showDeleteDialog={() => showDeleteDialog(wish.id)}
           />
         ))
       ) : (
@@ -17,6 +25,12 @@ export default function WishlistPage({ diveWishes }) {
           You currently have nothing on your wishlist. Start by adding some
           destinations you would like to dive.
         </Message>
+      )}
+      {isDialogVisible && (
+        <DeleteDialog
+          confirmDeleteWish={confirmDeleteWish}
+          cancelDeleteWish={cancelDeleteWish}
+        />
       )}
     </Wrapper>
   );
