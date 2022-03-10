@@ -5,6 +5,7 @@ import { useState } from 'react';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import Navigation from './Navigation.js';
 import WishlistPage from './pages/WishlistPage.js';
+import BookmarksPage from './pages/BookmarksPage.js';
 import AddWishPage from './pages/AddWishPage.js';
 
 export default function App() {
@@ -24,6 +25,21 @@ export default function App() {
             element={
               <WishlistPage
                 diveWishes={diveWishes}
+                toggleBookmark={toggleBookmark}
+                confirmDeleteWish={confirmDeleteWish}
+                cancelDeleteWish={cancelDeleteWish}
+                isDialogVisible={isDialogVisible}
+                showDeleteDialog={showDeleteDialog}
+              />
+            }
+          />
+          <Route
+            path="/bookmarks"
+            element={
+              <BookmarksPage
+                bookmarkedWishes={() =>
+                  diveWishes.filter(diveWish => diveWish.isBookmarked === true)
+                }
                 toggleBookmark={toggleBookmark}
                 confirmDeleteWish={confirmDeleteWish}
                 cancelDeleteWish={cancelDeleteWish}
