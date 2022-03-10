@@ -22,7 +22,7 @@ export default function DiveWish({
         )}
       </Bookmark>
       <DeleteButton onClick={showDeleteDialog}>
-        <img src={DeleteIcon} alt="Delete" />
+        <img src={DeleteIcon} alt="delete" />
       </DeleteButton>
     </Wrapper>
   );

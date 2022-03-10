@@ -4,8 +4,16 @@ import WishlistPage from './WishlistPage.js';
 describe('Wishlist', () => {
   it('renders wishlist with two sections', () => {
     const diveWishes = [
-      { id: '1', destination: 'Maldives', notes: '' },
-      { id: '2', destination: 'Lanzarote', notes: '' },
+      {
+        id: '1',
+        destination: 'Maldives',
+        notes: 'I want to go there for my next diving holiday',
+      },
+      {
+        id: '2',
+        destination: 'Lanzarote',
+        notes: 'I want to go there again soon to see my former colleauges.',
+      },
     ];
     render(<WishlistPage diveWishes={diveWishes} />);
 
