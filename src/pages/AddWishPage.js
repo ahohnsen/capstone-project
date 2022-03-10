@@ -6,20 +6,32 @@ export default function AddWishPage({ onAddDiveWish }) {
   const navigate = useNavigate();
 
   return (
-    <Form
-      aria-label="Add a dive destination to your wishlist"
-      onSubmit={handleSubmit}
-    >
-      <Container>
-        <Label htmlFor="destination">DESTINATION </Label>
-        <Input id="destination" name="destination" maxLength={25} required />
-      </Container>
-      <Container>
-        <Label htmlFor="notes">NOTES</Label>
-        <Textarea id="notes" name="notes" required />
-      </Container>
-      <Button type="submit">Add to list</Button>
-    </Form>
+    <>
+      <header>
+        <h1>Where do you want to dive?</h1>
+      </header>
+      <main>
+        <Form
+          aria-label="Add a dive destination to your wishlist"
+          onSubmit={handleSubmit}
+        >
+          <Container>
+            <Label htmlFor="destination">DESTINATION </Label>
+            <Input
+              id="destination"
+              name="destination"
+              maxLength={25}
+              required
+            />
+          </Container>
+          <Container>
+            <Label htmlFor="notes">NOTES</Label>
+            <Textarea id="notes" name="notes" required />
+          </Container>
+          <Button type="submit">Add to list</Button>
+        </Form>
+      </main>
+    </>
   );
 
   function handleSubmit(event) {

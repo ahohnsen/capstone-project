@@ -15,10 +15,7 @@ export default function App() {
 
   return (
     <AppGrid>
-      <Header>
-        <h1>Diving Wishlist</h1>
-      </Header>
-      <main>
+      <>
         <Routes>
           <Route
             path="/"
@@ -53,7 +50,7 @@ export default function App() {
             element={<AddWishPage onAddDiveWish={addToWishlist} />}
           />
         </Routes>
-      </main>
+      </>
       <Navigation />
     </AppGrid>
   );
@@ -92,8 +89,4 @@ const AppGrid = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-`;
-
-const Header = styled.header`
-  background-color: var(--bg-color-header);
 `;

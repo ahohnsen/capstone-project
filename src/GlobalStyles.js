@@ -12,9 +12,15 @@ body {
   background-color: var(--bg-color-main);
 }
 
+header {
+  background-color: var(--bg-color-header);
+  text-align: center;
+  padding: 10px;
+}
+
 main {
   width: 360px;
-  padding: 50px 0 20px;
+  padding: 40px 0 20px;
   margin: 0 auto;
   overflow-y: auto;
 }
@@ -32,11 +38,9 @@ textarea {
 }
 
 h1 {
-  font-size: 1.5rem;
-  font-weight: 400; 
   color: var(--font-color-header);
-  text-align: center;
-  padding: 15px;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 :root {

@@ -11,31 +11,38 @@ export default function BookmarksPage({
   showDeleteDialog,
 }) {
   return (
-    <Wrapper>
-      {bookmarkedWishes.length > 0 ? (
-        bookmarkedWishes.map(wish => (
-          <DiveWish
-            key={wish.id}
-            destination={wish.destination}
-            notes={wish.notes}
-            isBookmarked={wish.isBookmarked}
-            toggleBookmark={() => toggleBookmark(wish.id)}
-            showDeleteDialog={() => showDeleteDialog(wish.id)}
-          />
-        ))
-      ) : (
-        <Message>
-          You currently have nothing bookmarked. Start by marking your favorite
-          dive destinations.
-        </Message>
-      )}
-      {isDialogVisible && (
-        <DeleteDialog
-          confirmDeleteWish={confirmDeleteWish}
-          cancelDeleteWish={cancelDeleteWish}
-        />
-      )}
-    </Wrapper>
+    <>
+      <header>
+        <h1>Your favorites</h1>
+      </header>
+      <main>
+        <Wrapper>
+          {bookmarkedWishes.length > 0 ? (
+            bookmarkedWishes.map(wish => (
+              <DiveWish
+                key={wish.id}
+                destination={wish.destination}
+                notes={wish.notes}
+                isBookmarked={wish.isBookmarked}
+                toggleBookmark={() => toggleBookmark(wish.id)}
+                showDeleteDialog={() => showDeleteDialog(wish.id)}
+              />
+            ))
+          ) : (
+            <Message>
+              You currently have nothing bookmarked. Start by marking your
+              favorite dive destinations.
+            </Message>
+          )}
+          {isDialogVisible && (
+            <DeleteDialog
+              confirmDeleteWish={confirmDeleteWish}
+              cancelDeleteWish={cancelDeleteWish}
+            />
+          )}
+        </Wrapper>
+      </main>
+    </>
   );
 }
 
@@ -46,4 +53,5 @@ const Wrapper = styled.div`
 
 const Message = styled.p`
   text-align: center;
+  padding: 0 15px;
 `;
