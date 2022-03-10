@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import DiveWish from '../DiveWish.js';
-import DeleteDialog from '../DeleteDialog.js';
 
 export default function BookmarksPage({
   bookmarkedWishes,
-  toggleBookmark,
-  confirmDeleteWish,
-  cancelDeleteWish,
-  isDialogVisible,
-  showDeleteDialog,
+  onToggleBookmark,
+  onDeleteDiveWish,
 }) {
   return (
     <>
@@ -21,11 +17,12 @@ export default function BookmarksPage({
             bookmarkedWishes.map(wish => (
               <DiveWish
                 key={wish.id}
+                id={wish.id}
                 destination={wish.destination}
                 notes={wish.notes}
                 isBookmarked={wish.isBookmarked}
-                toggleBookmark={() => toggleBookmark(wish.id)}
-                showDeleteDialog={() => showDeleteDialog(wish.id)}
+                onToggleBookmark={() => onToggleBookmark(wish.id)}
+                onDeleteDiveWish={onDeleteDiveWish}
               />
             ))
           ) : (
@@ -33,12 +30,6 @@ export default function BookmarksPage({
               You currently have nothing bookmarked. Start by marking your
               favorite dive destinations.
             </Message>
-          )}
-          {isDialogVisible && (
-            <DeleteDialog
-              confirmDeleteWish={confirmDeleteWish}
-              cancelDeleteWish={cancelDeleteWish}
-            />
           )}
         </Wrapper>
       </main>

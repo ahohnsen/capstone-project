@@ -19,7 +19,7 @@ describe('DeleteDialog', () => {
 
   it('clicking the delete button calls the function to delete the item', () => {
     const confirmDeleteWish = jest.fn();
-    render(<DeleteDialog confirmDeleteWish={confirmDeleteWish} />);
+    render(<DeleteDialog onConfirmDeleteWish={confirmDeleteWish} />);
 
     const buttonDelete = screen.getByRole('button', { name: /delete/i });
 
@@ -29,7 +29,7 @@ describe('DeleteDialog', () => {
 
   it('clicking the cancel button calls the function to close the dialog', () => {
     const cancelDeleteWish = jest.fn();
-    render(<DeleteDialog cancelDeleteWish={cancelDeleteWish} />);
+    render(<DeleteDialog onCancelDeleteWish={cancelDeleteWish} />);
 
     const buttonCancel = screen.getByRole('button', { name: /cancel/i });
 

@@ -1,31 +1,47 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import DeleteIcon from './images/DeleteIcon.svg';
+import DeleteDialog from './DeleteDialog.js';
 import BookmarkIconInactive from './images/BookmarkInactive.svg';
 import BookmarkIconActive from './images/BookmarkActive.svg';
 
 export default function DiveWish({
+  id,
   destination,
   notes,
   isBookmarked,
-  showDeleteDialog,
-  toggleBookmark,
+  onToggleBookmark,
+  onDeleteDiveWish,
 }) {
+  const [showDialog, setShowDialog] = useState(false);
+
   return (
     <Wrapper>
       <Heading>{destination}</Heading>
       <Notes>{notes}</Notes>
-      <Bookmark onClick={toggleBookmark}>
+      <Bookmark onClick={onToggleBookmark}>
         {isBookmarked ? (
           <img src={BookmarkIconActive} alt="is bookmarked" />
         ) : (
           <img src={BookmarkIconInactive} alt="not bookmarked" />
         )}
       </Bookmark>
-      <DeleteButton onClick={showDeleteDialog}>
+      <DeleteButton onClick={() => setShowDialog(true)}>
         <img src={DeleteIcon} alt="delete" />
       </DeleteButton>
+      {showDialog && (
+        <DeleteDialog
+          onConfirmDeleteWish={() => handleDelete(id)}
+          onCancelDeleteWish={() => setShowDialog(false)}
+        />
+      )}
     </Wrapper>
   );
+
+  function handleDelete(id) {
+    setShowDialog(false);
+    onDeleteDiveWish(id);
+  }
 }
 
 const Wrapper = styled.section`

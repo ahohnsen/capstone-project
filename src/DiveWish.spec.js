@@ -24,35 +24,35 @@ describe('ListItem', () => {
     expect(buttonBookmark).toBeInTheDocument();
   });
 
-  it('clicking the delete button calls the function to open the delete dialog', () => {
-    const callback = jest.fn();
-    render(
-      <DiveWish
-        destination="Maldives"
-        notes="I want to go there for my next diving holiday"
-        showDeleteDialog={callback}
-      />
-    );
-
-    const buttonDelete = screen.getByRole('button', { name: /delete/i });
-    userEvent.click(buttonDelete);
-
-    expect(callback).toHaveBeenCalled();
-  });
-
   it('clicking the bookmark button calls the function to toggle the bookmark', () => {
-    const callback = jest.fn();
+    const toggleBookmark = jest.fn();
     render(
       <DiveWish
         destination="Maldives"
         notes="I want to go there for my next diving holiday"
-        toggleBookmark={callback}
+        onToggleBookmark={toggleBookmark}
       />
     );
 
     const buttonBookmark = screen.getByRole('button', { name: /bookmark/i });
     userEvent.click(buttonBookmark);
 
-    expect(callback).toHaveBeenCalled();
+    expect(toggleBookmark).toHaveBeenCalled();
   });
+
+  // it('clicking the delete button calls the function to show the delete confirmation dialog', () => {
+  //   const showDialog = jest.fn();
+  //   render(
+  //     <DiveWish
+  //       destination="Maldives"
+  //       notes="I want to go there for my next diving holiday"
+  //       onDeleteDiveWish={showDialog}
+  //     />
+  //   );
+
+  //   const buttonDelete = screen.getByRole('button', { name: /delete/i });
+  //   userEvent.click(buttonDelete);
+
+  //   expect(showDialog).toHaveBeenCalled();
+  // });
 });
