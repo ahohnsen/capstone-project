@@ -34,12 +34,12 @@ export default function App() {
             }
           />
           <Route
-            path="/bookmarks"
+            path="/favorites"
             element={
               <BookmarksPage
-                bookmarkedWishes={() =>
-                  diveWishes.filter(diveWish => diveWish.isBookmarked === true)
-                }
+                bookmarkedWishes={diveWishes.filter(
+                  diveWish => diveWish.isBookmarked === true
+                )}
                 toggleBookmark={toggleBookmark}
                 confirmDeleteWish={confirmDeleteWish}
                 cancelDeleteWish={cancelDeleteWish}
