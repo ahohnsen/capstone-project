@@ -32,7 +32,9 @@ describe('BookmarksPage', () => {
 
       render(<BookmarksPage bookmarkedWishes={bookmarkedWishes} />);
 
-      const message = screen.getByText(/you/i);
+      const message = screen.getByText(
+        'You currently have nothing bookmarked. Start by marking your favorite dive destinations.'
+      );
 
       expect(message).toBeInTheDocument();
     });
