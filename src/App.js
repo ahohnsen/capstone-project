@@ -10,6 +10,10 @@ import AddWishPage from './pages/AddWishPage.js';
 export default function App() {
   const [diveWishes, setDiveWishes] = useLocalStorage('DivingWishlist', []);
 
+  const bookmarkedWishes = diveWishes.filter(
+    diveWish => diveWish.isBookmarked === true
+  );
+
   return (
     <AppGrid>
       <Routes>
@@ -27,9 +31,7 @@ export default function App() {
           path="/favorites"
           element={
             <BookmarksPage
-              bookmarkedWishes={diveWishes.filter(
-                diveWish => diveWish.isBookmarked === true
-              )}
+              bookmarkedWishes={bookmarkedWishes}
               onToggleBookmark={toggleBookmark}
               onDeleteDiveWish={handleDeleteWish}
             />

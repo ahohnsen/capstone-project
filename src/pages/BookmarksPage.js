@@ -17,12 +17,11 @@ export default function BookmarksPage({
             bookmarkedWishes.map(wish => (
               <DiveWish
                 key={wish.id}
-                id={wish.id}
                 destination={wish.destination}
                 notes={wish.notes}
                 isBookmarked={wish.isBookmarked}
                 onToggleBookmark={() => onToggleBookmark(wish.id)}
-                onDeleteDiveWish={onDeleteDiveWish}
+                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
               />
             ))
           ) : (

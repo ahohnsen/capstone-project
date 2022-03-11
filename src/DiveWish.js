@@ -6,7 +6,6 @@ import BookmarkIconInactive from './images/BookmarkInactive.svg';
 import BookmarkIconActive from './images/BookmarkActive.svg';
 
 export default function DiveWish({
-  id,
   destination,
   notes,
   isBookmarked,
@@ -31,16 +30,16 @@ export default function DiveWish({
       </DeleteButton>
       {showDialog && (
         <DeleteDialog
-          onConfirmDeleteWish={() => handleDelete(id)}
+          onConfirmDeleteWish={handleDelete}
           onCancelDeleteWish={() => setShowDialog(false)}
         />
       )}
     </Wrapper>
   );
 
-  function handleDelete(id) {
+  function handleDelete() {
     setShowDialog(false);
-    onDeleteDiveWish(id);
+    onDeleteDiveWish();
   }
 }
 
