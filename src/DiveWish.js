@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import DeleteIcon from './images/DeleteIcon.svg';
 import DeleteDialog from './DeleteDialog.js';
+import DeleteIcon from './images/DeleteIcon.svg';
+import EditIcon from './images/EditIcon.svg';
 import BookmarkIconInactive from './images/BookmarkInactive.svg';
 import BookmarkIconActive from './images/BookmarkActive.svg';
 
@@ -11,6 +12,7 @@ export default function DiveWish({
   isBookmarked,
   onToggleBookmark,
   onDeleteDiveWish,
+  onEditDiveWish,
 }) {
   const [showDialog, setShowDialog] = useState(false);
 
@@ -25,6 +27,9 @@ export default function DiveWish({
           <img src={BookmarkIconInactive} alt="not bookmarked" />
         )}
       </Bookmark>
+      <EditButton onClick={onEditDiveWish}>
+        <img src={EditIcon} alt="edit" />
+      </EditButton>
       <DeleteButton onClick={() => setShowDialog(true)}>
         <img src={DeleteIcon} alt="delete" />
       </DeleteButton>
@@ -58,6 +63,14 @@ const Heading = styled.h2`
 const Notes = styled.p`
   padding: 10px 0;
   color: var(--font-color-content);
+`;
+
+const EditButton = styled.button`
+  position: absolute;
+  border: none;
+  background-color: var(--bg-color-section);
+  right: 45px;
+  bottom: 5px;
 `;
 
 const DeleteButton = styled.button`
