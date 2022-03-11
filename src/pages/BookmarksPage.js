@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Heading from '../Heading.js';
+import Content from '../Content.js';
 import DiveWish from '../DiveWish.js';
 
 export default function BookmarksPage({
@@ -8,35 +10,31 @@ export default function BookmarksPage({
 }) {
   return (
     <>
-      <header>
-        <h1>Your favorites</h1>
-      </header>
-      <main>
-        <Wrapper>
-          {bookmarkedWishes.length > 0 ? (
-            bookmarkedWishes.map(wish => (
-              <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                onToggleBookmark={() => onToggleBookmark(wish.id)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
-              />
-            ))
-          ) : (
-            <Message>
-              You currently have nothing bookmarked. Start by marking your
-              favorite dive destinations.
-            </Message>
-          )}
-        </Wrapper>
-      </main>
+      <Heading>Your favorites</Heading>
+      <Grid>
+        {bookmarkedWishes.length > 0 ? (
+          bookmarkedWishes.map(wish => (
+            <DiveWish
+              key={wish.id}
+              destination={wish.destination}
+              notes={wish.notes}
+              isBookmarked={wish.isBookmarked}
+              onToggleBookmark={() => onToggleBookmark(wish.id)}
+              onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+            />
+          ))
+        ) : (
+          <Message>
+            You currently have nothing bookmarked. Start by marking your
+            favorite dive destinations.
+          </Message>
+        )}
+      </Grid>
     </>
   );
 }
 
-const Wrapper = styled.div`
+const Grid = styled(Content)`
   display: grid;
   gap: 15px;
 `;

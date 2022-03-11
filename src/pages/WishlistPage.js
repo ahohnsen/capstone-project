@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Heading from '../Heading.js';
+import Content from '../Content.js';
 import DiveWish from '../DiveWish.js';
 
 export default function WishlistPage({
@@ -8,35 +10,31 @@ export default function WishlistPage({
 }) {
   return (
     <>
-      <header>
-        <h1>Diving Wishlist</h1>
-      </header>
-      <main>
-        <Wrapper>
-          {diveWishes.length > 0 ? (
-            diveWishes.map(wish => (
-              <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                onToggleBookmark={() => onToggleBookmark(wish.id)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
-              />
-            ))
-          ) : (
-            <Message>
-              You currently have nothing on your wishlist. Start by adding some
-              destinations you would like to dive.
-            </Message>
-          )}
-        </Wrapper>
-      </main>
+      <Heading>Diving Wishlist</Heading>
+      <Grid>
+        {diveWishes.length > 0 ? (
+          diveWishes.map(wish => (
+            <DiveWish
+              key={wish.id}
+              destination={wish.destination}
+              notes={wish.notes}
+              isBookmarked={wish.isBookmarked}
+              onToggleBookmark={() => onToggleBookmark(wish.id)}
+              onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+            />
+          ))
+        ) : (
+          <Message>
+            You currently have nothing on your wishlist. Start by adding some
+            destinations you would like to dive.
+          </Message>
+        )}
+      </Grid>
     </>
   );
 }
 
-const Wrapper = styled.div`
+const Grid = styled(Content)`
   display: grid;
   gap: 15px;
 `;

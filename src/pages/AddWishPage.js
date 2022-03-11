@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import Button from '../Button.js';
 import { useNavigate } from 'react-router';
+import Heading from '../Heading.js';
+import Content from '../Content.js';
+import Button from '../Button.js';
 
 export default function AddWishPage({ onAddDiveWish }) {
   const navigate = useNavigate();
 
   return (
     <>
-      <header>
-        <h1>Where do you want to dive?</h1>
-      </header>
-      <main>
+      <Heading>Where do you want to dive?</Heading>
+      <Content>
         <Form
           aria-label="Add a dive destination to your wishlist"
           onSubmit={handleSubmit}
@@ -30,7 +30,7 @@ export default function AddWishPage({ onAddDiveWish }) {
           </Container>
           <Button type="submit">Add to list</Button>
         </Form>
-      </main>
+      </Content>
     </>
   );
 
