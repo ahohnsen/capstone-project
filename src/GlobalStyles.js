@@ -12,13 +12,6 @@ body {
   background-color: var(--bg-color-main);
 }
 
-main {
-  width: 360px;
-  padding: 50px 0 20px;
-  margin: 0 auto;
-  overflow-y: auto;
-}
-
 input {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
   color: var(--font-color-content);
@@ -29,14 +22,6 @@ textarea {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
   color: var(--font-color-content);
   font-size: 1rem;
-}
-
-h1 {
-  font-size: 1.5rem;
-  font-weight: 400; 
-  color: var(--font-color-header);
-  text-align: center;
-  padding: 15px;
 }
 
 :root {

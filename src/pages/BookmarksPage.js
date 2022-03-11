@@ -3,17 +3,17 @@ import Heading from '../Heading.js';
 import Content from '../Content.js';
 import DiveWish from '../DiveWish.js';
 
-export default function WishlistPage({
-  diveWishes,
+export default function BookmarksPage({
+  bookmarkedWishes,
   onToggleBookmark,
   onDeleteDiveWish,
 }) {
   return (
     <>
-      <Heading>Diving Wishlist</Heading>
+      <Heading>Your favorites</Heading>
       <Grid>
-        {diveWishes.length > 0 ? (
-          diveWishes.map(wish => (
+        {bookmarkedWishes.length > 0 ? (
+          bookmarkedWishes.map(wish => (
             <DiveWish
               key={wish.id}
               destination={wish.destination}
@@ -25,8 +25,8 @@ export default function WishlistPage({
           ))
         ) : (
           <Message>
-            You currently have nothing on your wishlist. Start by adding some
-            destinations you would like to dive.
+            You currently have nothing bookmarked. Start by marking your
+            favorite dive destinations.
           </Message>
         )}
       </Grid>

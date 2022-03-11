@@ -3,13 +3,13 @@ import { MemoryRouter } from 'react-router-dom';
 import Navigation from './Navigation.js';
 
 describe('Navigation', () => {
-  it('renders two links', () => {
+  it('renders three links', () => {
     render(
       <MemoryRouter>
         <Navigation />
       </MemoryRouter>
     );
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(2);
+    expect(links).toHaveLength(3);
   });
 });

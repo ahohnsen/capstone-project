@@ -1,25 +1,37 @@
 import styled from 'styled-components';
-import Button from '../Button.js';
 import { useNavigate } from 'react-router';
+import Heading from '../Heading.js';
+import Content from '../Content.js';
+import Button from '../Button.js';
 
 export default function AddWishPage({ onAddDiveWish }) {
   const navigate = useNavigate();
 
   return (
-    <Form
-      aria-label="Add a dive destination to your wishlist"
-      onSubmit={handleSubmit}
-    >
-      <Container>
-        <Label htmlFor="destination">DESTINATION </Label>
-        <Input id="destination" name="destination" maxLength={25} required />
-      </Container>
-      <Container>
-        <Label htmlFor="notes">NOTES</Label>
-        <Textarea id="notes" name="notes" required />
-      </Container>
-      <Button type="submit">Add to list</Button>
-    </Form>
+    <>
+      <Heading>Where do you want to dive?</Heading>
+      <Content>
+        <Form
+          aria-label="Add a dive destination to your wishlist"
+          onSubmit={handleSubmit}
+        >
+          <Container>
+            <Label htmlFor="destination">DESTINATION </Label>
+            <Input
+              id="destination"
+              name="destination"
+              maxLength={25}
+              required
+            />
+          </Container>
+          <Container>
+            <Label htmlFor="notes">NOTES</Label>
+            <Textarea id="notes" name="notes" required />
+          </Container>
+          <Button type="submit">Add to list</Button>
+        </Form>
+      </Content>
+    </>
   );
 
   function handleSubmit(event) {
