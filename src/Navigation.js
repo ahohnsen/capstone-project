@@ -7,7 +7,7 @@ export default function Navigation() {
       <Nav>
         <StyledLink to="/">WISHLIST</StyledLink>
         <StyledLink to="/favorites">FAVORITES</StyledLink>
-        <StyledLink to="/add-wish">ADD WISH</StyledLink>
+        <StyledLink to="/add-wish/new">ADD WISH</StyledLink>
       </Nav>
     </StyledFooter>
   );
@@ -18,6 +18,7 @@ const StyledFooter = styled.footer`
   background-color: var(--bg-color-section);
   box-shadow: 0px -1px 4px var(--color-boxshadow);
   padding-bottom: 4px;
+  z-index: 1;
 `;
 
 const Nav = styled.nav`
