@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import DeleteDialog from './DeleteDialog.js';
+import IconButton from './IconButton.js';
 import DeleteIcon from './images/DeleteIcon.svg';
 import EditIcon from './images/EditIcon.svg';
 import BookmarkIconInactive from './images/BookmarkInactive.svg';
@@ -65,26 +66,17 @@ const Notes = styled.p`
   color: var(--font-color-content);
 `;
 
-const EditButton = styled.button`
-  position: absolute;
-  border: none;
-  background-color: var(--bg-color-section);
+const EditButton = styled(IconButton)`
   right: 45px;
   bottom: 5px;
 `;
 
-const DeleteButton = styled.button`
-  position: absolute;
-  border: none;
-  background-color: var(--bg-color-section);
+const DeleteButton = styled(IconButton)`
   right: 15px;
   bottom: 5px;
 `;
 
-const Bookmark = styled.button`
-  position: absolute;
-  border: none;
-  background-color: var(--bg-color-section);
+const Bookmark = styled(IconButton)`
   top: 0px;
   right: 0px;
 `;
