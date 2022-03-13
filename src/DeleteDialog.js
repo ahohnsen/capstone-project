@@ -29,6 +29,7 @@ const Dialog = styled.div`
   border-radius: 4px;
   box-shadow: 2px 2px 4px var(--color-boxshadow);
   text-align: center;
+  z-index: 1;
 `;
 
 const Wrapper = styled.div`
