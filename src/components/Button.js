@@ -11,6 +11,7 @@ const Button = styled.button`
   box-shadow: 2px 2px 4px var(--color-boxshadow);
   font-weight: 500;
   font-size: 1rem;
+  cursor: pointer;
 `;
 
 export default Button;

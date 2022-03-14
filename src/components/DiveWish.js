@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import DeleteIcon from './images/DeleteIcon.svg';
 import DeleteDialog from './DeleteDialog.js';
-import BookmarkIconInactive from './images/BookmarkInactive.svg';
-import BookmarkIconActive from './images/BookmarkActive.svg';
+import IconButton from './IconButton.js';
+import DeleteIcon from '../images/DeleteIcon.svg';
+import EditIcon from '../images/EditIcon.svg';
+import BookmarkIconInactive from '../images/BookmarkInactive.svg';
+import BookmarkIconActive from '../images/BookmarkActive.svg';
 
 export default function DiveWish({
   destination,
@@ -11,6 +13,7 @@ export default function DiveWish({
   isBookmarked,
   onToggleBookmark,
   onDeleteDiveWish,
+  onEditDiveWish,
 }) {
   const [showDialog, setShowDialog] = useState(false);
 
@@ -25,6 +28,9 @@ export default function DiveWish({
           <img src={BookmarkIconInactive} alt="not bookmarked" />
         )}
       </Bookmark>
+      <EditButton onClick={onEditDiveWish}>
+        <img src={EditIcon} alt="edit" />
+      </EditButton>
       <DeleteButton onClick={() => setShowDialog(true)}>
         <img src={DeleteIcon} alt="delete" />
       </DeleteButton>
@@ -56,22 +62,21 @@ const Heading = styled.h2`
 `;
 
 const Notes = styled.p`
-  padding: 10px 0;
+  padding: 10px 0 40px 0;
   color: var(--font-color-content);
 `;
 
-const DeleteButton = styled.button`
-  position: absolute;
-  border: none;
-  background-color: var(--bg-color-section);
+const EditButton = styled(IconButton)`
+  right: 45px;
+  bottom: 5px;
+`;
+
+const DeleteButton = styled(IconButton)`
   right: 15px;
   bottom: 5px;
 `;
 
-const Bookmark = styled.button`
-  position: absolute;
-  border: none;
-  background-color: var(--bg-color-section);
+const Bookmark = styled(IconButton)`
   top: 0px;
   right: 0px;
 `;

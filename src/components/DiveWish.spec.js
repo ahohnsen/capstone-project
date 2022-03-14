@@ -3,7 +3,7 @@ import { userEvent } from '@storybook/testing-library';
 import DiveWish from './DiveWish';
 
 describe('DiveWish', () => {
-  it('renders a destination,notes, and a delete and bookmark button', () => {
+  it('renders a destination,notes, and an edit, delete and bookmark button', () => {
     render(
       <DiveWish
         destination="Maldives"
@@ -16,15 +16,17 @@ describe('DiveWish', () => {
       'I want to go there for my next diving holiday'
     );
     const buttonBookmark = screen.getByRole('button', { name: /bookmark/i });
+    const buttonEdit = screen.getByRole('button', { name: /edit/i });
     const buttonDelete = screen.getByRole('button', { name: /delete/i });
 
     expect(destination).toBeInTheDocument();
     expect(notes).toBeInTheDocument();
+    expect(buttonEdit).toBeInTheDocument();
     expect(buttonDelete).toBeInTheDocument();
     expect(buttonBookmark).toBeInTheDocument();
   });
 
-  it('clicking the bookmark button calls the function to toggle the bookmark', () => {
+  it('calls the function to toggle the bookmark when the bookmark button is clicked', () => {
     const toggleBookmark = jest.fn();
     render(<DiveWish onToggleBookmark={toggleBookmark} />);
 
@@ -34,7 +36,17 @@ describe('DiveWish', () => {
     expect(toggleBookmark).toHaveBeenCalled();
   });
 
-  it('clicking the delete button calls the function to show the delete confirmation dialog', () => {
+  it('clicking the edit button calls the function to edit the dive wish', () => {
+    const editDiveWish = jest.fn();
+    render(<DiveWish onEditDiveWish={editDiveWish} />);
+
+    const buttonEdit = screen.getByRole('button', { name: /edit/i });
+    userEvent.click(buttonEdit);
+
+    expect(editDiveWish).toBeCalled();
+  });
+
+  it('calls the function to show the delete confirmation dialog when the delete button is clicked', () => {
     render(<DiveWish />);
 
     const buttonDelete = screen.getByRole('button', { name: /delete/i });
@@ -46,7 +58,7 @@ describe('DiveWish', () => {
     expect(buttonConfirmDelete).toBeInTheDocument();
   });
 
-  it('clicking the delete button in the confirmation dialog calls the function to delete the dive wish', () => {
+  it('calls the function to delete the dive wish when the delete button in the confirmation dialog is clicked', () => {
     const deleteDiveWish = jest.fn();
     render(<DiveWish onDeleteDiveWish={deleteDiveWish} />);
 
@@ -60,7 +72,7 @@ describe('DiveWish', () => {
     expect(deleteDiveWish).toBeCalled();
   });
 
-  it('clicking the cancel button in the confirmation dialog closes the dialog', () => {
+  it('closes the dialog when the cancel button in the confirmation dialog is clicked', () => {
     render(<DiveWish />);
 
     const buttonDelete = screen.getByRole('button', { name: /delete/i });

@@ -18,6 +18,7 @@ const StyledFooter = styled.footer`
   background-color: var(--bg-color-section);
   box-shadow: 0px -1px 4px var(--color-boxshadow);
   padding-bottom: 4px;
+  z-index: 1;
 `;
 
 const Nav = styled.nav`
