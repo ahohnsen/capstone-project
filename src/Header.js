@@ -16,6 +16,7 @@ const StyledHeader = styled.header`
 const Heading = styled.h1`
   position: relative;
   width: 360px;
+  margin: 0 auto;
   text-align: center;
   color: var(--font-color-header);
   font-size: 1.5rem;
