@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import Navigation from './Navigation.js';
 import WishlistPage from './pages/WishlistPage.js';
 import BookmarksPage from './pages/BookmarksPage.js';
 import AddWishPage from './pages/AddWishPage.js';
+import EditWishPage from './pages/EditWishPage.js';
 
 export default function App() {
   const [diveWishes, setDiveWishes] = useLocalStorage('DivingWishlist', []);
@@ -26,7 +27,7 @@ export default function App() {
             <WishlistPage
               diveWishes={diveWishes}
               onToggleBookmark={toggleBookmark}
-              onEditDiveWish={handleEditWish}
+              onEditDiveWish={handleEditRedirect}
               onDeleteDiveWish={handleDeleteWish}
             />
           }
@@ -37,16 +38,20 @@ export default function App() {
             <BookmarksPage
               bookmarkedWishes={bookmarkedWishes}
               onToggleBookmark={toggleBookmark}
-              onEditDiveWish={handleEditWish}
+              onEditDiveWish={handleEditRedirect}
               onDeleteDiveWish={handleDeleteWish}
             />
           }
         />
         <Route
-          path="/add-wish/:status"
+          path="/add-wish"
+          element={<AddWishPage onAddDiveWish={handleAddWish} />}
+        />
+        <Route
+          path="/edit-wish"
           element={
-            <AddWishPage
-              onAddDiveWish={handleAddWish}
+            <EditWishPage
+              onEditDiveWish={handleEditWish}
               diveWishToEdit={diveWishToEdit}
             />
           }
@@ -56,22 +61,25 @@ export default function App() {
     </AppGrid>
   );
 
-  function handleAddWish({ id, destination, notes }) {
-    if (diveWishToEdit) {
-      setDiveWishes(
-        diveWishes.map(diveWish =>
-          diveWish.id === id ? { ...diveWish, destination, notes } : diveWish
-        )
-      );
-      setDiveWishToEdit(null);
-    } else {
-      setDiveWishes([{ id, destination, notes }, ...diveWishes]);
-    }
+  function handleAddWish({ destination, notes }) {
+    const id = nanoid();
+    setDiveWishes([{ id, destination, notes }, ...diveWishes]);
   }
 
-  function handleEditWish(wish) {
+  function handleEditWish({ destination, notes }) {
+    setDiveWishes(
+      diveWishes.map(diveWish =>
+        diveWish.id === diveWishToEdit.id
+          ? { ...diveWish, id: diveWishToEdit.id, destination, notes }
+          : diveWish
+      )
+    );
+    setDiveWishToEdit(null);
+  }
+
+  function handleEditRedirect(wish) {
     setDiveWishToEdit({ ...wish });
-    navigate('/add-wish/edit');
+    navigate('/edit-wish');
   }
 
   function handleDeleteWish(id) {

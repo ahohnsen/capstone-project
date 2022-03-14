@@ -7,7 +7,7 @@ export default function Navigation() {
       <Nav>
         <StyledLink to="/">WISHLIST</StyledLink>
         <StyledLink to="/favorites">FAVORITES</StyledLink>
-        <StyledLink to="/add-wish/new">ADD WISH</StyledLink>
+        <StyledLink to="/add-wish">ADD WISH</StyledLink>
       </Nav>
     </StyledFooter>
   );
