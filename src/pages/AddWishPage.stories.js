@@ -5,4 +5,4 @@ export default {
   component: AddWishPage,
 };
 
-export const Default = () => <AddWishPage />;
+export const Default = <AddWishPage />;
