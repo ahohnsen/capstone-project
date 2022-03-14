@@ -3,7 +3,7 @@ import { userEvent } from '@storybook/testing-library';
 import DiveWish from './DiveWish';
 
 describe('DiveWish', () => {
-  it('renders a destination,notes, and an edit, delete, bookmark and check button', () => {
+  it('renders a destination, notes, and an edit, delete, bookmark and check button', () => {
     render(
       <DiveWish
         destination="Maldives"

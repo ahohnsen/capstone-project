@@ -25,13 +25,15 @@ export default function DiveWish({
     <Wrapper>
       <Heading>{destination}</Heading>
       <Notes>{notes}</Notes>
-      <Bookmark onClick={onToggleBookmark}>
-        {isBookmarked ? (
-          <img src={BookmarkIconActive} alt="is bookmarked" />
-        ) : (
-          <img src={BookmarkIconInactive} alt="not bookmarked" />
-        )}
-      </Bookmark>
+      {!isArchived && (
+        <Bookmark onClick={onToggleBookmark}>
+          {isBookmarked ? (
+            <img src={BookmarkIconActive} alt="is bookmarked" />
+          ) : (
+            <img src={BookmarkIconInactive} alt="not bookmarked" />
+          )}
+        </Bookmark>
+      )}
       <CheckButton onClick={onToggleCheckmark}>
         {isArchived ? (
           <img src={CheckActiveIcon} alt="is archived" />
