@@ -4,6 +4,8 @@ import DeleteDialog from './DeleteDialog.js';
 import IconButton from './IconButton.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 import EditIcon from '../images/EditIcon.svg';
+import CheckActiveIcon from '../images/CheckActive.svg';
+import CheckInactiveIcon from '../images/CheckInactive.svg';
 import BookmarkIconInactive from '../images/BookmarkInactive.svg';
 import BookmarkIconActive from '../images/BookmarkActive.svg';
 
@@ -11,7 +13,9 @@ export default function DiveWish({
   destination,
   notes,
   isBookmarked,
+  isArchived,
   onToggleBookmark,
+  onToggleCheckmark,
   onDeleteDiveWish,
   onEditDiveWish,
 }) {
@@ -28,6 +32,13 @@ export default function DiveWish({
           <img src={BookmarkIconInactive} alt="not bookmarked" />
         )}
       </Bookmark>
+      <CheckButton onClick={onToggleCheckmark}>
+        {isArchived ? (
+          <img src={CheckActiveIcon} alt="is archived" />
+        ) : (
+          <img src={CheckInactiveIcon} alt="not archived" />
+        )}
+      </CheckButton>
       <EditButton onClick={onEditDiveWish}>
         <img src={EditIcon} alt="edit" />
       </EditButton>
@@ -64,6 +75,11 @@ const Heading = styled.h2`
 const Notes = styled.p`
   padding: 10px 0 40px 0;
   color: var(--font-color-content);
+`;
+
+const CheckButton = styled(IconButton)`
+  right: 75px;
+  bottom: 5px;
 `;
 
 const EditButton = styled(IconButton)`
