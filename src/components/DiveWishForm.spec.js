@@ -34,7 +34,7 @@ describe('DiveWishForm', () => {
     expect(form).toBeInTheDocument();
   });
 
-  it('the form to add a new dive wish has empty input fields and a button with the name "Add to list"', () => {
+  it('renders a form to add a new dive wish, that has empty input fields and a button with the name "Add to list"', () => {
     render(
       <MemoryRouter>
         <DiveWishForm
@@ -63,11 +63,11 @@ describe('DiveWishForm', () => {
     expect(form).toBeInTheDocument();
   });
 
-  it('the form to edit a dive wish shows the existing data in both input fields and a button with the name "Save changes"', () => {
+  it('renders a form to edit a dive wish, that shows the existing data in both input fields and a button with the name "Save changes"', () => {
     render(
       <MemoryRouter>
         <DiveWishForm
-          formName={'Edit ypur dive wish'}
+          formName={'Edit your dive wish'}
           buttonName={'Save changes'}
           preloadedValues={{
             destination: 'Maldives',

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
-import Button from './Button.js';
+import Button from './components/Button.js';
 
 export default function DiveWishForm({
   formName,
