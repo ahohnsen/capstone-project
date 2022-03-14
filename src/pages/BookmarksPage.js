@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Header from '../Header.js';
-import Content from '../Content.js';
-import DiveWish from '../DiveWish.js';
+import Header from '../components/Header.js';
+import Content from '../components/Content.js';
+import DiveWish from '../components/DiveWish.js';
 
 export default function BookmarksPage({
   bookmarkedWishes,

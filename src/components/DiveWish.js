@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import DeleteDialog from './DeleteDialog.js';
 import IconButton from './IconButton.js';
-import DeleteIcon from './images/DeleteIcon.svg';
-import EditIcon from './images/EditIcon.svg';
-import BookmarkIconInactive from './images/BookmarkInactive.svg';
-import BookmarkIconActive from './images/BookmarkActive.svg';
+import DeleteIcon from '../images/DeleteIcon.svg';
+import EditIcon from '../images/EditIcon.svg';
+import BookmarkIconInactive from '../images/BookmarkInactive.svg';
+import BookmarkIconActive from '../images/BookmarkActive.svg';
 
 export default function DiveWish({
   destination,
@@ -62,7 +62,7 @@ const Heading = styled.h2`
 `;
 
 const Notes = styled.p`
-  padding: 10px 0;
+  padding: 10px 0 40px 0;
   color: var(--font-color-content);
 `;
 

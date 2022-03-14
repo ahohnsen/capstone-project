@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
-import Header from '../Header.js';
-import Content from '../Content.js';
-import DiveWishForm from '../DiveWishForm.js';
-import IconButton from '../IconButton.js';
+import Header from '../components/Header.js';
+import Content from '../components/Content.js';
+import DiveWishForm from '../components/DiveWishForm.js';
+import IconButton from '../components/IconButton.js';
 import AbortIcon from '../images/Abort.svg';
 
 export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {

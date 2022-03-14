@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import useLocalStorage from './hooks/useLocalStorage.js';
-import Navigation from './Navigation.js';
+import Navigation from './components/Navigation.js';
 import WishlistPage from './pages/WishlistPage.js';
 import BookmarksPage from './pages/BookmarksPage.js';
 import AddWishPage from './pages/AddWishPage.js';

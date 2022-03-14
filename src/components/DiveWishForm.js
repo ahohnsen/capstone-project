@@ -103,5 +103,5 @@ const Textarea = styled.textarea`
 const ErrorMessage = styled.div`
   text-align: center;
   color: red;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 `;

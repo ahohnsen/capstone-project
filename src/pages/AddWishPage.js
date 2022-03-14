@@ -1,6 +1,6 @@
-import Header from '../Header.js';
-import Content from '../Content.js';
-import DiveWishForm from '../DiveWishForm.js';
+import Header from '../components/Header.js';
+import Content from '../components/Content.js';
+import DiveWishForm from '../components/DiveWishForm.js';
 
 export default function AddWishPage({ onAddDiveWish }) {
   return (

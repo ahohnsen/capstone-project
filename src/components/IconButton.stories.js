@@ -1,8 +1,8 @@
-import IconButton from './IconButton';
-import BookmarkIconInactive from './images/BookmarkInactive.svg';
-import BookmarkIconActive from './images/BookmarkActive.svg';
-import EditIcon from './images/EditIcon.svg';
-import DeleteIcon from './images/DeleteIcon.svg';
+import IconButton from './IconButton.js';
+import BookmarkIconInactive from '../images/BookmarkInactive.svg';
+import BookmarkIconActive from '../images/BookmarkActive.svg';
+import EditIcon from '../images/EditIcon.svg';
+import DeleteIcon from '../images/DeleteIcon.svg';
 
 export default {
   title: 'Component/IconButton',
