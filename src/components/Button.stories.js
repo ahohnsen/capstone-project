@@ -7,5 +7,5 @@ export default {
 
 const Template = args => <Button {...args} />;
 
-export const Default = Template.bind({});
-Default.args = { children: 'POST' };
+export const ButtonDefault = Template.bind({});
+ButtonDefault.args = { children: 'POST' };

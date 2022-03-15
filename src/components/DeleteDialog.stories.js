@@ -5,4 +5,4 @@ export default {
   component: DeleteDialog,
 };
 
-export const Default = <DeleteDialog />;
+export const DeleteDialogDefault = <DeleteDialog />;

@@ -7,8 +7,8 @@ export default {
 
 const Template = args => <ArchivePage {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const ArchivePageDefault = Template.bind({});
+ArchivePageDefault.args = {
   archivedWishes: [
     {
       destination: 'Maldives',
