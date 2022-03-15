@@ -15,10 +15,11 @@ const StyledHeader = styled.header`
 `;
 const Heading = styled.h1`
   position: relative;
-  width: 360px;
+  width: 100vw;
+  max-width: 500px;
   margin: 0 auto;
   text-align: center;
   color: var(--font-color-header);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 400;
 `;

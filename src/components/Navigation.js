@@ -25,7 +25,7 @@ const Nav = styled.nav`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
-  width: 360px;
+  max-width: 500px;
   margin: 0 auto;
 `;
 
@@ -33,6 +33,7 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   text-align: center;
   text-decoration: none;
+  font-size: 0.95rem;
   font-weight: 600;
   padding: 10px 0;
   color: var(--color-inactive);

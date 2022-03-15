@@ -31,6 +31,6 @@ export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {
 
 const AbortButton = styled(IconButton)`
   padding: 5px 10px;
-  top: 5px;
+  top: 3px;
   left: 10px;
 `;

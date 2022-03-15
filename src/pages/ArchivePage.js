@@ -57,6 +57,6 @@ const Grid = styled.div`
 
 const BackButton = styled(IconButton)`
   padding: 5px 10px;
-  top: 5px;
+  top: 2px;
   left: 5px;
 `;

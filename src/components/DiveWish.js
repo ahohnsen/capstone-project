@@ -69,7 +69,7 @@ const Wrapper = styled.section`
 `;
 
 const Heading = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--font-color-heading);
 `;
