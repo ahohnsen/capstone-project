@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import Navigation from './components/Navigation.js';
@@ -8,6 +8,7 @@ import WishlistPage from './pages/WishlistPage.js';
 import BookmarksPage from './pages/BookmarksPage.js';
 import AddWishPage from './pages/AddWishPage.js';
 import EditWishPage from './pages/EditWishPage.js';
+import ArchivePage from './pages/ArchivePage.js';
 
 export default function App() {
   const [diveWishes, setDiveWishes] = useLocalStorage('DivingWishlist', []);
@@ -16,6 +17,10 @@ export default function App() {
   const navigate = useNavigate();
   const bookmarkedWishes = diveWishes.filter(
     diveWish => diveWish.isBookmarked === true
+  );
+
+  const archivedWishes = diveWishes.filter(
+    diveWish => diveWish.isArchived === true
   );
 
   return (
@@ -27,6 +32,7 @@ export default function App() {
             <WishlistPage
               diveWishes={diveWishes}
               onToggleBookmark={toggleBookmark}
+              onToggleCheckmark={toggleCheckmark}
               onEditDiveWish={handleEditRedirect}
               onDeleteDiveWish={handleDeleteWish}
             />
@@ -38,6 +44,7 @@ export default function App() {
             <BookmarksPage
               bookmarkedWishes={bookmarkedWishes}
               onToggleBookmark={toggleBookmark}
+              onToggleCheckmark={toggleCheckmark}
               onEditDiveWish={handleEditRedirect}
               onDeleteDiveWish={handleDeleteWish}
             />
@@ -56,6 +63,21 @@ export default function App() {
             />
           }
         />
+        <Route
+          path="/archive"
+          element={
+            archivedWishes.length === 0 ? (
+              <Navigate replace to="/" />
+            ) : (
+              <ArchivePage
+                archivedWishes={archivedWishes}
+                onToggleCheckmark={toggleCheckmark}
+                onEditDiveWish={handleEditRedirect}
+                onDeleteDiveWish={handleDeleteWish}
+              />
+            )
+          }
+        />
       </Routes>
       <Navigation />
     </AppGrid>
@@ -63,7 +85,11 @@ export default function App() {
 
   function handleAddWish({ destination, notes }) {
     const id = nanoid();
-    setDiveWishes([{ id, destination, notes }, ...diveWishes]);
+    setDiveWishes([
+      { id, destination, notes, isArchived: false },
+      ...diveWishes,
+    ]);
+    navigate('/');
   }
 
   function handleEditWish({ destination, notes }) {
@@ -75,6 +101,7 @@ export default function App() {
       )
     );
     setDiveWishToEdit(null);
+    navigate(-1);
   }
 
   function handleEditRedirect(wish) {
@@ -91,6 +118,22 @@ export default function App() {
       diveWishes.map(diveWish => {
         if (id === diveWish.id) {
           return { ...diveWish, isBookmarked: !diveWish.isBookmarked };
+        } else {
+          return diveWish;
+        }
+      })
+    );
+  }
+
+  function toggleCheckmark(id) {
+    setDiveWishes(
+      diveWishes.map(diveWish => {
+        if (id === diveWish.id) {
+          return {
+            ...diveWish,
+            isArchived: !diveWish.isArchived,
+            isBookmarked: false,
+          };
         } else {
           return diveWish;
         }

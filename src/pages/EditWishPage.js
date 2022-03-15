@@ -12,7 +12,7 @@ export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {
   return (
     <>
       <Header>
-        <AbortButton onClick={() => navigate('/')}>
+        <AbortButton onClick={() => navigate(-1)}>
           <img src={AbortIcon} alt="abort editing" />
         </AbortButton>
         Edit dive destination
@@ -30,7 +30,7 @@ export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {
 }
 
 const AbortButton = styled(IconButton)`
-  top: 10px;
-  left: 20px;
-  z-index: 2;
+  padding: 5px 10px;
+  top: 3px;
+  left: 10px;
 `;

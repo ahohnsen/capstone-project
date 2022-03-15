@@ -21,3 +21,11 @@ DiveWishBookmarked.args = {
     'My last diving holidays in the Maldives were perfect! I wanna go there again as soon as possible. But next time I want to do a liveaboard.',
   isBookmarked: true,
 };
+
+export const ArchivedDiveWish = Template.bind({});
+ArchivedDiveWish.args = {
+  destination: 'Maldives',
+  notes:
+    'My last diving holidays in the Maldives were perfect! I wanna go there again as soon as possible. But next time I want to do a liveaboard.',
+  isArchived: true,
+};

@@ -7,8 +7,8 @@ export default {
 
 const Template = args => <EditWishPage {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const EditWishPageDefault = Template.bind({});
+EditWishPageDefault.args = {
   diveWishToEdit: {
     destination: 'Maldives',
     notes: 'It was so beautiful. Cannot wait to go again!',

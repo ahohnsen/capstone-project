@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import Button from './Button.js';
 
@@ -9,7 +8,6 @@ export default function DiveWishForm({
   preloadedValues,
   handleDiveWish,
 }) {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -62,7 +60,6 @@ export default function DiveWishForm({
       destination: wish.destination,
       notes: wish.notes,
     });
-    navigate('/');
   }
 }
 

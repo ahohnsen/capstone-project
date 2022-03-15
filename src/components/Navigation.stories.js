@@ -5,6 +5,4 @@ export default {
   component: Navigation,
 };
 
-const Template = () => <Navigation />;
-
-export const NavigationComplete = Template.bind({});
+export const NavigationDefault = <Navigation />;

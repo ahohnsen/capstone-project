@@ -27,7 +27,7 @@ const Dialog = styled.div`
   padding: 20px;
   background-color: var(--bg-color-section);
   border-radius: 4px;
-  box-shadow: 2px 2px 4px var(--color-boxshadow);
+  box-shadow: 0px 0px 6px var(--color-boxshadow);
   text-align: center;
   z-index: 1;
 `;

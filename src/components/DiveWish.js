@@ -4,6 +4,8 @@ import DeleteDialog from './DeleteDialog.js';
 import IconButton from './IconButton.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 import EditIcon from '../images/EditIcon.svg';
+import CheckActiveIcon from '../images/CheckActive.svg';
+import CheckInactiveIcon from '../images/CheckInactive.svg';
 import BookmarkIconInactive from '../images/BookmarkInactive.svg';
 import BookmarkIconActive from '../images/BookmarkActive.svg';
 
@@ -11,7 +13,9 @@ export default function DiveWish({
   destination,
   notes,
   isBookmarked,
+  isArchived,
   onToggleBookmark,
+  onToggleCheckmark,
   onDeleteDiveWish,
   onEditDiveWish,
 }) {
@@ -21,13 +25,22 @@ export default function DiveWish({
     <Wrapper>
       <Heading>{destination}</Heading>
       <Notes>{notes}</Notes>
-      <Bookmark onClick={onToggleBookmark}>
-        {isBookmarked ? (
-          <img src={BookmarkIconActive} alt="is bookmarked" />
+      {!isArchived && (
+        <Bookmark onClick={onToggleBookmark}>
+          {isBookmarked ? (
+            <img src={BookmarkIconActive} alt="is bookmarked" />
+          ) : (
+            <img src={BookmarkIconInactive} alt="not bookmarked" />
+          )}
+        </Bookmark>
+      )}
+      <CheckButton onClick={onToggleCheckmark}>
+        {isArchived ? (
+          <img src={CheckActiveIcon} alt="is archived" />
         ) : (
-          <img src={BookmarkIconInactive} alt="not bookmarked" />
+          <img src={CheckInactiveIcon} alt="not archived" />
         )}
-      </Bookmark>
+      </CheckButton>
       <EditButton onClick={onEditDiveWish}>
         <img src={EditIcon} alt="edit" />
       </EditButton>
@@ -56,7 +69,7 @@ const Wrapper = styled.section`
 `;
 
 const Heading = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--font-color-heading);
 `;
@@ -66,17 +79,22 @@ const Notes = styled.p`
   color: var(--font-color-content);
 `;
 
+const CheckButton = styled(IconButton)`
+  right: 70px;
+  bottom: 0px;
+`;
+
 const EditButton = styled(IconButton)`
-  right: 45px;
-  bottom: 5px;
+  right: 40px;
+  bottom: 0px;
 `;
 
 const DeleteButton = styled(IconButton)`
-  right: 15px;
-  bottom: 5px;
+  right: 10px;
+  bottom: 0px;
 `;
 
 const Bookmark = styled(IconButton)`
-  top: 0px;
-  right: 0px;
+  top: -5px;
+  right: -5px;
 `;

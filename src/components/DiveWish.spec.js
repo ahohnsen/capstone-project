@@ -3,7 +3,7 @@ import { userEvent } from '@storybook/testing-library';
 import DiveWish from './DiveWish';
 
 describe('DiveWish', () => {
-  it('renders a destination,notes, and an edit, delete and bookmark button', () => {
+  it('renders a destination, notes, and an edit, delete, bookmark and check button', () => {
     render(
       <DiveWish
         destination="Maldives"
@@ -16,14 +16,26 @@ describe('DiveWish', () => {
       'I want to go there for my next diving holiday'
     );
     const buttonBookmark = screen.getByRole('button', { name: /bookmark/i });
+    const buttonCheckmark = screen.getByRole('button', { name: /archived/i });
     const buttonEdit = screen.getByRole('button', { name: /edit/i });
     const buttonDelete = screen.getByRole('button', { name: /delete/i });
 
     expect(destination).toBeInTheDocument();
     expect(notes).toBeInTheDocument();
+    expect(buttonBookmark).toBeInTheDocument();
+    expect(buttonCheckmark).toBeInTheDocument();
     expect(buttonEdit).toBeInTheDocument();
     expect(buttonDelete).toBeInTheDocument();
-    expect(buttonBookmark).toBeInTheDocument();
+  });
+
+  it('calls the function to toggle the checkmark when the check button is clicked', () => {
+    const toggleCheckmark = jest.fn();
+    render(<DiveWish onToggleCheckmark={toggleCheckmark} />);
+
+    const buttonCheckmark = screen.getByRole('button', { name: /archive/i });
+    userEvent.click(buttonCheckmark);
+
+    expect(toggleCheckmark).toHaveBeenCalled();
   });
 
   it('calls the function to toggle the bookmark when the bookmark button is clicked', () => {
@@ -36,7 +48,7 @@ describe('DiveWish', () => {
     expect(toggleBookmark).toHaveBeenCalled();
   });
 
-  it('clicking the edit button calls the function to edit the dive wish', () => {
+  it('calls the function to edit the dive wish when the edit button is clicked', () => {
     const editDiveWish = jest.fn();
     render(<DiveWish onEditDiveWish={editDiveWish} />);
 
