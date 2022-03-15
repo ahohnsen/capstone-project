@@ -5,6 +5,7 @@ import CheckIconInactive from '../images/CheckInactive.svg';
 import CheckIconActive from '../images/CheckActive.svg';
 import EditIcon from '../images/EditIcon.svg';
 import DeleteIcon from '../images/DeleteIcon.svg';
+import ArrowForward from '../images/ArrowForward.svg';
 
 export default {
   title: 'Component/IconButton',
@@ -38,3 +39,6 @@ EditButton.args = { children: <img src={EditIcon} alt="edit" /> };
 
 export const DeleteButton = Template.bind({});
 DeleteButton.args = { children: <img src={DeleteIcon} alt="abort" /> };
+
+export const ArrowForwardButton = Template.bind({});
+ArrowForwardButton.args = { children: <img src={ArrowForward} alt="abort" /> };
