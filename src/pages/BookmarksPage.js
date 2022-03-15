@@ -6,6 +6,7 @@ import DiveWish from '../components/DiveWish.js';
 export default function BookmarksPage({
   bookmarkedWishes,
   onToggleBookmark,
+  onToggleCheckmark,
   onEditDiveWish,
   onDeleteDiveWish,
 }) {
@@ -21,7 +22,9 @@ export default function BookmarksPage({
                 destination={wish.destination}
                 notes={wish.notes}
                 isBookmarked={wish.isBookmarked}
+                isArchived={wish.isArchived}
                 onToggleBookmark={() => onToggleBookmark(wish.id)}
+                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
                 onEditDiveWish={() => onEditDiveWish(wish)}
                 onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
               />

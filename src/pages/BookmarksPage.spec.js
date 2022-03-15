@@ -26,17 +26,15 @@ describe('BookmarksPage', () => {
     expect(diveWish2).toBeInTheDocument();
   });
 
-  describe('BookmarksPage', () => {
-    it('renders a message to the user when there are no bookmarked items', () => {
-      const bookmarkedWishes = [];
+  it('renders a message to the user when there are no bookmarked items', () => {
+    const bookmarkedWishes = [];
 
-      render(<BookmarksPage bookmarkedWishes={bookmarkedWishes} />);
+    render(<BookmarksPage bookmarkedWishes={bookmarkedWishes} />);
 
-      const message = screen.getByText(
-        'You currently have nothing bookmarked. Start by marking your favorite dive destinations.'
-      );
+    const message = screen.getByText(
+      'You currently have nothing bookmarked. Start by marking your favorite dive destinations.'
+    );
 
-      expect(message).toBeInTheDocument();
-    });
+    expect(message).toBeInTheDocument();
   });
 });
