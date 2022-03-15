@@ -80,21 +80,21 @@ const Notes = styled.p`
 `;
 
 const CheckButton = styled(IconButton)`
-  right: 75px;
-  bottom: 5px;
+  right: 70px;
+  bottom: 0px;
 `;
 
 const EditButton = styled(IconButton)`
-  right: 45px;
-  bottom: 5px;
+  right: 40px;
+  bottom: 0px;
 `;
 
 const DeleteButton = styled(IconButton)`
-  right: 15px;
-  bottom: 5px;
+  right: 10px;
+  bottom: 0px;
 `;
 
 const Bookmark = styled(IconButton)`
-  top: 0px;
-  right: 0px;
+  top: -5px;
+  right: -5px;
 `;
