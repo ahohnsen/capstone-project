@@ -5,7 +5,6 @@ import Content from '../components/Content.js';
 import DiveWish from '../components/DiveWish.js';
 import IconButton from '../components/IconButton.js';
 import ArrowBack from '../images/ArrowBack.svg';
-import { useEffect } from 'react';
 
 export default function ArchivePage({
   archivedWishes,
@@ -14,12 +13,6 @@ export default function ArchivePage({
   onDeleteDiveWish,
 }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (archivedWishes.length === 0) {
-      navigate('/');
-    }
-  }, [archivedWishes, navigate]);
 
   return (
     <>

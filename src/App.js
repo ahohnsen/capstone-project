@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import Navigation from './components/Navigation.js';
@@ -66,12 +66,16 @@ export default function App() {
         <Route
           path="/archive"
           element={
-            <ArchivePage
-              archivedWishes={archivedWishes}
-              onToggleCheckmark={toggleCheckmark}
-              onEditDiveWish={handleEditRedirect}
-              onDeleteDiveWish={handleDeleteWish}
-            />
+            archivedWishes.length === 0 ? (
+              <Navigate replace to="/" />
+            ) : (
+              <ArchivePage
+                archivedWishes={archivedWishes}
+                onToggleCheckmark={toggleCheckmark}
+                onEditDiveWish={handleEditRedirect}
+                onDeleteDiveWish={handleDeleteWish}
+              />
+            )
           }
         />
       </Routes>
