@@ -24,19 +24,20 @@ export default function ArchivePage({
       </Header>
       <Content>
         <Grid>
-          {archivedWishes.length > 0 &&
-            archivedWishes.map(wish => (
-              <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                isArchived={wish.isArchived}
-                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
-                onEditDiveWish={() => onEditDiveWish(wish)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
-              />
-            ))}
+          {archivedWishes.length > 0
+            ? archivedWishes.map(wish => (
+                <DiveWish
+                  key={wish.id}
+                  destination={wish.destination}
+                  notes={wish.notes}
+                  isBookmarked={wish.isBookmarked}
+                  isArchived={wish.isArchived}
+                  onToggleCheckmark={() => onToggleCheckmark(wish.id)}
+                  onEditDiveWish={() => onEditDiveWish(wish)}
+                  onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+                />
+              ))
+            : navigate('/')}
         </Grid>
       </Content>
     </>
