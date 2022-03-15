@@ -73,8 +73,9 @@ const Message = styled.p`
 
 const Container = styled.div`
   position: relative;
-  background-color: var(--bg-color-section);
   padding: 15px 15px;
+  margin-top: 20px;
+  background-color: var(--bg-color-section);
 `;
 
 const Heading = styled.h2`

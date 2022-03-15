@@ -5,6 +5,7 @@ import Content from '../components/Content.js';
 import DiveWish from '../components/DiveWish.js';
 import IconButton from '../components/IconButton.js';
 import ArrowBack from '../images/ArrowBack.svg';
+import { useEffect } from 'react';
 
 export default function ArchivePage({
   archivedWishes,
@@ -13,6 +14,12 @@ export default function ArchivePage({
   onDeleteDiveWish,
 }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (archivedWishes.length === 0) {
+      navigate('/');
+    }
+  }, [archivedWishes, navigate]);
 
   return (
     <>
@@ -24,20 +31,19 @@ export default function ArchivePage({
       </Header>
       <Content>
         <Grid>
-          {archivedWishes.length > 0
-            ? archivedWishes.map(wish => (
-                <DiveWish
-                  key={wish.id}
-                  destination={wish.destination}
-                  notes={wish.notes}
-                  isBookmarked={wish.isBookmarked}
-                  isArchived={wish.isArchived}
-                  onToggleCheckmark={() => onToggleCheckmark(wish.id)}
-                  onEditDiveWish={() => onEditDiveWish(wish)}
-                  onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
-                />
-              ))
-            : navigate('/')}
+          {archivedWishes.length > 0 &&
+            archivedWishes.map(wish => (
+              <DiveWish
+                key={wish.id}
+                destination={wish.destination}
+                notes={wish.notes}
+                isBookmarked={wish.isBookmarked}
+                isArchived={wish.isArchived}
+                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
+                onEditDiveWish={() => onEditDiveWish(wish)}
+                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+              />
+            ))}
         </Grid>
       </Content>
     </>
