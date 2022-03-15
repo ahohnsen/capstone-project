@@ -89,6 +89,7 @@ export default function App() {
       { id, destination, notes, isArchived: false },
       ...diveWishes,
     ]);
+    navigate('/');
   }
 
   function handleEditWish({ destination, notes }) {
@@ -100,6 +101,7 @@ export default function App() {
       )
     );
     setDiveWishToEdit(null);
+    navigate(-1);
   }
 
   function handleEditRedirect(wish) {

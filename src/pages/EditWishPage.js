@@ -12,7 +12,7 @@ export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {
   return (
     <>
       <Header>
-        <AbortButton onClick={() => navigate('/')}>
+        <AbortButton onClick={() => navigate(-1)}>
           <img src={AbortIcon} alt="abort editing" />
         </AbortButton>
         Edit dive destination

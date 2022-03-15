@@ -5,6 +5,7 @@ const Content = styled.main`
   max-width: 500px;
   padding: 40px 0 20px;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export default Content;
