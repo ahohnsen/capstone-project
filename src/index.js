@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './firebase/AuthContext.js';
-import App from './App';
+import { AuthProvider } from './contexts/AuthContext';
+import App from './App.js';
 import GlobalStyles from './GlobalStyles';
 
 ReactDOM.render(
