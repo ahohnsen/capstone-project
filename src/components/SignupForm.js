@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
 import Button from './Button.js';
 
-export default function LoginForm() {
+export default function SignupForm() {
   const { register, handleSubmit } = useForm({});
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -27,25 +27,34 @@ export default function LoginForm() {
             {...register('password', { required: true })}
           />
         </Label>
-        <LoginButton disabled={loading}>LOGIN</LoginButton>
-        <RegisterText>
-          Need an account?
-          <StyledLink to="/start/signup"> Create one.</StyledLink>
-        </RegisterText>
-        <StyledLink to="/start/forgot-password">Forgot password?</StyledLink>
+        <Label>
+          PASSWORD CONFIRMATION
+          <Input
+            type="password"
+            {...register('passwordConfirmation', { required: true })}
+          />
+        </Label>
+        <SignupButton disabled={loading}>SIGN UP</SignupButton>
+        <LoginText>
+          Already have an account?
+          <StyledLink to="/start/login"> Log in.</StyledLink>
+        </LoginText>
       </Form>
     </>
   );
 
   async function onSubmit(data) {
-    console.log(data.email, data.password);
+    if (data.password !== data.passwordConfirmation) {
+      return setError('Passwords do not match');
+    }
+
     try {
       setError('');
       setLoading(true);
-      await login(data.email, data.password);
+      await signup(data.email, data.password);
       navigate('/');
     } catch {
-      setError('Failed to log in');
+      setError('Failed to create an account');
     }
 
     setLoading(false);
@@ -74,17 +83,16 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-const LoginButton = styled(Button)`
+const SignupButton = styled(Button)`
   width: 100%;
   margin-top: 10px;
 `;
 
 const StyledLink = styled(Link)`
   color: var(--font-color-action);
-  text-align: center;
 `;
 
-const RegisterText = styled.span`
+const LoginText = styled.span`
   color: var(--font-color-action);
   text-align: center;
 `;
