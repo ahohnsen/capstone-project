@@ -37,7 +37,7 @@ export default function SignupForm() {
         <SignupButton disabled={loading}>SIGN UP</SignupButton>
         <LoginText>
           Already have an account?
-          <StyledLink to="/start/login"> Log in.</StyledLink>
+          <StyledLink to="/login"> Log in.</StyledLink>
         </LoginText>
       </Form>
     </>

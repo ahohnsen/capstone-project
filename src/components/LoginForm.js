@@ -30,15 +30,14 @@ export default function LoginForm() {
         <LoginButton disabled={loading}>LOGIN</LoginButton>
         <RegisterText>
           Need an account?
-          <StyledLink to="/start/signup"> Create one.</StyledLink>
+          <StyledLink to="/signup"> Create one.</StyledLink>
         </RegisterText>
-        <StyledLink to="/start/forgot-password">Forgot password?</StyledLink>
+        <StyledLink to="/forgot-password">Forgot password?</StyledLink>
       </Form>
     </>
   );
 
   async function onSubmit(data) {
-    console.log(data.email, data.password);
     try {
       setError('');
       setLoading(true);

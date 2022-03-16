@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import Content from '../components/Content.js';
 import LoginForm from '../components/LoginForm.js';
+import SignupForm from '../components/SignupForm.js';
+import ForgotPasswordForm from '../components/ForgotPasswordForm.js';
 import BackgroundImage from '../images/Ocean.jpg';
 import ScubaMateLogo from '../images/ScubaMateLogo.svg';
 
@@ -12,6 +14,8 @@ export default function StartScreen() {
     <Container>
       <Logo src={ScubaMateLogo} alt="ScubaMate Logo" />
       {login === 'login' && <LoginForm />}
+      {login === 'signup' && <SignupForm />}
+      {login === 'forgot-password' && <ForgotPasswordForm />}
     </Container>
   );
 }
