@@ -3,26 +3,36 @@ import { MemoryRouter } from 'react-router-dom';
 import { AuthProvider } from '../contexts/AuthContext.js';
 import WishlistPage from './WishlistPage.js';
 
-describe('Wishlist', () => {
+jest.mock('firebase/compat/auth');
+jest.mock('firebase/compat/app', () => ({
+  initializeApp: jest.fn().mockReturnValue({
+    auth: jest.fn().mockReturnValue({
+      onAuthStateChanged: jest.fn().mockImplementation(callback => callback()),
+    }),
+  }),
+}));
+
+describe('WishlistPage', () => {
+  const diveWishes = [
+    {
+      id: '1',
+      destination: 'Maldives',
+      notes: 'I want to go there for my next diving holiday',
+      isArchived: false,
+    },
+    {
+      id: '2',
+      destination: 'Lanzarote',
+      notes: 'I want to go there again soon to see my former colleauges.',
+      isArchived: false,
+    },
+  ];
+
   it('renders wishlist with two dive wishes', () => {
-    const diveWishes = [
-      {
-        id: '1',
-        destination: 'Maldives',
-        notes: 'I want to go there for my next diving holiday',
-        isArchived: false,
-      },
-      {
-        id: '2',
-        destination: 'Lanzarote',
-        notes: 'I want to go there again soon to see my former colleauges.',
-        isArchived: false,
-      },
-    ];
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage diveWishes={diveWishes} />
+          <WishlistPage diveWishes={[...diveWishes]} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -37,10 +47,12 @@ describe('Wishlist', () => {
   it('renders a heading with the name "Diving Wishlist" and a logout button', () => {
     render(
       <MemoryRouter>
-        <WishlistPage />
+        <AuthProvider>
+          <WishlistPage diveWishes={[...diveWishes]} />
+        </AuthProvider>
       </MemoryRouter>
     );
-    const heading = screen.getByRole('heading', { name: 'Diving Wishlist' });
+    const heading = screen.getByRole('heading', { name: /Diving Wishlist/i });
     const buttonLogout = screen.getByRole('button', { name: /logout/i });
 
     expect(heading).toBeInTheDocument();
@@ -51,7 +63,9 @@ describe('Wishlist', () => {
     const diveWishes = [];
     render(
       <MemoryRouter>
-        <WishlistPage diveWishes={diveWishes} />
+        <AuthProvider>
+          <WishlistPage diveWishes={[...diveWishes]} />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -79,7 +93,9 @@ describe('Wishlist', () => {
     ];
     render(
       <MemoryRouter>
-        <WishlistPage diveWishes={diveWishes} />
+        <AuthProvider>
+          <WishlistPage diveWishes={diveWishes} />
+        </AuthProvider>
       </MemoryRouter>
     );
     const heading = screen.getByRole('heading', { name: 'Archive' });
