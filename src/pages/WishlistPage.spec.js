@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { AuthProvider } from '../contexts/AuthContext.js';
 import WishlistPage from './WishlistPage.js';
 
 describe('Wishlist', () => {
-  it('renders wishlist with two sections', () => {
+  it('renders wishlist with two dive wishes', () => {
     const diveWishes = [
       {
         id: '1',
@@ -20,7 +21,9 @@ describe('Wishlist', () => {
     ];
     render(
       <MemoryRouter>
-        <WishlistPage diveWishes={diveWishes} />
+        <AuthProvider>
+          <WishlistPage diveWishes={diveWishes} />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -29,6 +32,19 @@ describe('Wishlist', () => {
 
     expect(diveWish1).toBeInTheDocument();
     expect(diveWish2).toBeInTheDocument();
+  });
+
+  it('renders a heading with the name "Diving Wishlist" and a logout button', () => {
+    render(
+      <MemoryRouter>
+        <WishlistPage />
+      </MemoryRouter>
+    );
+    const heading = screen.getByRole('heading', { name: 'Diving Wishlist' });
+    const buttonLogout = screen.getByRole('button', { name: /logout/i });
+
+    expect(heading).toBeInTheDocument();
+    expect(buttonLogout).toBeInTheDocument();
   });
 
   it('renders a message to the user when wishlist is empty', () => {
