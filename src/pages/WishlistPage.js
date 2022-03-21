@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import DiveWish from '../components/DiveWish.js';
 import IconButton from '../components/IconButton.js';
 import ArrowForward from '../images/ArrowForward.svg';
-import { useNavigate } from 'react-router';
+import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function WishlistPage({
   diveWishes,
@@ -13,7 +16,10 @@ export default function WishlistPage({
   onEditDiveWish,
   onDeleteDiveWish,
 }) {
+  const { logout } = useAuth();
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+
   const notArchivedWishes = diveWishes.filter(
     diveWish => diveWish.isArchived === false
   );
@@ -24,8 +30,14 @@ export default function WishlistPage({
 
   return (
     <>
-      <Header>Diving Wishlist</Header>
+      <Header>
+        Diving Wishlist
+        <LogoutButton onClick={handleLogout}>
+          <img src={LogoutIcon} alt="logout" />
+        </LogoutButton>
+      </Header>
       <Content>
+        {error && <p>{error}</p>}
         <Grid>
           {notArchivedWishes.length > 0 ? (
             notArchivedWishes.map(wish => (
@@ -50,15 +62,26 @@ export default function WishlistPage({
           {archivedWishes.length > 0 && (
             <Container>
               <Heading>Archive</Heading>
-              <ArrowIcon onClick={() => navigate('/archive')}>
+              <ArrowButton onClick={() => navigate('/archive')}>
                 <img src={ArrowForward} alt="go to archive" />
-              </ArrowIcon>
+              </ArrowButton>
             </Container>
           )}
         </Grid>
       </Content>
     </>
   );
+
+  async function handleLogout() {
+    setError('');
+
+    try {
+      await logout();
+      navigate('/login');
+    } catch {
+      setError('Failed to log out');
+    }
+  }
 }
 
 const Grid = styled.div`
@@ -84,8 +107,14 @@ const Heading = styled.h2`
   color: var(--font-color-heading);
 `;
 
-const ArrowIcon = styled(IconButton)`
+const ArrowButton = styled(IconButton)`
   padding: 5px 10px;
   top: 11px;
   right: 0px;
+`;
+
+const LogoutButton = styled(IconButton)`
+  padding: 5px 10px;
+  top: 0px;
+  right: -10px;
 `;

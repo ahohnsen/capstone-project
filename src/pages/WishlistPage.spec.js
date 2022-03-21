@@ -1,26 +1,39 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { AuthProvider } from '../contexts/AuthContext.js';
 import WishlistPage from './WishlistPage.js';
 
-describe('Wishlist', () => {
-  it('renders wishlist with two sections', () => {
-    const diveWishes = [
-      {
-        id: '1',
-        destination: 'Maldives',
-        notes: 'I want to go there for my next diving holiday',
-        isArchived: false,
-      },
-      {
-        id: '2',
-        destination: 'Lanzarote',
-        notes: 'I want to go there again soon to see my former colleauges.',
-        isArchived: false,
-      },
-    ];
+jest.mock('firebase/compat/auth');
+jest.mock('firebase/compat/app', () => ({
+  initializeApp: jest.fn().mockReturnValue({
+    auth: jest.fn().mockReturnValue({
+      onAuthStateChanged: jest.fn().mockImplementation(callback => callback()),
+    }),
+  }),
+}));
+
+describe('WishlistPage', () => {
+  const diveWishes = [
+    {
+      id: '1',
+      destination: 'Maldives',
+      notes: 'I want to go there for my next diving holiday',
+      isArchived: false,
+    },
+    {
+      id: '2',
+      destination: 'Lanzarote',
+      notes: 'I want to go there again soon to see my former colleauges.',
+      isArchived: false,
+    },
+  ];
+
+  it('renders wishlist with two dive wishes', () => {
     render(
       <MemoryRouter>
-        <WishlistPage diveWishes={diveWishes} />
+        <AuthProvider>
+          <WishlistPage diveWishes={[...diveWishes]} />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -31,11 +44,28 @@ describe('Wishlist', () => {
     expect(diveWish2).toBeInTheDocument();
   });
 
+  it('renders a heading with the name "Diving Wishlist" and a logout button', () => {
+    render(
+      <MemoryRouter>
+        <AuthProvider>
+          <WishlistPage diveWishes={[...diveWishes]} />
+        </AuthProvider>
+      </MemoryRouter>
+    );
+    const heading = screen.getByRole('heading', { name: /Diving Wishlist/i });
+    const buttonLogout = screen.getByRole('button', { name: /logout/i });
+
+    expect(heading).toBeInTheDocument();
+    expect(buttonLogout).toBeInTheDocument();
+  });
+
   it('renders a message to the user when wishlist is empty', () => {
     const diveWishes = [];
     render(
       <MemoryRouter>
-        <WishlistPage diveWishes={diveWishes} />
+        <AuthProvider>
+          <WishlistPage diveWishes={[...diveWishes]} />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -63,7 +93,9 @@ describe('Wishlist', () => {
     ];
     render(
       <MemoryRouter>
-        <WishlistPage diveWishes={diveWishes} />
+        <AuthProvider>
+          <WishlistPage diveWishes={diveWishes} />
+        </AuthProvider>
       </MemoryRouter>
     );
     const heading = screen.getByRole('heading', { name: 'Archive' });

@@ -1,5 +1,6 @@
 import GlobalStyles from '../src/GlobalStyles.js';
 import { MemoryRouter } from 'react-router-dom';
+import { AuthProvider } from '../src/contexts/AuthContext.js';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -13,11 +14,11 @@ export const parameters = {
 
 export const decorators = [
   Story => (
-    <>
     <MemoryRouter>
+      <AuthProvider>
       <GlobalStyles />
       <Story />
+      </AuthProvider>
     </MemoryRouter>
-    </>
   ),
 ];
