@@ -34,7 +34,6 @@ export default function App() {
     } catch (error) {
       console.log('Error:', error.message);
     }
-    console.log(posts);
   }
 
   return (
@@ -159,20 +158,20 @@ export default function App() {
     }
   }
 
-  // function handleDeleteWish(_id) {
-  //   setPosts(posts.filter(post => post.id !== id));
-  // }
-
-  function toggleBookmark(id) {
-    setPosts(
-      posts.map(post => {
-        if (id === post.id) {
-          return { ...post, isBookmarked: !post.isBookmarked };
-        } else {
-          return post;
-        }
-      })
-    );
+  async function toggleBookmark(_id) {
+    const bookmarkStatus = posts.find(post => post._id === _id);
+    const toggleBookmarkPost = {
+      _id: _id,
+      post: {
+        isBookmarked: !bookmarkStatus.isBookmarked,
+      },
+    };
+    try {
+      await axios.put('/api/posts/', toggleBookmarkPost);
+      getPosts();
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
   }
 
   function toggleCheckmark(id) {
