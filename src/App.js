@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
-import { nanoid } from 'nanoid';
 import { useAuth } from './contexts/AuthContext.js';
 import PrivateRoute from './PrivateRoute.js';
 import Navigation from './components/Navigation.js';
@@ -51,7 +50,7 @@ export default function App() {
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
                 onEditDiveWish={handleEditRedirect}
-                onDeleteDiveWish={handleDeleteWish}
+                onDeletePost={handleDeletePost}
               />
             </PrivateRoute>
           }
@@ -65,7 +64,7 @@ export default function App() {
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
                 onEditDiveWish={handleEditRedirect}
-                onDeleteDiveWish={handleDeleteWish}
+                onDeletePost={handleDeletePost}
               />
             </PrivateRoute>
           }
@@ -74,7 +73,7 @@ export default function App() {
           path="/add-wish"
           element={
             <PrivateRoute>
-              <AddWishPage onAddDiveWish={handleAddWish} />
+              <AddWishPage onAddPost={handleAddPost} />
             </PrivateRoute>
           }
         />
@@ -97,10 +96,10 @@ export default function App() {
                 <Navigate replace to="/" />
               ) : (
                 <ArchivePage
-                  archivedWishes={archivedPosts}
+                  archivedPosts={archivedPosts}
                   onToggleCheckmark={toggleCheckmark}
                   onEditDiveWish={handleEditRedirect}
-                  onDeleteDiveWish={handleDeleteWish}
+                  onDeletePost={handleDeletePost}
                 />
               )}
             </PrivateRoute>
@@ -112,9 +111,19 @@ export default function App() {
   );
   // }
 
-  function handleAddWish({ destination, notes }) {
-    const id = nanoid();
-    setPosts([{ id, destination, notes, isArchived: false }, ...posts]);
+  async function handleAddPost({ destination, notes }) {
+    const newPost = {
+      destination: destination,
+      notes: notes,
+      isBookmarked: false,
+      isArchived: false,
+    };
+    try {
+      await axios.post('/api/posts', newPost);
+      getPosts();
+    } catch (error) {
+      console.log('Error', error.messages);
+    }
     navigate('/');
   }
 
@@ -135,9 +144,18 @@ export default function App() {
     navigate('/edit-wish');
   }
 
-  function handleDeleteWish(id) {
-    setPosts(posts.filter(post => post.id !== id));
+  async function handleDeletePost(_id) {
+    try {
+      await axios.delete('/api/posts/', { data: { _id: _id } });
+      getPosts();
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
   }
+
+  // function handleDeleteWish(_id) {
+  //   setPosts(posts.filter(post => post.id !== id));
+  // }
 
   function toggleBookmark(id) {
     setPosts(

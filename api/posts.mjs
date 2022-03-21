@@ -8,7 +8,7 @@ export default async function handler(request, response) {
 
   if (method === 'GET') {
     try {
-      const posts = await Post.find().populate('author');
+      const posts = await Post.find();
       response.json(posts);
     } catch (error) {
       response.status(500).json({ message: error.message });

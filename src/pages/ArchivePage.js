@@ -7,10 +7,10 @@ import IconButton from '../components/IconButton.js';
 import ArrowBack from '../images/ArrowBack.svg';
 
 export default function ArchivePage({
-  archivedWishes,
+  archivedPosts,
   onToggleCheckmark,
   onEditDiveWish,
-  onDeleteDiveWish,
+  onDeletePost,
 }) {
   const navigate = useNavigate();
 
@@ -24,17 +24,17 @@ export default function ArchivePage({
       </Header>
       <Content>
         <Grid>
-          {archivedWishes.length > 0 &&
-            archivedWishes.map(wish => (
+          {archivedPosts.length > 0 &&
+            archivedPosts.map(post => (
               <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                isArchived={wish.isArchived}
-                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
-                onEditDiveWish={() => onEditDiveWish(wish)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+                key={post._id}
+                destination={post.destination}
+                notes={post.notes}
+                isBookmarked={post.isBookmarked}
+                isArchived={post.isArchived}
+                onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                onEditDiveWish={() => onEditDiveWish(post)}
+                onDeletePost={() => onDeletePost(post._id)}
               />
             ))}
         </Grid>

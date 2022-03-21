@@ -14,7 +14,7 @@ export default function WishlistPage({
   onToggleBookmark,
   onToggleCheckmark,
   onEditDiveWish,
-  onDeleteDiveWish,
+  onDeletePost,
 }) {
   const { logout } = useAuth();
   const [error, setError] = useState('');
@@ -46,7 +46,7 @@ export default function WishlistPage({
                 onToggleBookmark={() => onToggleBookmark(post._id)}
                 onToggleCheckmark={() => onToggleCheckmark(post._id)}
                 onEditDiveWish={() => onEditDiveWish(post)}
-                onDeleteDiveWish={() => onDeleteDiveWish(post._id)}
+                onDeletePost={() => onDeletePost(post._id)}
               />
             ))
           ) : (

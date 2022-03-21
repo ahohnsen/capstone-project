@@ -16,7 +16,7 @@ export default function DiveWish({
   isArchived,
   onToggleBookmark,
   onToggleCheckmark,
-  onDeleteDiveWish,
+  onDeletePost,
   onEditDiveWish,
 }) {
   const [showDialog, setShowDialog] = useState(false);
@@ -58,7 +58,7 @@ export default function DiveWish({
 
   function handleDelete() {
     setShowDialog(false);
-    onDeleteDiveWish();
+    onDeletePost();
   }
 }
 

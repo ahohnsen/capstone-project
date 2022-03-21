@@ -10,7 +10,8 @@ Content-Type: application/json
 {
   "destination": "Maldives2",
   "notes": "Beautiful, I wanna go again asap!",
-  "author": "62388bd80cc0c7e03d877986"
+  "isBookmarked": false,
+  "isArchived": false
 }
 
 ###
