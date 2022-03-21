@@ -15,12 +15,15 @@ export default function DiveWishForm({
     formState: { errors },
   } = useForm({
     defaultValues: preloadedValues
-      ? preloadedValues
+      ? {
+          destination: preloadedValues.destination,
+          notes: preloadedValues.notes,
+        }
       : { destination: '', notes: '' },
   });
 
   return (
-    <Form aria-label={formName} onSubmit={handleSubmit(wish => onSubmit(wish))}>
+    <Form aria-label={formName} onSubmit={handleSubmit(post => onSubmit(post))}>
       <Container>
         <Label htmlFor="destination">DESTINATION </Label>
         <Input

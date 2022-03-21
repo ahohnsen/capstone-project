@@ -9,7 +9,7 @@ import ArrowBack from '../images/ArrowBack.svg';
 export default function ArchivePage({
   archivedPosts,
   onToggleCheckmark,
-  onEditDiveWish,
+  onEditPost,
   onDeletePost,
 }) {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function ArchivePage({
                 isBookmarked={post.isBookmarked}
                 isArchived={post.isArchived}
                 onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                onEditDiveWish={() => onEditDiveWish(post)}
+                onEditPost={() => onEditPost(post)}
                 onDeletePost={() => onDeletePost(post._id)}
               />
             ))}

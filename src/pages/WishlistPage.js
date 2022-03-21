@@ -13,7 +13,7 @@ export default function WishlistPage({
   posts,
   onToggleBookmark,
   onToggleCheckmark,
-  onEditDiveWish,
+  onEditPost,
   onDeletePost,
 }) {
   const { logout } = useAuth();
@@ -45,7 +45,7 @@ export default function WishlistPage({
                 isArchived={post.isArchived}
                 onToggleBookmark={() => onToggleBookmark(post._id)}
                 onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                onEditDiveWish={() => onEditDiveWish(post)}
+                onEditPost={() => onEditPost(post)}
                 onDeletePost={() => onDeletePost(post._id)}
               />
             ))

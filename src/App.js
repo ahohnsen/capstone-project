@@ -49,7 +49,7 @@ export default function App() {
                 posts={posts}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
-                onEditDiveWish={handleEditRedirect}
+                onEditPost={handleEditRedirect}
                 onDeletePost={handleDeletePost}
               />
             </PrivateRoute>
@@ -63,7 +63,7 @@ export default function App() {
                 bookmarkedPosts={bookmarkedPosts}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
-                onEditDiveWish={handleEditRedirect}
+                onEditPost={handleEditRedirect}
                 onDeletePost={handleDeletePost}
               />
             </PrivateRoute>
@@ -82,8 +82,8 @@ export default function App() {
           element={
             <PrivateRoute>
               <EditWishPage
-                onEditDiveWish={handleEditWish}
-                diveWishToEdit={postToEdit}
+                onEditPost={handleEditPost}
+                postToEdit={postToEdit}
               />
             </PrivateRoute>
           }
@@ -98,7 +98,7 @@ export default function App() {
                 <ArchivePage
                   archivedPosts={archivedPosts}
                   onToggleCheckmark={toggleCheckmark}
-                  onEditDiveWish={handleEditRedirect}
+                  onEditPost={handleEditRedirect}
                   onDeletePost={handleDeletePost}
                 />
               )}
@@ -127,14 +127,20 @@ export default function App() {
     navigate('/');
   }
 
-  function handleEditWish({ destination, notes }) {
-    setPosts(
-      posts.map(post =>
-        post.id === postToEdit.id
-          ? { ...post, id: post.id, destination, notes }
-          : post
-      )
-    );
+  async function handleEditPost({ destination, notes }) {
+    const newPost = {
+      _id: postToEdit._id,
+      post: {
+        destination,
+        notes,
+      },
+    };
+    try {
+      await axios.put('/api/posts/', newPost);
+      getPosts();
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
     setPostToEdit(null);
     navigate(-1);
   }

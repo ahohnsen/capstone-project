@@ -17,7 +17,7 @@ export default function DiveWish({
   onToggleBookmark,
   onToggleCheckmark,
   onDeletePost,
-  onEditDiveWish,
+  onEditPost,
 }) {
   const [showDialog, setShowDialog] = useState(false);
 
@@ -41,7 +41,7 @@ export default function DiveWish({
           <img src={CheckInactiveIcon} alt="not archived" />
         )}
       </CheckButton>
-      <EditButton onClick={onEditDiveWish}>
+      <EditButton onClick={onEditPost}>
         <img src={EditIcon} alt="edit" />
       </EditButton>
       <DeleteButton onClick={() => setShowDialog(true)}>
