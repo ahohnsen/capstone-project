@@ -174,20 +174,20 @@ export default function App() {
     }
   }
 
-  function toggleCheckmark(id) {
-    setPosts(
-      posts.map(post => {
-        if (id === post.id) {
-          return {
-            ...post,
-            isArchived: !post.isArchived,
-            isBookmarked: false,
-          };
-        } else {
-          return post;
-        }
-      })
-    );
+  async function toggleCheckmark(_id) {
+    const archiveStatus = posts.find(post => post._id === _id);
+    const toggleCheckmarkPost = {
+      _id: _id,
+      post: {
+        isArchived: !archiveStatus.isArchived,
+      },
+    };
+    try {
+      await axios.put('/api/posts/', toggleCheckmarkPost);
+      getPosts();
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
   }
 }
 
