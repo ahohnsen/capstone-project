@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { useAuth } from './contexts/AuthContext.js';
-import useLocalStorage from './hooks/useLocalStorage.js';
 import PrivateRoute from './PrivateRoute.js';
 import Navigation from './components/Navigation.js';
 import WishlistPage from './pages/WishlistPage.js';
@@ -15,17 +15,28 @@ import StartScreen from './pages/StartScreen.js';
 
 export default function App() {
   const { currentUser } = useAuth();
-  const [diveWishes, setDiveWishes] = useLocalStorage(currentUser?.uid, []);
-  const [diveWishToEdit, setDiveWishToEdit] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
 
-  const bookmarkedWishes = diveWishes.filter(
-    diveWish => diveWish.isBookmarked === true
-  );
+  const bookmarkedPosts = posts.filter(post => post.isBookmarked === true);
 
-  const archivedWishes = diveWishes.filter(
-    diveWish => diveWish.isArchived === true
-  );
+  const archivedPosts = posts.filter(post => post.isArchived === true);
+
+  useEffect(() => {
+    getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function getPosts() {
+    try {
+      const response = await axios.get('/api/posts');
+      setPosts(response.data);
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
+    console.log(posts);
+  }
 
   return (
     <AppGrid>
@@ -36,7 +47,7 @@ export default function App() {
           element={
             <PrivateRoute>
               <WishlistPage
-                diveWishes={diveWishes}
+                posts={posts}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
                 onEditDiveWish={handleEditRedirect}
@@ -50,7 +61,7 @@ export default function App() {
           element={
             <PrivateRoute>
               <BookmarksPage
-                bookmarkedWishes={bookmarkedWishes}
+                bookmarkedPosts={bookmarkedPosts}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
                 onEditDiveWish={handleEditRedirect}
@@ -73,7 +84,7 @@ export default function App() {
             <PrivateRoute>
               <EditWishPage
                 onEditDiveWish={handleEditWish}
-                diveWishToEdit={diveWishToEdit}
+                diveWishToEdit={postToEdit}
               />
             </PrivateRoute>
           }
@@ -82,11 +93,11 @@ export default function App() {
           path="/archive"
           element={
             <PrivateRoute>
-              {archivedWishes.length === 0 ? (
+              {archivedPosts.length === 0 ? (
                 <Navigate replace to="/" />
               ) : (
                 <ArchivePage
-                  archivedWishes={archivedWishes}
+                  archivedWishes={archivedPosts}
                   onToggleCheckmark={toggleCheckmark}
                   onEditDiveWish={handleEditRedirect}
                   onDeleteDiveWish={handleDeleteWish}
@@ -103,57 +114,54 @@ export default function App() {
 
   function handleAddWish({ destination, notes }) {
     const id = nanoid();
-    setDiveWishes([
-      { id, destination, notes, isArchived: false },
-      ...diveWishes,
-    ]);
+    setPosts([{ id, destination, notes, isArchived: false }, ...posts]);
     navigate('/');
   }
 
   function handleEditWish({ destination, notes }) {
-    setDiveWishes(
-      diveWishes.map(diveWish =>
-        diveWish.id === diveWishToEdit.id
-          ? { ...diveWish, id: diveWishToEdit.id, destination, notes }
-          : diveWish
+    setPosts(
+      posts.map(post =>
+        post.id === postToEdit.id
+          ? { ...post, id: post.id, destination, notes }
+          : post
       )
     );
-    setDiveWishToEdit(null);
+    setPostToEdit(null);
     navigate(-1);
   }
 
-  function handleEditRedirect(wish) {
-    setDiveWishToEdit({ ...wish });
+  function handleEditRedirect(post) {
+    setPostToEdit({ ...post });
     navigate('/edit-wish');
   }
 
   function handleDeleteWish(id) {
-    setDiveWishes(diveWishes.filter(diveWish => diveWish.id !== id));
+    setPosts(posts.filter(post => post.id !== id));
   }
 
   function toggleBookmark(id) {
-    setDiveWishes(
-      diveWishes.map(diveWish => {
-        if (id === diveWish.id) {
-          return { ...diveWish, isBookmarked: !diveWish.isBookmarked };
+    setPosts(
+      posts.map(post => {
+        if (id === post.id) {
+          return { ...post, isBookmarked: !post.isBookmarked };
         } else {
-          return diveWish;
+          return post;
         }
       })
     );
   }
 
   function toggleCheckmark(id) {
-    setDiveWishes(
-      diveWishes.map(diveWish => {
-        if (id === diveWish.id) {
+    setPosts(
+      posts.map(post => {
+        if (id === post.id) {
           return {
-            ...diveWish,
-            isArchived: !diveWish.isArchived,
+            ...post,
+            isArchived: !post.isArchived,
             isBookmarked: false,
           };
         } else {
-          return diveWish;
+          return post;
         }
       })
     );

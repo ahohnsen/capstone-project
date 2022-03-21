@@ -10,7 +10,7 @@ import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function WishlistPage({
-  diveWishes,
+  posts,
   onToggleBookmark,
   onToggleCheckmark,
   onEditDiveWish,
@@ -20,13 +20,9 @@ export default function WishlistPage({
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const notArchivedWishes = diveWishes.filter(
-    diveWish => diveWish.isArchived === false
-  );
+  const notArchivedPosts = posts.filter(post => post.isArchived === false);
 
-  const archivedWishes = diveWishes.filter(
-    diveWish => diveWish.isArchived === true
-  );
+  const archivedPosts = posts.filter(post => post.isArchived === true);
 
   return (
     <>
@@ -39,18 +35,18 @@ export default function WishlistPage({
       <Content>
         {error && <p>{error}</p>}
         <Grid>
-          {notArchivedWishes.length > 0 ? (
-            notArchivedWishes.map(wish => (
+          {notArchivedPosts.length > 0 ? (
+            notArchivedPosts.map(post => (
               <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                isArchived={wish.isArchived}
-                onToggleBookmark={() => onToggleBookmark(wish.id)}
-                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
-                onEditDiveWish={() => onEditDiveWish(wish)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+                key={post._id}
+                destination={post.destination}
+                notes={post.notes}
+                isBookmarked={post.isBookmarked}
+                isArchived={post.isArchived}
+                onToggleBookmark={() => onToggleBookmark(post._id)}
+                onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                onEditDiveWish={() => onEditDiveWish(post)}
+                onDeleteDiveWish={() => onDeleteDiveWish(post._id)}
               />
             ))
           ) : (
@@ -59,7 +55,7 @@ export default function WishlistPage({
               destinations you would like to dive.
             </Message>
           )}
-          {archivedWishes.length > 0 && (
+          {archivedPosts.length > 0 && (
             <Container>
               <Heading>Archive</Heading>
               <ArrowButton onClick={() => navigate('/archive')}>
