@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:3000/api
+
+
+GET {{baseUrl}}/posts
+
+###
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "destination": "Maldives2",
+  "notes": "Beautiful, I wanna go again asap!",
+  "author": "62388bd80cc0c7e03d877986"
+}
+
+###
+PUT {{baseUrl}}/posts
+Content-Type: application/json
+
+{ "_id": "62388d27c63eda90e36da5cb",
+  "post": {
+    "destination": "Maldives",
+  "notes": "Beautiful, I wanna go again as soon as possible!"
+  }
+}
+
+###
+DELETE {{baseUrl}}/posts
+Content-Type: application/json
+
+{ "_id": "62388e78fddc73b86b9fa73e"
+}
