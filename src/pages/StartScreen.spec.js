@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { AuthProvider } from '../contexts/AuthContext.js';
 import StartScreen from './StartScreen.js';
 
 jest.mock('firebase/compat/auth');
@@ -15,7 +16,9 @@ describe('StartScreen', () => {
   it('renders the starting screen with the logo of the app', () => {
     render(
       <MemoryRouter>
-        <StartScreen />
+        <AuthProvider>
+          <StartScreen />
+        </AuthProvider>
       </MemoryRouter>
     );
     const logo = screen.getByAltText(/logo/i);

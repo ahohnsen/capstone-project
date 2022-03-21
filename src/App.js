@@ -30,7 +30,7 @@ export default function App() {
   return (
     <AppGrid>
       <Routes>
-        <Route path="/:login" element={<StartScreen />} />
+        <Route path="/:signin" element={<StartScreen />} />
         <Route
           path="/"
           element={

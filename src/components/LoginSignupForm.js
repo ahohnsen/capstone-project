@@ -1,16 +1,10 @@
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext.js';
 import Button from './Button.js';
 
-export default function LoginForm() {
+export default function LoginSignupForm({ status, onSubmit, error, loading }) {
   const { register, handleSubmit } = useForm({});
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -27,28 +21,35 @@ export default function LoginForm() {
             {...register('password', { required: true })}
           />
         </Label>
-        <LoginButton disabled={loading}>LOGIN</LoginButton>
-        <RegisterText>
-          Need an account?
-          <StyledLink to="/signup"> Create one.</StyledLink>
-        </RegisterText>
-        <StyledLink to="/forgot-password">Forgot password?</StyledLink>
+        {status === 'signup' && (
+          <Label>
+            PASSWORD CONFIRMATION
+            <Input
+              type="password"
+              {...register('passwordConfirmation', { required: true })}
+            />
+          </Label>
+        )}
+        <SubmitButton disabled={loading}>
+          {status === 'signup' ? 'SIGN UP' : 'LOGIN'}
+        </SubmitButton>
+        {status === 'signup' ? (
+          <StyledText>
+            Already have an account?
+            <StyledLink to="/login"> Log in.</StyledLink>
+          </StyledText>
+        ) : (
+          <>
+            <StyledText>
+              Need an account?
+              <StyledLink to="/signup"> Create one.</StyledLink>
+            </StyledText>
+            <StyledLink to="/forgot-password">Forgot password?</StyledLink>
+          </>
+        )}
       </Form>
     </>
   );
-
-  async function onSubmit(data) {
-    try {
-      setError('');
-      setLoading(true);
-      await login(data.email, data.password);
-      navigate('/');
-    } catch {
-      setError('Failed to log in');
-    }
-
-    setLoading(false);
-  }
 }
 
 const Form = styled.form`
@@ -73,7 +74,7 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-const LoginButton = styled(Button)`
+const SubmitButton = styled(Button)`
   width: 100%;
   margin-top: 10px;
 `;
@@ -83,7 +84,7 @@ const StyledLink = styled(Link)`
   text-align: center;
 `;
 
-const RegisterText = styled.span`
+const StyledText = styled.span`
   color: var(--font-color-action);
   text-align: center;
 `;

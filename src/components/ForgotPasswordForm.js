@@ -24,7 +24,7 @@ export default function ForgotPasswordForm() {
         <ResetButton disabled={loading}>RESET PASSWORD</ResetButton>
         <Text>
           Remember your password again?
-          <StyledLink to="/login">Log in.</StyledLink>
+          <StyledLink to="/login"> Log in.</StyledLink>
         </Text>
         <Text>
           Need an account?
