@@ -8,8 +8,6 @@ POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "fullname": "Andrea Hohnsen",
-  "userID": "Xd5eWLrBoSQuIfQH27whbqcpVNZ2",
   "email": "hohnsenandrea@gmail.com"
 }
 
@@ -19,8 +17,6 @@ Content-Type: application/json
 
 { "_id": "62388bacfb333fc46a975638",
   "user": {
-    "fullname": "TestUser",
-    "userID": "MgkpgTXUjadGCq1bjJo87gTVTtd2",
   "email": "test@test.com"
   }
 }

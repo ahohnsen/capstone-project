@@ -23,7 +23,7 @@ export default function App() {
   const archivedPosts = posts.filter(post => post.isArchived === true);
 
   useEffect(() => {
-    getPosts();
+    currentUser && getPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

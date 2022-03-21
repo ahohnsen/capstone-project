@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
+import axios from 'axios';
 import Content from '../components/Content.js';
 import LoginSignupForm from '../components/LoginSignupForm.js';
 import ForgotPasswordForm from '../components/ForgotPasswordForm.js';
@@ -60,12 +61,21 @@ export default function StartScreen() {
       setError('');
       setLoading(true);
       await signup(data.email, data.password);
+      saveNewUser({ email: data.email });
       navigate('/');
     } catch {
       setError('Failed to create an account');
     }
 
     setLoading(false);
+  }
+
+  async function saveNewUser(email) {
+    try {
+      await axios.post('/api/users', email);
+    } catch (error) {
+      console.log('Error', error.messages);
+    }
   }
 }
 

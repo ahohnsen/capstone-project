@@ -16,7 +16,7 @@ export default function Navigation() {
 const StyledFooter = styled.footer`
   width: 100vw;
   background-color: var(--bg-color-section);
-  box-shadow: 0px -1px 4px var(--color-boxshadow);
+  box-shadow: 0 -1px 4px var(--color-boxshadow);
   padding-bottom: 4px;
   z-index: 1;
 `;

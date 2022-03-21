@@ -106,11 +106,11 @@ const Heading = styled.h2`
 const ArrowButton = styled(IconButton)`
   padding: 5px 10px;
   top: 11px;
-  right: 0px;
+  right: 0;
 `;
 
 const LogoutButton = styled(IconButton)`
   padding: 5px 10px;
-  top: 0px;
-  right: -10px;
+  top: 0;
+  right: 0;
 `;
