@@ -10,6 +10,12 @@ export default function LoginSignupForm({ status, onSubmit, error, loading }) {
     <>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <Form onSubmit={handleSubmit(data => onSubmit(data))}>
+        {status === 'signup' && (
+          <Label>
+            FULL NAME
+            <Input type="text" {...register('fullname', { required: true })} />
+          </Label>
+        )}
         <Label>
           E-MAIL
           <Input type="email" {...register('email', { required: true })} />

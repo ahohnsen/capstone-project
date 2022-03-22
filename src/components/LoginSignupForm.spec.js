@@ -49,7 +49,7 @@ describe('LoginSignupForm', () => {
     expect(linkResetPassword).toBeInTheDocument();
   });
 
-  it('renders a form with an input field for email, password and passsword confirmation as well as a login button when status is "signup"', () => {
+  it('renders a form with an input field for full name, email, password and passsword confirmation as well as a login button when status is "signup"', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
@@ -57,7 +57,7 @@ describe('LoginSignupForm', () => {
         </AuthProvider>
       </MemoryRouter>
     );
-
+    const inputFullName = screen.getByLabelText('FULL NAME');
     const inputEmail = screen.getByLabelText('E-MAIL');
     const inputPassword = screen.getByLabelText('PASSWORD');
     const inputPasswordConfirmation = screen.getByLabelText(
@@ -65,6 +65,7 @@ describe('LoginSignupForm', () => {
     );
     const button = screen.getByRole('button', { name: /sign up/i });
 
+    expect(inputFullName).toBeInTheDocument();
     expect(inputEmail).toBeInTheDocument();
     expect(inputPassword).toBeInTheDocument();
     expect(inputPasswordConfirmation).toBeInTheDocument();

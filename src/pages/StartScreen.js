@@ -60,7 +60,7 @@ export default function StartScreen() {
       setError('');
       setLoading(true);
       await signup(data.email, data.password);
-      saveNewUser({ email: data.email });
+      saveNewUser({ fullname: data.fullname, email: data.email });
       navigate('/');
     } catch {
       setError('Failed to create an account');
