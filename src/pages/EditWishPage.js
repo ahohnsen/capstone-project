@@ -6,7 +6,7 @@ import DiveWishForm from '../components/DiveWishForm.js';
 import IconButton from '../components/IconButton.js';
 import AbortIcon from '../images/Abort.svg';
 
-export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {
+export default function EditWishPage({ onEditPost, postToEdit }) {
   const navigate = useNavigate();
 
   return (
@@ -21,8 +21,8 @@ export default function EditWishPage({ onEditDiveWish, diveWishToEdit }) {
         <DiveWishForm
           formName={'Edit your dive wish'}
           buttonName={'Save changes'}
-          handleDiveWish={onEditDiveWish}
-          preloadedValues={diveWishToEdit}
+          handlePost={onEditPost}
+          preloadedValues={postToEdit}
         />
       </Content>
     </>

@@ -16,8 +16,8 @@ export default function DiveWish({
   isArchived,
   onToggleBookmark,
   onToggleCheckmark,
-  onDeleteDiveWish,
-  onEditDiveWish,
+  onDeletePost,
+  onEditPost,
 }) {
   const [showDialog, setShowDialog] = useState(false);
 
@@ -41,7 +41,7 @@ export default function DiveWish({
           <img src={CheckInactiveIcon} alt="not archived" />
         )}
       </CheckButton>
-      <EditButton onClick={onEditDiveWish}>
+      <EditButton onClick={onEditPost}>
         <img src={EditIcon} alt="edit" />
       </EditButton>
       <DeleteButton onClick={() => setShowDialog(true)}>
@@ -58,7 +58,7 @@ export default function DiveWish({
 
   function handleDelete() {
     setShowDialog(false);
-    onDeleteDiveWish();
+    onDeletePost();
   }
 }
 
@@ -81,17 +81,17 @@ const Notes = styled.p`
 
 const CheckButton = styled(IconButton)`
   right: 70px;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const EditButton = styled(IconButton)`
   right: 40px;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const DeleteButton = styled(IconButton)`
   right: 10px;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const Bookmark = styled(IconButton)`

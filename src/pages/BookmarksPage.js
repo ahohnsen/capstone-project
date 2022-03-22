@@ -4,29 +4,29 @@ import Content from '../components/Content.js';
 import DiveWish from '../components/DiveWish.js';
 
 export default function BookmarksPage({
-  bookmarkedWishes,
+  bookmarkedPosts,
   onToggleBookmark,
   onToggleCheckmark,
-  onEditDiveWish,
-  onDeleteDiveWish,
+  onEditPost,
+  onDeletePost,
 }) {
   return (
     <>
       <Header>Your favorites</Header>
       <Content>
         <Grid>
-          {bookmarkedWishes.length > 0 ? (
-            bookmarkedWishes.map(wish => (
+          {bookmarkedPosts?.length > 0 ? (
+            bookmarkedPosts.map(post => (
               <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                isArchived={wish.isArchived}
-                onToggleBookmark={() => onToggleBookmark(wish.id)}
-                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
-                onEditDiveWish={() => onEditDiveWish(wish)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+                key={post._id}
+                destination={post.destination}
+                notes={post.notes}
+                isBookmarked={post.isBookmarked}
+                isArchived={post.isArchived}
+                onToggleBookmark={() => onToggleBookmark(post._id)}
+                onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                onEditPost={() => onEditPost(post)}
+                onDeletePost={() => onDeletePost(post._id)}
               />
             ))
           ) : (

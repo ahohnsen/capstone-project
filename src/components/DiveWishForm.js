@@ -6,7 +6,7 @@ export default function DiveWishForm({
   formName,
   buttonName,
   preloadedValues,
-  handleDiveWish,
+  handlePost,
 }) {
   const {
     register,
@@ -15,12 +15,15 @@ export default function DiveWishForm({
     formState: { errors },
   } = useForm({
     defaultValues: preloadedValues
-      ? preloadedValues
+      ? {
+          destination: preloadedValues.destination,
+          notes: preloadedValues.notes,
+        }
       : { destination: '', notes: '' },
   });
 
   return (
-    <Form aria-label={formName} onSubmit={handleSubmit(wish => onSubmit(wish))}>
+    <Form aria-label={formName} onSubmit={handleSubmit(post => onSubmit(post))}>
       <Container>
         <Label htmlFor="destination">DESTINATION </Label>
         <Input
@@ -55,10 +58,10 @@ export default function DiveWishForm({
     </Form>
   );
 
-  function onSubmit(wish) {
-    handleDiveWish({
-      destination: wish.destination,
-      notes: wish.notes,
+  function onSubmit(post) {
+    handlePost({
+      destination: post.destination,
+      notes: post.notes,
     });
   }
 }

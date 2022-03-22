@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:3000/api
+
+
+GET {{baseUrl}}/users
+
+###
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "email": "hohnsenandrea@gmail.com"
+}
+
+###
+PUT {{baseUrl}}/users
+Content-Type: application/json
+
+{ "_id": "62388bacfb333fc46a975638",
+  "user": {
+  "email": "test@test.com"
+  }
+}

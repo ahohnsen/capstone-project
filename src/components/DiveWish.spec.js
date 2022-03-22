@@ -49,13 +49,13 @@ describe('DiveWish', () => {
   });
 
   it('calls the function to edit the dive wish when the edit button is clicked', () => {
-    const editDiveWish = jest.fn();
-    render(<DiveWish onEditDiveWish={editDiveWish} />);
+    const editPost = jest.fn();
+    render(<DiveWish onEditPost={editPost} />);
 
     const buttonEdit = screen.getByRole('button', { name: /edit/i });
     userEvent.click(buttonEdit);
 
-    expect(editDiveWish).toBeCalled();
+    expect(editPost).toBeCalled();
   });
 
   it('calls the function to show the delete confirmation dialog when the delete button is clicked', () => {
@@ -71,8 +71,8 @@ describe('DiveWish', () => {
   });
 
   it('calls the function to delete the dive wish when the delete button in the confirmation dialog is clicked', () => {
-    const deleteDiveWish = jest.fn();
-    render(<DiveWish onDeleteDiveWish={deleteDiveWish} />);
+    const deletePost = jest.fn();
+    render(<DiveWish onDeletePost={deletePost} />);
 
     const buttonDelete = screen.getByRole('button', { name: /delete/i });
     userEvent.click(buttonDelete);
@@ -81,7 +81,7 @@ describe('DiveWish', () => {
       name: 'Yes, delete',
     });
     userEvent.click(buttonConfirmDelete);
-    expect(deleteDiveWish).toBeCalled();
+    expect(deletePost).toBeCalled();
   });
 
   it('closes the dialog when the cancel button in the confirmation dialog is clicked', () => {

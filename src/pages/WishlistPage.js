@@ -1,32 +1,42 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
+import LoadingSpinner from '../components/LoadingSpinner.js';
 import DiveWish from '../components/DiveWish.js';
 import IconButton from '../components/IconButton.js';
 import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function WishlistPage({
-  diveWishes,
+  sortedPosts,
+  onGetPosts,
+  isLoading,
+  setIsLoading,
+  hasError,
   onToggleBookmark,
   onToggleCheckmark,
-  onEditDiveWish,
-  onDeleteDiveWish,
+  onEditPost,
+  onDeletePost,
 }) {
   const { logout } = useAuth();
-  const [error, setError] = useState('');
+  const [logoutError, setLogoutError] = useState('');
   const navigate = useNavigate();
 
-  const notArchivedWishes = diveWishes.filter(
-    diveWish => diveWish.isArchived === false
+  const notArchivedPosts = sortedPosts?.filter(
+    post => post.isArchived === false
   );
 
-  const archivedWishes = diveWishes.filter(
-    diveWish => diveWish.isArchived === true
-  );
+  const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    onGetPosts();
+    setTimeout(() => setIsLoading(false), 500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -37,29 +47,35 @@ export default function WishlistPage({
         </LogoutButton>
       </Header>
       <Content>
-        {error && <p>{error}</p>}
+        {isLoading && <LoadingSpinner />}
+        {logoutError && <p>{logoutError}</p>}
+        {hasError && (
+          <p>Unfortunately, something went wrong. Please refresh this page.</p>
+        )}
         <Grid>
-          {notArchivedWishes.length > 0 ? (
-            notArchivedWishes.map(wish => (
+          {!isLoading &&
+            !hasError &&
+            notArchivedPosts?.length > 0 &&
+            notArchivedPosts.map(post => (
               <DiveWish
-                key={wish.id}
-                destination={wish.destination}
-                notes={wish.notes}
-                isBookmarked={wish.isBookmarked}
-                isArchived={wish.isArchived}
-                onToggleBookmark={() => onToggleBookmark(wish.id)}
-                onToggleCheckmark={() => onToggleCheckmark(wish.id)}
-                onEditDiveWish={() => onEditDiveWish(wish)}
-                onDeleteDiveWish={() => onDeleteDiveWish(wish.id)}
+                key={post._id}
+                destination={post.destination}
+                notes={post.notes}
+                isBookmarked={post.isBookmarked}
+                isArchived={post.isArchived}
+                onToggleBookmark={() => onToggleBookmark(post._id)}
+                onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                onEditPost={() => onEditPost(post)}
+                onDeletePost={() => onDeletePost(post._id)}
               />
-            ))
-          ) : (
+            ))}
+          {!isLoading && !hasError && notArchivedPosts?.length === 0 && (
             <Message>
               You currently have nothing on your wishlist. Start by adding some
               destinations you would like to dive.
             </Message>
           )}
-          {archivedWishes.length > 0 && (
+          {!isLoading && !hasError && archivedPosts?.length > 0 && (
             <Container>
               <Heading>Archive</Heading>
               <ArrowButton onClick={() => navigate('/archive')}>
@@ -73,13 +89,13 @@ export default function WishlistPage({
   );
 
   async function handleLogout() {
-    setError('');
+    setLogoutError('');
 
     try {
       await logout();
       navigate('/login');
     } catch {
-      setError('Failed to log out');
+      setLogoutError('Failed to log out');
     }
   }
 }
@@ -110,11 +126,11 @@ const Heading = styled.h2`
 const ArrowButton = styled(IconButton)`
   padding: 5px 10px;
   top: 11px;
-  right: 0px;
+  right: 0;
 `;
 
 const LogoutButton = styled(IconButton)`
   padding: 5px 10px;
-  top: 0px;
-  right: -10px;
+  top: 0;
+  right: 0;
 `;
