@@ -14,21 +14,22 @@ import StartScreen from './pages/StartScreen.js';
 
 export default function App() {
   const { currentUser } = useAuth();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
 
-  const bookmarkedPosts = posts.filter(post => post.isBookmarked === true);
+  const bookmarkedPosts = posts?.filter(post => post.isBookmarked === true);
 
-  const archivedPosts = posts.filter(post => post.isArchived === true);
+  const archivedPosts = posts?.filter(post => post.isArchived === true);
 
   useEffect(() => {
-    setIsLoading(true);
     if (currentUser) {
+      setIsLoading(true);
       getPosts();
     }
+    setTimeout(() => setIsLoading(false), 1500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -41,7 +42,6 @@ export default function App() {
       console.log('Error:', error.message);
       setHasError(true);
     }
-    setTimeout(() => setIsLoading(false), 1000);
   }
 
   return (
@@ -101,7 +101,7 @@ export default function App() {
           path="/archive"
           element={
             <PrivateRoute>
-              {archivedPosts.length === 0 ? (
+              {archivedPosts?.length === 0 ? (
                 <Navigate replace to="/" />
               ) : (
                 <ArchivePage
