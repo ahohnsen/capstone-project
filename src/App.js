@@ -15,7 +15,7 @@ import StartScreen from './pages/StartScreen.js';
 export default function App() {
   const { currentUser } = useAuth();
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function App() {
       console.log('Error:', error.message);
       setHasError(true);
     }
-    setIsLoading(false);
+    setTimeout(() => setIsLoading(false), 1000);
   }
 
   return (
