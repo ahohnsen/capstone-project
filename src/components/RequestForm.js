@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import Button from './Button.js';
 
-export default function DiveWishForm({
+export default function RequestForm({
   formName,
   buttonName,
   preloadedValues,

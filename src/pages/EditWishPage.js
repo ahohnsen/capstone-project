@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
-import DiveWishForm from '../components/DiveWishForm.js';
+import RequestForm from '../components/RequestForm.js';
 import IconButton from '../components/IconButton.js';
 import AbortIcon from '../images/Abort.svg';
 
@@ -18,7 +18,7 @@ export default function EditWishPage({ onEditPost, postToEdit }) {
         Edit dive destination
       </Header>
       <Content>
-        <DiveWishForm
+        <RequestForm
           formName={'Edit your dive wish'}
           buttonName={'Save changes'}
           handlePost={onEditPost}

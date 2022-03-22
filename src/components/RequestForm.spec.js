@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import DiveWishForm from './DiveWishForm';
+import RequestForm from './RequestForm';
 
-describe('DiveWishForm', () => {
+describe('RequestForm', () => {
   it('renders a form with an input field, a textarea and a button to submit the form', () => {
     render(
       <MemoryRouter>
-        <DiveWishForm buttonName={'Add to list'} />
+        <RequestForm buttonName={'Add to list'} />
       </MemoryRouter>
     );
 
@@ -22,9 +22,7 @@ describe('DiveWishForm', () => {
   it('renders a form to add a new dive wish with the name "Add a new dive destination to your wishlist"', () => {
     render(
       <MemoryRouter>
-        <DiveWishForm
-          formName={'Add a new dive destination to your wishlist'}
-        />
+        <RequestForm formName={'Add a new dive destination to your wishlist'} />
       </MemoryRouter>
     );
 
@@ -37,7 +35,7 @@ describe('DiveWishForm', () => {
   it('renders a form to add a new dive wish, that has empty input fields and a button with the name "Add to list"', () => {
     render(
       <MemoryRouter>
-        <DiveWishForm
+        <RequestForm
           formName={'Add a new dive destination to your wishlist'}
           buttonName={'Add to list'}
         />
@@ -53,7 +51,7 @@ describe('DiveWishForm', () => {
   it('renders a form to edit an existing dive wish with the name "Edit your dive wish"', () => {
     render(
       <MemoryRouter>
-        <DiveWishForm formName={'Edit your dive wish'} />
+        <RequestForm formName={'Edit your dive wish'} />
       </MemoryRouter>
     );
 
@@ -66,7 +64,7 @@ describe('DiveWishForm', () => {
   it('renders a form to edit a dive wish, that shows the existing data in both input fields and a button with the name "Save changes"', () => {
     render(
       <MemoryRouter>
-        <DiveWishForm
+        <RequestForm
           formName={'Edit your dive wish'}
           buttonName={'Save changes'}
           preloadedValues={{
