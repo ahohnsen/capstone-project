@@ -36,19 +36,21 @@ export default function WishlistPage({
         {error && <p>{error}</p>}
         <Grid>
           {notArchivedPosts.length > 0 ? (
-            notArchivedPosts.map(post => (
-              <DiveWish
-                key={post._id}
-                destination={post.destination}
-                notes={post.notes}
-                isBookmarked={post.isBookmarked}
-                isArchived={post.isArchived}
-                onToggleBookmark={() => onToggleBookmark(post._id)}
-                onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                onEditPost={() => onEditPost(post)}
-                onDeletePost={() => onDeletePost(post._id)}
-              />
-            ))
+            notArchivedPosts
+              .reverse()
+              .map(post => (
+                <DiveWish
+                  key={post._id}
+                  destination={post.destination}
+                  notes={post.notes}
+                  isBookmarked={post.isBookmarked}
+                  isArchived={post.isArchived}
+                  onToggleBookmark={() => onToggleBookmark(post._id)}
+                  onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                  onEditPost={() => onEditPost(post)}
+                  onDeletePost={() => onDeletePost(post._id)}
+                />
+              ))
           ) : (
             <Message>
               You currently have nothing on your wishlist. Start by adding some

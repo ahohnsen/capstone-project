@@ -25,18 +25,20 @@ export default function ArchivePage({
       <Content>
         <Grid>
           {archivedPosts.length > 0 &&
-            archivedPosts.map(post => (
-              <DiveWish
-                key={post._id}
-                destination={post.destination}
-                notes={post.notes}
-                isBookmarked={post.isBookmarked}
-                isArchived={post.isArchived}
-                onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                onEditPost={() => onEditPost(post)}
-                onDeletePost={() => onDeletePost(post._id)}
-              />
-            ))}
+            archivedPosts
+              .reverse()
+              .map(post => (
+                <DiveWish
+                  key={post._id}
+                  destination={post.destination}
+                  notes={post.notes}
+                  isBookmarked={post.isBookmarked}
+                  isArchived={post.isArchived}
+                  onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                  onEditPost={() => onEditPost(post)}
+                  onDeletePost={() => onDeletePost(post._id)}
+                />
+              ))}
         </Grid>
       </Content>
     </>
