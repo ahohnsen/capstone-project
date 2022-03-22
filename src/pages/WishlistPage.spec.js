@@ -28,11 +28,19 @@ describe('WishlistPage', () => {
     },
   ];
 
+  const onGetPosts = jest.fn();
+  const setIsLoading = jest.fn();
+
   it('renders wishlist with two dive wishes', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage sortedPosts={[...sortedPosts]} />
+          <WishlistPage
+            sortedPosts={[...sortedPosts]}
+            isLoading={false}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+          />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -48,7 +56,12 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage sortedPosts={[...sortedPosts]} />
+          <WishlistPage
+            sortedPosts={[...sortedPosts]}
+            isLoading={false}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+          />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -64,7 +77,12 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage sortedPosts={sortedPosts} />
+          <WishlistPage
+            sortedPosts={sortedPosts}
+            isLoading={false}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+          />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -94,7 +112,12 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage sortedPosts={sortedPosts} />
+          <WishlistPage
+            sortedPosts={sortedPosts}
+            isLoading={false}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+          />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -109,7 +132,12 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage sortedPosts={[...sortedPosts]} isLoading={true} />
+          <WishlistPage
+            sortedPosts={[...sortedPosts]}
+            isLoading={true}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+          />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -123,7 +151,13 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage sortedPosts={[...sortedPosts]} hasError={true} />
+          <WishlistPage
+            sortedPosts={[...sortedPosts]}
+            isLoading={false}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+            hasError={true}
+          />
         </AuthProvider>
       </MemoryRouter>
     );
