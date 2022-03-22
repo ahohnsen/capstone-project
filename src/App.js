@@ -25,10 +25,8 @@ export default function App() {
   const archivedPosts = posts?.filter(post => post.isArchived === true);
 
   useEffect(() => {
-    if (currentUser) {
-      setIsLoading(true);
-      getPosts();
-    }
+    setIsLoading(true);
+    getPosts();
     setTimeout(() => setIsLoading(false), 1500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

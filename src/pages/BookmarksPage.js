@@ -15,7 +15,7 @@ export default function BookmarksPage({
       <Header>Your favorites</Header>
       <Content>
         <Grid>
-          {bookmarkedPosts.length > 0 ? (
+          {bookmarkedPosts?.length > 0 ? (
             bookmarkedPosts
               .reverse()
               .map(post => (
