@@ -16,21 +16,19 @@ export default function BookmarksPage({
       <Content>
         <Grid>
           {bookmarkedPosts?.length > 0 ? (
-            bookmarkedPosts
-              .reverse()
-              .map(post => (
-                <DiveWish
-                  key={post._id}
-                  destination={post.destination}
-                  notes={post.notes}
-                  isBookmarked={post.isBookmarked}
-                  isArchived={post.isArchived}
-                  onToggleBookmark={() => onToggleBookmark(post._id)}
-                  onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                  onEditPost={() => onEditPost(post)}
-                  onDeletePost={() => onDeletePost(post._id)}
-                />
-              ))
+            bookmarkedPosts.map(post => (
+              <DiveWish
+                key={post._id}
+                destination={post.destination}
+                notes={post.notes}
+                isBookmarked={post.isBookmarked}
+                isArchived={post.isArchived}
+                onToggleBookmark={() => onToggleBookmark(post._id)}
+                onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                onEditPost={() => onEditPost(post)}
+                onDeletePost={() => onDeletePost(post._id)}
+              />
+            ))
           ) : (
             <Message>
               You currently have nothing bookmarked. Start by marking your

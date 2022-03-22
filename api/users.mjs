@@ -13,7 +13,9 @@ export default async function handler(request, response) {
     } catch (error) {
       response.status(500).json({ message: error.message });
     }
-  } else if (method === 'POST') {
+  }
+
+  if (method === 'POST') {
     const user = new User(request.body);
     try {
       const newUser = await user.save();
@@ -21,7 +23,9 @@ export default async function handler(request, response) {
     } catch (error) {
       response.status(400).json({ message: error.message });
     }
-  } else if (method === 'PUT') {
+  }
+
+  if (method === 'PUT') {
     const { user, _id } = request.body;
     try {
       const updatedUser = await User.findByIdAndUpdate(_id, user, {

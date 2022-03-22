@@ -20,9 +20,13 @@ export default function App() {
   const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
 
-  const bookmarkedPosts = posts?.filter(post => post.isBookmarked === true);
+  const sortedPosts = posts ? [...posts].reverse() : null;
 
-  const archivedPosts = posts?.filter(post => post.isArchived === true);
+  const bookmarkedPosts = sortedPosts?.filter(
+    post => post.isBookmarked === true
+  );
+
+  const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,7 +55,7 @@ export default function App() {
           element={
             <PrivateRoute>
               <WishlistPage
-                posts={posts}
+                sortedPosts={sortedPosts}
                 isLoading={isLoading}
                 hasError={hasError}
                 onToggleBookmark={toggleBookmark}
@@ -122,8 +126,6 @@ export default function App() {
     const newPost = {
       destination: destination,
       notes: notes,
-      isBookmarked: false,
-      isArchived: false,
     };
     try {
       await axios.post('/api/posts', newPost);

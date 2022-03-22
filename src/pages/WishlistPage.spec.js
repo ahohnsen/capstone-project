@@ -13,7 +13,7 @@ jest.mock('firebase/compat/app', () => ({
 }));
 
 describe('WishlistPage', () => {
-  const posts = [
+  const sortedPosts = [
     {
       _id: '1',
       destination: 'Maldives',
@@ -32,7 +32,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage posts={[...posts]} />
+          <WishlistPage sortedPosts={[...sortedPosts]} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -48,7 +48,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage posts={[...posts]} />
+          <WishlistPage sortedPosts={[...sortedPosts]} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -60,11 +60,11 @@ describe('WishlistPage', () => {
   });
 
   it('renders a message to the user when wishlist is empty', () => {
-    const posts = [];
+    const sortedPosts = [];
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage posts={[...posts]} />
+          <WishlistPage sortedPosts={sortedPosts} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -77,7 +77,7 @@ describe('WishlistPage', () => {
   });
 
   it('renders a heading and a button to go the archive when there is at least one archived dive wish', () => {
-    const posts = [
+    const sortedPosts = [
       {
         _id: '1',
         destination: 'Maldives',
@@ -94,7 +94,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage posts={posts} />
+          <WishlistPage sortedPosts={sortedPosts} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -109,7 +109,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage posts={[...posts]} isLoading={true} />
+          <WishlistPage sortedPosts={[...sortedPosts]} isLoading={true} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -123,7 +123,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage posts={[...posts]} hasError={true} />
+          <WishlistPage sortedPosts={[...sortedPosts]} hasError={true} />
         </AuthProvider>
       </MemoryRouter>
     );

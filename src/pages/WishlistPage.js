@@ -11,7 +11,7 @@ import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function WishlistPage({
-  posts,
+  sortedPosts,
   isLoading,
   hasError,
   onToggleBookmark,
@@ -23,9 +23,11 @@ export default function WishlistPage({
   const [logoutError, setLogoutError] = useState('');
   const navigate = useNavigate();
 
-  const notArchivedPosts = posts?.filter(post => post.isArchived === false);
+  const notArchivedPosts = sortedPosts?.filter(
+    post => post.isArchived === false
+  );
 
-  const archivedPosts = posts?.filter(post => post.isArchived === true);
+  const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
 
   return (
     <>
@@ -45,21 +47,19 @@ export default function WishlistPage({
           {!isLoading &&
             !hasError &&
             notArchivedPosts?.length > 0 &&
-            notArchivedPosts
-              .reverse()
-              .map(post => (
-                <DiveWish
-                  key={post._id}
-                  destination={post.destination}
-                  notes={post.notes}
-                  isBookmarked={post.isBookmarked}
-                  isArchived={post.isArchived}
-                  onToggleBookmark={() => onToggleBookmark(post._id)}
-                  onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                  onEditPost={() => onEditPost(post)}
-                  onDeletePost={() => onDeletePost(post._id)}
-                />
-              ))}
+            notArchivedPosts.map(post => (
+              <DiveWish
+                key={post._id}
+                destination={post.destination}
+                notes={post.notes}
+                isBookmarked={post.isBookmarked}
+                isArchived={post.isArchived}
+                onToggleBookmark={() => onToggleBookmark(post._id)}
+                onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                onEditPost={() => onEditPost(post)}
+                onDeletePost={() => onDeletePost(post._id)}
+              />
+            ))}
           {!isLoading && !hasError && notArchivedPosts?.length === 0 && (
             <Message>
               You currently have nothing on your wishlist. Start by adding some

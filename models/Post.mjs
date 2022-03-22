@@ -6,9 +6,8 @@ const schema = new Schema(
   {
     destination: { type: String, required: true },
     notes: { type: String, required: true },
-    // author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    isArchived: { type: Boolean, required: true },
-    isBookmarked: { type: Boolean, required: true },
+    isArchived: { type: Boolean, required: true, default: false },
+    isBookmarked: { type: Boolean, required: true, default: false },
   },
   {
     versionKey: false,

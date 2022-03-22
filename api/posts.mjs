@@ -13,7 +13,9 @@ export default async function handler(request, response) {
     } catch (error) {
       response.status(500).json({ message: error.message });
     }
-  } else if (method === 'POST') {
+  }
+
+  if (method === 'POST') {
     const post = new Post(request.body);
     try {
       const newPost = await post.save();
@@ -21,7 +23,9 @@ export default async function handler(request, response) {
     } catch (error) {
       response.status(400).json({ message: error.message });
     }
-  } else if (method === 'PUT') {
+  }
+
+  if (method === 'PUT') {
     const { post, _id } = request.body;
     try {
       const updatedPost = await Post.findByIdAndUpdate(_id, post, {
@@ -31,7 +35,9 @@ export default async function handler(request, response) {
     } catch (error) {
       response.status(400).json({ message: error.message });
     }
-  } else if (method === 'DELETE') {
+  }
+
+  if (method === 'DELETE') {
     const { _id } = request.body;
     try {
       const deletedPost = await Post.findByIdAndDelete(_id);

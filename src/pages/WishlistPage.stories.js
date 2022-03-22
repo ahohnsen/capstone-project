@@ -9,7 +9,7 @@ const Template = args => <WishlistPage {...args} />;
 
 export const WishlistPageDefault = Template.bind({});
 WishlistPageDefault.args = {
-  posts: [
+  sortedPosts: [
     {
       destination: 'Maldives',
       notes:
@@ -28,7 +28,7 @@ WishlistPageDefault.args = {
 
 export const WishlistPageWithArchive = Template.bind({});
 WishlistPageWithArchive.args = {
-  posts: [
+  sortedPosts: [
     {
       destination: 'Maldives',
       notes:
@@ -45,17 +45,17 @@ WishlistPageWithArchive.args = {
 
 export const WishlistPageEmpty = Template.bind({});
 WishlistPageEmpty.args = {
-  posts: [],
+  sortedPosts: [],
 };
 
 export const WishlistWithDatabaseError = Template.bind({});
 WishlistWithDatabaseError.args = {
-  posts: [],
+  sortedPosts: [],
   hasError: true,
 };
 
 export const WishlistWithLoadingSpinner = Template.bind({});
 WishlistWithLoadingSpinner.args = {
-  posts: [],
+  sortedPosts: [],
   isLoading: true,
 };
