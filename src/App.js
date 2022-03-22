@@ -180,6 +180,7 @@ export default function App() {
       _id: _id,
       post: {
         isArchived: !archiveStatus.isArchived,
+        isBookmarked: false,
       },
     };
     try {

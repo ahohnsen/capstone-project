@@ -13,15 +13,15 @@ jest.mock('firebase/compat/app', () => ({
 }));
 
 describe('WishlistPage', () => {
-  const diveWishes = [
+  const posts = [
     {
-      id: '1',
+      _id: '1',
       destination: 'Maldives',
       notes: 'I want to go there for my next diving holiday',
       isArchived: false,
     },
     {
-      id: '2',
+      _id: '2',
       destination: 'Lanzarote',
       notes: 'I want to go there again soon to see my former colleauges.',
       isArchived: false,
@@ -32,23 +32,23 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage diveWishes={[...diveWishes]} />
+          <WishlistPage posts={[...posts]} />
         </AuthProvider>
       </MemoryRouter>
     );
 
-    const diveWish1 = screen.getByText('Maldives');
-    const diveWish2 = screen.getByText('Lanzarote');
+    const post1 = screen.getByText('Maldives');
+    const post2 = screen.getByText('Lanzarote');
 
-    expect(diveWish1).toBeInTheDocument();
-    expect(diveWish2).toBeInTheDocument();
+    expect(post1).toBeInTheDocument();
+    expect(post2).toBeInTheDocument();
   });
 
   it('renders a heading with the name "Diving Wishlist" and a logout button', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage diveWishes={[...diveWishes]} />
+          <WishlistPage posts={[...posts]} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -60,11 +60,11 @@ describe('WishlistPage', () => {
   });
 
   it('renders a message to the user when wishlist is empty', () => {
-    const diveWishes = [];
+    const posts = [];
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage diveWishes={[...diveWishes]} />
+          <WishlistPage posts={[...posts]} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -77,15 +77,15 @@ describe('WishlistPage', () => {
   });
 
   it('renders a heading and a button to go the archive when there is at least one archived dive wish', () => {
-    const diveWishes = [
+    const posts = [
       {
-        id: '1',
+        _id: '1',
         destination: 'Maldives',
         notes: 'I want to go there for my next diving holiday',
         isArchived: false,
       },
       {
-        id: '2',
+        _id: '2',
         destination: 'Lanzarote',
         notes: 'I want to go there again soon to see my former colleauges.',
         isArchived: true,
@@ -94,7 +94,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage diveWishes={diveWishes} />
+          <WishlistPage posts={posts} />
         </AuthProvider>
       </MemoryRouter>
     );

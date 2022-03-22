@@ -3,33 +3,33 @@ import BookmarksPage from './BookmarksPage';
 
 describe('BookmarksPage', () => {
   it('renders bookmark page with two bookmarked items', () => {
-    const bookmarkedWishes = [
+    const bookmarkedPosts = [
       {
-        id: '1',
+        _id: '1',
         destination: 'Maldives',
         notes: 'I want to go there for my next diving holiday',
         isBookmarked: true,
       },
       {
-        id: '2',
+        _id: '2',
         destination: 'Galapagos Island',
         notes: 'My dream destination but first I have to win the lottery.',
         isBookmarked: true,
       },
     ];
-    render(<BookmarksPage bookmarkedWishes={bookmarkedWishes} />);
+    render(<BookmarksPage bookmarkedPosts={bookmarkedPosts} />);
 
-    const diveWish1 = screen.getByText('Maldives');
-    const diveWish2 = screen.getByText('Galapagos Island');
+    const post1 = screen.getByText('Maldives');
+    const post2 = screen.getByText('Galapagos Island');
 
-    expect(diveWish1).toBeInTheDocument();
-    expect(diveWish2).toBeInTheDocument();
+    expect(post1).toBeInTheDocument();
+    expect(post2).toBeInTheDocument();
   });
 
   it('renders a message to the user when there are no bookmarked items', () => {
-    const bookmarkedWishes = [];
+    const bookmarkedPosts = [];
 
-    render(<BookmarksPage bookmarkedWishes={bookmarkedWishes} />);
+    render(<BookmarksPage bookmarkedPosts={bookmarkedPosts} />);
 
     const message = screen.getByText(
       'You currently have nothing bookmarked. Start by marking your favorite dive destinations.'

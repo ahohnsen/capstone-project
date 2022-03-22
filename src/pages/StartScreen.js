@@ -47,9 +47,8 @@ export default function StartScreen() {
       navigate('/');
     } catch {
       setError('Failed to log in');
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   async function onSignup(data) {
