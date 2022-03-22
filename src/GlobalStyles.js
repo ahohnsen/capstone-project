@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
 :root {
   --bg-color-main: #FAFCFF;
   --bg-color-section: #FFFFFF;
-  --bg-color-button: #05A6A6;
+  --bg-color-action: #05A6A6;
   --bg-color-header: #071359;
   --bg-color-form: rgba(6, 95, 110, 0.7);
   --font-color-header: #FFFFFF;
@@ -29,13 +29,7 @@ body {
   background-color: var(--bg-color-main);
 }
 
-input {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
-  color: var(--font-color-content);
-  font-size: 1rem;
-}
-
-textarea {
+input, textarea {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
   color: var(--font-color-content);
   font-size: 1rem;
