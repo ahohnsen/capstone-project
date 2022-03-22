@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
@@ -12,13 +12,14 @@ import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function WishlistPage({
   sortedPosts,
-  isLoading,
+  onGetPosts,
   hasError,
   onToggleBookmark,
   onToggleCheckmark,
   onEditPost,
   onDeletePost,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
   const { logout } = useAuth();
   const [logoutError, setLogoutError] = useState('');
   const navigate = useNavigate();
@@ -28,6 +29,13 @@ export default function WishlistPage({
   );
 
   const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    onGetPosts();
+    setTimeout(() => setIsLoading(false), 500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

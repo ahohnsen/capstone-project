@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './contexts/AuthContext.js';
@@ -15,7 +15,6 @@ import StartScreen from './pages/StartScreen.js';
 export default function App() {
   const { currentUser } = useAuth();
   const [posts, setPosts] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
@@ -28,24 +27,6 @@ export default function App() {
 
   const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
 
-  useEffect(() => {
-    setIsLoading(true);
-    getPosts();
-    setTimeout(() => setIsLoading(false), 1500);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  async function getPosts() {
-    setHasError(false);
-    try {
-      const response = await axios.get('/api/posts');
-      setPosts(response.data);
-    } catch (error) {
-      console.log('Error:', error.message);
-      setHasError(true);
-    }
-  }
-
   return (
     <AppGrid>
       <Routes>
@@ -56,7 +37,7 @@ export default function App() {
             <PrivateRoute>
               <WishlistPage
                 sortedPosts={sortedPosts}
-                isLoading={isLoading}
+                onGetPosts={getPosts}
                 hasError={hasError}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
@@ -121,6 +102,17 @@ export default function App() {
     </AppGrid>
   );
   // }
+
+  async function getPosts() {
+    setHasError(false);
+    try {
+      const response = await axios.get('/api/posts');
+      setPosts(response.data);
+    } catch (error) {
+      console.log('Error:', error.message);
+      setHasError(true);
+    }
+  }
 
   async function handleAddPost({ destination, notes }) {
     const newPost = {
