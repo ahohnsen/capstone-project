@@ -15,6 +15,7 @@ import StartScreen from './pages/StartScreen.js';
 export default function App() {
   const { currentUser } = useAuth();
   const [posts, setPosts] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ export default function App() {
               <WishlistPage
                 sortedPosts={sortedPosts}
                 onGetPosts={getPosts}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
                 hasError={hasError}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}

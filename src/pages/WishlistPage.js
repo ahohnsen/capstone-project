@@ -13,13 +13,14 @@ import LogoutIcon from '../images/LogoutIcon.svg';
 export default function WishlistPage({
   sortedPosts,
   onGetPosts,
+  isLoading,
+  setIsLoading,
   hasError,
   onToggleBookmark,
   onToggleCheckmark,
   onEditPost,
   onDeletePost,
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const { logout } = useAuth();
   const [logoutError, setLogoutError] = useState('');
   const navigate = useNavigate();
