@@ -9,7 +9,7 @@ const Template = args => <WishlistPage {...args} />;
 
 export const WishlistPageDefault = Template.bind({});
 WishlistPageDefault.args = {
-  diveWishes: [
+  posts: [
     {
       destination: 'Maldives',
       notes:
@@ -28,7 +28,7 @@ WishlistPageDefault.args = {
 
 export const WishlistPageWithArchive = Template.bind({});
 WishlistPageWithArchive.args = {
-  diveWishes: [
+  posts: [
     {
       destination: 'Maldives',
       notes:
@@ -45,5 +45,5 @@ WishlistPageWithArchive.args = {
 
 export const WishlistPageEmpty = Template.bind({});
 WishlistPageEmpty.args = {
-  diveWishes: [],
+  posts: [],
 };

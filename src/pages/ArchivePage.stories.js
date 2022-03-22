@@ -9,7 +9,7 @@ const Template = args => <ArchivePage {...args} />;
 
 export const ArchivePageDefault = Template.bind({});
 ArchivePageDefault.args = {
-  archivedWishes: [
+  archivedPosts: [
     {
       destination: 'Maldives',
       notes:

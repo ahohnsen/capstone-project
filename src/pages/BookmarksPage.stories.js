@@ -9,7 +9,7 @@ const Template = args => <BookmarksPage {...args} />;
 
 export const BookmarksPageDefault = Template.bind({});
 BookmarksPageDefault.args = {
-  bookmarkedWishes: [
+  bookmarkedPosts: [
     {
       destination: 'Maldives',
       notes:
@@ -26,5 +26,5 @@ BookmarksPageDefault.args = {
 
 export const BookmarksPageEmpty = Template.bind({});
 BookmarksPageEmpty.args = {
-  bookmarkedWishes: [],
+  bookmarkedPosts: [],
 };
