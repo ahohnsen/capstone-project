@@ -104,4 +104,32 @@ describe('WishlistPage', () => {
     expect(heading).toBeInTheDocument();
     expect(buttonArchive).toBeInTheDocument();
   });
+
+  it('renders a loading spinner while data is fetched from the database', () => {
+    render(
+      <MemoryRouter>
+        <AuthProvider>
+          <WishlistPage posts={[...posts]} isLoading={true} />
+        </AuthProvider>
+      </MemoryRouter>
+    );
+
+    const loadingSpinner = screen.getByText('Loading');
+
+    expect(loadingSpinner).toBeInTheDocument();
+  });
+
+  it('renders an error message if data could not be fetched from the database', () => {
+    render(
+      <MemoryRouter>
+        <AuthProvider>
+          <WishlistPage posts={[...posts]} hasError={true} />
+        </AuthProvider>
+      </MemoryRouter>
+    );
+
+    const message = screen.getByText(/Something went wrong/i);
+
+    expect(message).toBeInTheDocument();
+  });
 });

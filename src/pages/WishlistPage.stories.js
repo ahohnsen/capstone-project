@@ -47,3 +47,15 @@ export const WishlistPageEmpty = Template.bind({});
 WishlistPageEmpty.args = {
   posts: [],
 };
+
+export const WishlistWithDatabaseError = Template.bind({});
+WishlistWithDatabaseError.args = {
+  posts: [],
+  hasError: true,
+};
+
+export const WishlistWithLoadingSpinner = Template.bind({});
+WishlistWithLoadingSpinner.args = {
+  posts: [],
+  isLoading: true,
+};

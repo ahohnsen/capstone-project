@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
+import LoadingSpinner from '../components/LoadingSpinner.js';
 import DiveWish from '../components/DiveWish.js';
 import IconButton from '../components/IconButton.js';
 import ArrowForward from '../images/ArrowForward.svg';
@@ -11,13 +12,15 @@ import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function WishlistPage({
   posts,
+  isLoading,
+  hasError,
   onToggleBookmark,
   onToggleCheckmark,
   onEditPost,
   onDeletePost,
 }) {
   const { logout } = useAuth();
-  const [error, setError] = useState('');
+  const [logoutError, setLogoutError] = useState('');
   const navigate = useNavigate();
 
   const notArchivedPosts = posts.filter(post => post.isArchived === false);
@@ -33,31 +36,37 @@ export default function WishlistPage({
         </LogoutButton>
       </Header>
       <Content>
-        {error && <p>{error}</p>}
+        {isLoading && <LoadingSpinner />}
+        {logoutError && <p>{logoutError}</p>}
+        {hasError && (
+          <p>Unfortunately, something went wrong. Please refresh this page.</p>
+        )}
         <Grid>
-          {notArchivedPosts.length > 0 ? (
-            notArchivedPosts
-              .reverse()
-              .map(post => (
-                <DiveWish
-                  key={post._id}
-                  destination={post.destination}
-                  notes={post.notes}
-                  isBookmarked={post.isBookmarked}
-                  isArchived={post.isArchived}
-                  onToggleBookmark={() => onToggleBookmark(post._id)}
-                  onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                  onEditPost={() => onEditPost(post)}
-                  onDeletePost={() => onDeletePost(post._id)}
-                />
-              ))
-          ) : (
-            <Message>
-              You currently have nothing on your wishlist. Start by adding some
-              destinations you would like to dive.
-            </Message>
-          )}
-          {archivedPosts.length > 0 && (
+          {!isLoading &&
+            !hasError &&
+            (notArchivedPosts.length > 0 ? (
+              notArchivedPosts
+                .reverse()
+                .map(post => (
+                  <DiveWish
+                    key={post._id}
+                    destination={post.destination}
+                    notes={post.notes}
+                    isBookmarked={post.isBookmarked}
+                    isArchived={post.isArchived}
+                    onToggleBookmark={() => onToggleBookmark(post._id)}
+                    onToggleCheckmark={() => onToggleCheckmark(post._id)}
+                    onEditPost={() => onEditPost(post)}
+                    onDeletePost={() => onDeletePost(post._id)}
+                  />
+                ))
+            ) : (
+              <Message>
+                You currently have nothing on your wishlist. Start by adding
+                some destinations you would like to dive.
+              </Message>
+            ))}
+          {!isLoading && !hasError && archivedPosts.length > 0 && (
             <Container>
               <Heading>Archive</Heading>
               <ArrowButton onClick={() => navigate('/archive')}>
@@ -71,13 +80,13 @@ export default function WishlistPage({
   );
 
   async function handleLogout() {
-    setError('');
+    setLogoutError('');
 
     try {
       await logout();
       navigate('/login');
     } catch {
-      setError('Failed to log out');
+      setLogoutError('Failed to log out');
     }
   }
 }

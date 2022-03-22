@@ -15,6 +15,8 @@ import StartScreen from './pages/StartScreen.js';
 export default function App() {
   const { currentUser } = useAuth();
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const navigate = useNavigate();
 
@@ -23,17 +25,23 @@ export default function App() {
   const archivedPosts = posts.filter(post => post.isArchived === true);
 
   useEffect(() => {
-    currentUser && getPosts();
+    setIsLoading(true);
+    if (currentUser) {
+      getPosts();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getPosts() {
+    setHasError(false);
     try {
       const response = await axios.get('/api/posts');
       setPosts(response.data);
     } catch (error) {
       console.log('Error:', error.message);
+      setHasError(true);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -46,6 +54,8 @@ export default function App() {
             <PrivateRoute>
               <WishlistPage
                 posts={posts}
+                isLoading={isLoading}
+                hasError={hasError}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
                 onEditPost={handleEditRedirect}
