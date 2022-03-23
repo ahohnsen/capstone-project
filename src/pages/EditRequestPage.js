@@ -6,7 +6,7 @@ import RequestForm from '../components/RequestForm.js';
 import IconButton from '../components/IconButton.js';
 import AbortIcon from '../images/Abort.svg';
 
-export default function EditWishPage({ onEditPost, postToEdit }) {
+export default function EditRequestPage({ onEditPost, postToEdit }) {
   const navigate = useNavigate();
 
   return (
@@ -15,12 +15,12 @@ export default function EditWishPage({ onEditPost, postToEdit }) {
         <AbortButton onClick={() => navigate(-1)}>
           <img src={AbortIcon} alt="abort editing" />
         </AbortButton>
-        Edit dive destination
+        Edit your post
       </Header>
       <Content>
         <RequestForm
-          formName={'Edit your dive wish'}
-          buttonName={'Save changes'}
+          formName={'Edit your buddy request'}
+          buttonName={'SAVE CHANGES'}
           handlePost={onEditPost}
           preloadedValues={postToEdit}
         />

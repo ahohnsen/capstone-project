@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import AddRequestPage from './AddRequestPage.js';
 
 describe('AddRequestPage', () => {
-  it('renders a form with the name "Add a new dive destination to your wishlist" as well as a header with the heading "Where do you want to dive?"', () => {
+  it('renders a form with the name "Add a request for a buddy" as well as a header with the heading "Looking for a buddy?"', () => {
     render(
       <MemoryRouter>
         <AddRequestPage />
