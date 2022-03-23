@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AuthProvider } from '../contexts/AuthContext.js';
-import WishlistPage from './WishlistPage.js';
+import SearchPage from './SearchPage.js';
 
 jest.mock('firebase/compat/auth');
 jest.mock('firebase/compat/app', () => ({
@@ -12,18 +12,18 @@ jest.mock('firebase/compat/app', () => ({
   }),
 }));
 
-describe('WishlistPage', () => {
+describe('SearchPage', () => {
   const sortedPosts = [
     {
       _id: '1',
       destination: 'Maldives',
-      notes: 'I want to go there for my next diving holiday',
+      description: 'I want to go there for my next diving holiday',
       isArchived: false,
     },
     {
       _id: '2',
       destination: 'Lanzarote',
-      notes: 'I want to go there again soon to see my former colleauges.',
+      description: 'I want to go there again soon to see my former colleauges.',
       isArchived: false,
     },
   ];
@@ -31,11 +31,11 @@ describe('WishlistPage', () => {
   const onGetPosts = jest.fn();
   const setIsLoading = jest.fn();
 
-  it('renders wishlist with two dive wishes', () => {
+  it('renders search page with two posts', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage
+          <SearchPage
             sortedPosts={[...sortedPosts]}
             isLoading={false}
             setIsLoading={setIsLoading}
@@ -52,11 +52,11 @@ describe('WishlistPage', () => {
     expect(post2).toBeInTheDocument();
   });
 
-  it('renders a heading with the name "Diving Wishlist" and a logout button', () => {
+  it('renders a heading with the name "Find a dive buddy" and a logout button', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage
+          <SearchPage
             sortedPosts={[...sortedPosts]}
             isLoading={false}
             setIsLoading={setIsLoading}
@@ -65,19 +65,19 @@ describe('WishlistPage', () => {
         </AuthProvider>
       </MemoryRouter>
     );
-    const heading = screen.getByRole('heading', { name: /Diving Wishlist/i });
+    const heading = screen.getByRole('heading', { name: /Find a dive buddy/i });
     const buttonLogout = screen.getByRole('button', { name: /logout/i });
 
     expect(heading).toBeInTheDocument();
     expect(buttonLogout).toBeInTheDocument();
   });
 
-  it('renders a message to the user when wishlist is empty', () => {
+  it('renders a message to the user when there are no posts', () => {
     const sortedPosts = [];
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage
+          <SearchPage
             sortedPosts={sortedPosts}
             isLoading={false}
             setIsLoading={setIsLoading}
@@ -88,31 +88,32 @@ describe('WishlistPage', () => {
     );
 
     const message = screen.getByText(
-      /You currently have nothing on your wishlist./i
+      /There is currently nobody looking for a dive buddy./i
     );
 
     expect(message).toBeInTheDocument();
   });
 
-  it('renders a heading and a button to go the archive when there is at least one archived dive wish', () => {
+  it('renders a heading and a button to go the archive when there is at least one archived post', () => {
     const sortedPosts = [
       {
         _id: '1',
         destination: 'Maldives',
-        notes: 'I want to go there for my next diving holiday',
+        description: 'I want to go there for my next diving holiday',
         isArchived: false,
       },
       {
         _id: '2',
         destination: 'Lanzarote',
-        notes: 'I want to go there again soon to see my former colleauges.',
+        description:
+          'I want to go there again soon to see my former colleauges.',
         isArchived: true,
       },
     ];
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage
+          <SearchPage
             sortedPosts={sortedPosts}
             isLoading={false}
             setIsLoading={setIsLoading}
@@ -132,7 +133,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage
+          <SearchPage
             sortedPosts={[...sortedPosts]}
             isLoading={true}
             setIsLoading={setIsLoading}
@@ -151,7 +152,7 @@ describe('WishlistPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <WishlistPage
+          <SearchPage
             sortedPosts={[...sortedPosts]}
             isLoading={false}
             setIsLoading={setIsLoading}
