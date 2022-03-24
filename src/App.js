@@ -32,6 +32,9 @@ export default function App() {
     post => post.isArchived === true && post.author._id === currentUserData?._id
   );
 
+  console.log('firebase', currentUser);
+  console.log('data', currentUserData);
+
   useEffect(() => {
     getUsers();
   }, [currentUser]);
