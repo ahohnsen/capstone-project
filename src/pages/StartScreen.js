@@ -61,12 +61,11 @@ export default function StartScreen() {
       setLoading(true);
       await signup(data.email, data.password);
       saveNewUser({ fullname: data.fullname, email: data.email });
+      setLoading(false);
       navigate('/');
     } catch {
       setError('Failed to create an account');
     }
-
-    setLoading(false);
   }
 
   async function saveNewUser(userData) {

@@ -34,6 +34,7 @@ export default function App() {
 
   console.log('firebase', currentUser);
   console.log('data', currentUserData);
+  console.log(currentUserData?._id);
 
   useEffect(() => {
     getUsers();
