@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import Button from './Button.js';
 
 export default function DeleteDialog({
-  onConfirmDeleteWish,
-  onCancelDeleteWish,
+  onConfirmDeletePost,
+  onCancelDeletePost,
 }) {
   return (
     <Dialog>
-      Do you really want to delete this item from your wishlist?
+      Do you really want to delete this post?
       <Wrapper>
-        <Button onClick={onConfirmDeleteWish}>Yes, delete</Button>
-        <Button onClick={onCancelDeleteWish}>Cancel</Button>
+        <Button onClick={onConfirmDeletePost}>Yes, delete</Button>
+        <Button onClick={onCancelDeletePost}>Cancel</Button>
       </Wrapper>
     </Dialog>
   );

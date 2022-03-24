@@ -8,4 +8,4 @@ export default {
 const Template = args => <Header {...args} />;
 
 export const HeaderDefault = Template.bind({});
-HeaderDefault.args = { children: 'Diving Wishlist' };
+HeaderDefault.args = { children: 'Find a dive buddy' };
