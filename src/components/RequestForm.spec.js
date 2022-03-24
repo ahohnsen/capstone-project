@@ -3,85 +3,83 @@ import { MemoryRouter } from 'react-router-dom';
 import RequestForm from './RequestForm';
 
 describe('RequestForm', () => {
-  it('renders a form with an input field, a textarea and a button to submit the form', () => {
+  it('renders a form with three input fields, a textarea and a button to submit the form', () => {
     render(
       <MemoryRouter>
-        <RequestForm buttonName={'Add to list'} />
+        <RequestForm buttonName="POST" />
       </MemoryRouter>
     );
 
     const destinationInput = screen.getByLabelText(/destination/i);
-    const notesTextarea = screen.getByLabelText(/notes/i);
-    const submitButton = screen.getByRole('button', { name: 'Add to list' });
+    const descriptionTextarea = screen.getByLabelText(/description/i);
+    const submitButton = screen.getByRole('button', { name: 'POST' });
 
     expect(destinationInput).toBeInTheDocument();
-    expect(notesTextarea).toBeInTheDocument();
+    expect(descriptionTextarea).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
 
-  it('renders a form to add a new dive wish with the name "Add a new dive destination to your wishlist"', () => {
+  it('renders a form to add a new request with the name "Add a request for a buddy"', () => {
     render(
       <MemoryRouter>
-        <RequestForm formName={'Add a new dive destination to your wishlist'} />
+        <RequestForm formName={'Add a request for a buddy'} />
       </MemoryRouter>
     );
 
     const form = screen.getByRole('form', {
-      name: 'Add a new dive destination to your wishlist',
+      name: 'Add a request for a buddy',
     });
     expect(form).toBeInTheDocument();
   });
 
-  it('renders a form to add a new dive wish, that has empty input fields and a button with the name "Add to list"', () => {
+  it('renders a form to add a new request, that has empty input fields and a button with the name "Post"', () => {
     render(
       <MemoryRouter>
-        <RequestForm
-          formName={'Add a new dive destination to your wishlist'}
-          buttonName={'Add to list'}
-        />
+        <RequestForm formName="Add a request for a buddy" buttonName="POST" />
       </MemoryRouter>
     );
     const inputFields = screen.getAllByDisplayValue('');
-    const submitButton = screen.getByRole('button', { name: 'Add to list' });
+    const submitButton = screen.getByRole('button', { name: 'POST' });
 
-    expect(inputFields).toHaveLength(2);
+    expect(inputFields).toHaveLength(4);
     expect(submitButton).toBeInTheDocument();
   });
 
-  it('renders a form to edit an existing dive wish with the name "Edit your dive wish"', () => {
+  it('renders a form to edit an existing post with the name "Edit your post"', () => {
     render(
       <MemoryRouter>
-        <RequestForm formName={'Edit your dive wish'} />
+        <RequestForm formName={'Edit your post'} />
       </MemoryRouter>
     );
 
     const form = screen.getByRole('form', {
-      name: 'Edit your dive wish',
+      name: 'Edit your post',
     });
     expect(form).toBeInTheDocument();
   });
 
-  it('renders a form to edit a dive wish, that shows the existing data in both input fields and a button with the name "Save changes"', () => {
+  it('renders a form to edit a post, that shows the existing data in both input fields and a button with the name "Save changes"', () => {
     render(
       <MemoryRouter>
         <RequestForm
-          formName={'Edit your dive wish'}
-          buttonName={'Save changes'}
+          formName={'Edit your post'}
+          buttonName={'SAVE CHANGES'}
           preloadedValues={{
             destination: 'Maldives',
-            notes: 'It was so beautiful, I wanna go again as soon as possible!',
+            description:
+              'It was so beautiful, I wanna go again as soon as possible!',
           }}
         />
       </MemoryRouter>
     );
     const destinationInput = screen.getByDisplayValue('Maldives');
-    const notesTextarea = screen.getByDisplayValue(
+    const descriptionTextarea = screen.getByDisplayValue(
       'It was so beautiful, I wanna go again as soon as possible!'
     );
-    const submitButton = screen.getByRole('button', { name: 'Save changes' });
+    const submitButton = screen.getByRole('button', { name: 'SAVE CHANGES' });
 
     expect(destinationInput).toBeInTheDocument();
-    expect(notesTextarea).toBeInTheDocument();
+    expect(descriptionTextarea).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
 });

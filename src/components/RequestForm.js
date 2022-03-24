@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button.js';
 
@@ -17,15 +18,18 @@ export default function RequestForm({
     defaultValues: preloadedValues
       ? {
           destination: preloadedValues.destination,
-          notes: preloadedValues.notes,
+          description: preloadedValues.description,
         }
-      : { destination: '', notes: '' },
+      : { destination: '', description: '' },
   });
+
+  const dateToday = new Date().toISOString().substring(0, 10);
+  const [startDate, setStartDate] = useState('');
 
   return (
     <Form aria-label={formName} onSubmit={handleSubmit(post => onSubmit(post))}>
       <Container>
-        <Label htmlFor="destination">DESTINATION </Label>
+        <Label htmlFor="destination">DESTINATION</Label>
         <Input
           {...register('destination', {
             required: 'A destination is required.',
@@ -40,20 +44,49 @@ export default function RequestForm({
           }}
         />
       </Container>
+      <div>
+        <Container>
+          <Label htmlFor="start-date"> DATES - START AND END</Label>
+          <DateInput
+            id="start-date"
+            {...register('startDate', {
+              required: 'A start date is required',
+            })}
+            type="date"
+            min={dateToday}
+            onChange={event => {
+              setStartDate(event.target.value);
+            }}
+          />
+          <Label htmlFor="end-date" className="sr-only">
+            END DATE
+          </Label>
+          <DateInput
+            id="end-date"
+            {...register('endDate', { required: 'An end date is required' })}
+            type="date"
+            min={startDate}
+          />
+        </Container>
+      </div>
       <Container>
-        <Label htmlFor="notes">NOTES</Label>
+        <Label htmlFor="description">DESCRIPTION</Label>
         <Textarea
-          {...register('notes', { required: ' Notes are required.' })}
-          id="notes"
+          {...register('description', {
+            required: ' A description is required.',
+          })}
+          id="description"
           onKeyUp={() => {
-            trigger('notes');
+            trigger('description');
           }}
         />
       </Container>
       <Button type="submit">{buttonName}</Button>
       <ErrorMessage>
         <p>{errors.destination && errors.destination.message}</p>
-        <p>{errors.notes && errors.notes.message}</p>
+        <p>{errors.description && errors.description.message}</p>
+        <p>{errors.startDate && errors.startDate.message}</p>
+        <p>{errors.endDate && errors.endDate.message}</p>
       </ErrorMessage>
     </Form>
   );
@@ -61,7 +94,9 @@ export default function RequestForm({
   function onSubmit(post) {
     handlePost({
       destination: post.destination,
-      notes: post.notes,
+      description: post.description,
+      startDate: post.startDate,
+      endDate: post.endDate,
     });
   }
 }
@@ -85,6 +120,13 @@ const Input = styled.input`
   padding: 2px;
   border: 0;
 `;
+
+const DateInput = styled.input`
+  padding: 2px;
+  border: 0;
+  width: 50%;
+`;
+
 const Container = styled.div`
   position: relative;
   padding: 10px;
