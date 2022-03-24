@@ -3,21 +3,31 @@ import BookmarksPage from './BookmarksPage';
 
 describe('BookmarksPage', () => {
   it('renders bookmark page with two bookmarked items', () => {
+    const currentUserData = [
+      {
+        _id: '2',
+      },
+    ];
     const bookmarkedPosts = [
       {
         _id: '1',
         destination: 'Maldives',
-        notes: 'I want to go there for my next diving holiday',
         isBookmarked: true,
+        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
       },
       {
         _id: '2',
         destination: 'Galapagos Island',
-        notes: 'My dream destination but first I have to win the lottery.',
         isBookmarked: true,
+        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
       },
     ];
-    render(<BookmarksPage bookmarkedPosts={bookmarkedPosts} />);
+    render(
+      <BookmarksPage
+        bookmarkedPosts={bookmarkedPosts}
+        currentUserData={currentUserData}
+      />
+    );
 
     const post1 = screen.getByText('Maldives');
     const post2 = screen.getByText('Galapagos Island');
@@ -32,7 +42,7 @@ describe('BookmarksPage', () => {
     render(<BookmarksPage bookmarkedPosts={bookmarkedPosts} />);
 
     const message = screen.getByText(
-      'You currently have nothing bookmarked. Start by marking your favorite dive destinations.'
+      'You currently have nothing bookmarked. Start by marking your favorite posts.'
     );
 
     expect(message).toBeInTheDocument();

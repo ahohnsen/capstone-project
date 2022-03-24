@@ -8,20 +8,23 @@ describe('ArchivePage', () => {
       {
         _id: '1',
         destination: 'Maldives',
-        notes: 'I want to go there for my next diving holiday',
         isArchived: true,
+        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
       },
       {
         _id: '2',
         destination: 'Galapagos Island',
-        notes: 'My dream destination but first I have to win the lottery.',
         isArchived: true,
+        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
       },
     ];
 
     render(
       <MemoryRouter>
-        <ArchivePage archivedPosts={archivedPosts} />
+        <ArchivePage
+          archivedPosts={archivedPosts}
+          currentUserData={{ _id: '1' }}
+        />
       </MemoryRouter>
     );
 

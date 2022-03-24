@@ -17,14 +17,14 @@ describe('SearchPage', () => {
     {
       _id: '1',
       destination: 'Maldives',
-      description: 'I want to go there for my next diving holiday',
       isArchived: false,
+      author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
     },
     {
       _id: '2',
       destination: 'Lanzarote',
-      description: 'I want to go there again soon to see my former colleauges.',
       isArchived: false,
+      author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
     },
   ];
 
@@ -99,15 +99,16 @@ describe('SearchPage', () => {
       {
         _id: '1',
         destination: 'Maldives',
-        description: 'I want to go there for my next diving holiday',
         isArchived: false,
+        author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
       },
+    ];
+    const archivedPosts = [
       {
         _id: '2',
         destination: 'Lanzarote',
-        description:
-          'I want to go there again soon to see my former colleauges.',
         isArchived: true,
+        author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
       },
     ];
     render(
@@ -115,7 +116,9 @@ describe('SearchPage', () => {
         <AuthProvider>
           <SearchPage
             sortedPosts={sortedPosts}
+            archivedPosts={archivedPosts}
             isLoading={false}
+            hasError={false}
             setIsLoading={setIsLoading}
             onGetPosts={onGetPosts}
           />
@@ -123,7 +126,9 @@ describe('SearchPage', () => {
       </MemoryRouter>
     );
     const heading = screen.getByRole('heading', { name: 'Archive' });
-    const buttonArchive = screen.getByRole('button', { name: /archived/i });
+    const buttonArchive = screen.getByRole('button', {
+      name: /go to archive/i,
+    });
 
     expect(heading).toBeInTheDocument();
     expect(buttonArchive).toBeInTheDocument();
@@ -153,7 +158,6 @@ describe('SearchPage', () => {
       <MemoryRouter>
         <AuthProvider>
           <SearchPage
-            sortedPosts={[...sortedPosts]}
             isLoading={false}
             setIsLoading={setIsLoading}
             onGetPosts={onGetPosts}
