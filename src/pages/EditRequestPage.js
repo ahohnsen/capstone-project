@@ -30,6 +30,7 @@ export default function EditRequestPage({ onEditPost, postToEdit }) {
 }
 
 const AbortButton = styled(IconButton)`
+  position: absolute;
   padding: 5px 10px;
   top: 3px;
   left: 10px;

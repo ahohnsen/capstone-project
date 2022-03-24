@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
-import DiveWish from '../components/DiveWish.js';
+import Request from '../components/Request.js';
 
 export default function BookmarksPage({
+  currentUserData,
   bookmarkedPosts,
   onToggleBookmark,
   onToggleCheckmark,
@@ -17,12 +18,17 @@ export default function BookmarksPage({
         <Grid>
           {bookmarkedPosts?.length > 0 ? (
             bookmarkedPosts.map(post => (
-              <DiveWish
+              <Request
                 key={post._id}
+                currentUserData={currentUserData}
+                createdDate={post.createdAt}
+                startDate={post.startDate}
+                endDate={post.endDate}
                 destination={post.destination}
-                notes={post.notes}
+                description={post.description}
                 isBookmarked={post.isBookmarked}
                 isArchived={post.isArchived}
+                author={post.author}
                 onToggleBookmark={() => onToggleBookmark(post._id)}
                 onToggleCheckmark={() => onToggleCheckmark(post._id)}
                 onEditPost={() => onEditPost(post)}
@@ -32,7 +38,7 @@ export default function BookmarksPage({
           ) : (
             <Message>
               You currently have nothing bookmarked. Start by marking your
-              favorite dive destinations.
+              favorite posts.
             </Message>
           )}
         </Grid>

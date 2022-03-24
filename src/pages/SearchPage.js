@@ -5,13 +5,15 @@ import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import LoadingSpinner from '../components/LoadingSpinner.js';
-import DiveWish from '../components/DiveWish.js';
+import Request from '../components/Request.js';
 import IconButton from '../components/IconButton.js';
 import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function SearchPage({
   sortedPosts,
+  archivedPosts,
+  currentUserData,
   onGetPosts,
   isLoading,
   setIsLoading,
@@ -20,6 +22,7 @@ export default function SearchPage({
   onToggleCheckmark,
   onEditPost,
   onDeletePost,
+  onLogout,
 }) {
   const { logout } = useAuth();
   const [logoutError, setLogoutError] = useState('');
@@ -29,12 +32,10 @@ export default function SearchPage({
     post => post.isArchived === false
   );
 
-  const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
-
   useEffect(() => {
     setIsLoading(true);
     onGetPosts();
-    setTimeout(() => setIsLoading(false), 500);
+    setTimeout(() => setIsLoading(false), 800);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,12 +58,17 @@ export default function SearchPage({
             !hasError &&
             notArchivedPosts?.length > 0 &&
             notArchivedPosts.map(post => (
-              <DiveWish
+              <Request
                 key={post._id}
+                currentUserData={currentUserData}
+                createdDate={post.createdAt}
+                startDate={post.startDate}
+                endDate={post.endDate}
                 destination={post.destination}
                 description={post.description}
                 isBookmarked={post.isBookmarked}
                 isArchived={post.isArchived}
+                author={post.author}
                 onToggleBookmark={() => onToggleBookmark(post._id)}
                 onToggleCheckmark={() => onToggleCheckmark(post._id)}
                 onEditPost={() => onEditPost(post)}
@@ -93,6 +99,7 @@ export default function SearchPage({
 
     try {
       await logout();
+      onLogout();
       navigate('/login');
     } catch {
       setLogoutError('Failed to log out');
@@ -124,12 +131,14 @@ const Heading = styled.h2`
 `;
 
 const ArrowButton = styled(IconButton)`
+  position: absolute;
   padding: 5px 10px;
   top: 11px;
   right: 0;
 `;
 
 const LogoutButton = styled(IconButton)`
+  position: absolute;
   padding: 5px 10px;
   top: 0;
   right: 0;
