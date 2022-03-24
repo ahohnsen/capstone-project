@@ -69,9 +69,9 @@ export default function StartScreen() {
     setLoading(false);
   }
 
-  async function saveNewUser(email) {
+  async function saveNewUser(userData) {
     try {
-      await axios.post('/api/users', email);
+      await axios.post('/api/users', userData);
     } catch (error) {
       console.log('Error', error.messages);
     }

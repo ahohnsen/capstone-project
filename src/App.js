@@ -34,11 +34,11 @@ export default function App() {
 
   useEffect(() => {
     getUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     saveCurrentUserData();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users, currentUser]);
 
