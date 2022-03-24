@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import RequestForm from './RequestForm';
 
 describe('RequestForm', () => {
-  it('renders a form with three input fields, a textarea and a button to submit the form', () => {
+  it('renders a form with four input fields, a textarea and a button to submit the form', () => {
     render(
       <MemoryRouter>
         <RequestForm buttonName="POST" />
@@ -11,10 +11,14 @@ describe('RequestForm', () => {
     );
 
     const destinationInput = screen.getByLabelText(/destination/i);
+    const startDateInput = screen.getByLabelText(/start/i);
+    const endDateInput = screen.getByLabelText('END DATE');
     const descriptionTextarea = screen.getByLabelText(/description/i);
     const submitButton = screen.getByRole('button', { name: 'POST' });
 
     expect(destinationInput).toBeInTheDocument();
+    expect(startDateInput).toBeInTheDocument();
+    expect(endDateInput).toBeInTheDocument();
     expect(descriptionTextarea).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
