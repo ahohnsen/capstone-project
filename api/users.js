@@ -1,9 +1,8 @@
-import dbConnect from '../lib/dbConnect.mjs';
-import User from '../models/User.mjs';
-
-await dbConnect();
+import dbConnect from '../lib/dbConnect.js';
+import User from '../models/User.js';
 
 export default async function handler(request, response) {
+  await dbConnect();
   const { method } = request;
 
   if (method === 'GET') {

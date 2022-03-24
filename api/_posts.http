@@ -8,10 +8,11 @@ POST {{baseUrl}}/posts
 Content-Type: application/json
 
 {
-  "destination": "Maldives2",
-  "notes": "Beautiful, I wanna go again asap!",
+  "destination": "Maldives5",
+  "description": "Beautiful, I wanna go again asap!",
   "isBookmarked": false,
-  "isArchived": false
+  "isArchived": false,
+  "author": "623a3c28210528d3870d2c63" 
 }
 
 ###
@@ -21,7 +22,7 @@ Content-Type: application/json
 { "_id": "62388d27c63eda90e36da5cb",
   "post": {
     "destination": "Maldives",
-  "notes": "Beautiful, I wanna go again as soon as possible!"
+  "description": "Beautiful, I wanna go again as soon as possible!"
   }
 }
 
