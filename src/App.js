@@ -32,19 +32,23 @@ export default function App() {
     post => post.isArchived === true && post.author._id === currentUserData?._id
   );
 
-  console.log('firebase', currentUser);
-  console.log('data', currentUserData);
-  console.log(currentUserData?._id);
+  console.log('currentUser from Firebase', currentUser);
+  console.log('users', users);
+  console.log('currentUserData', currentUserData);
 
   useEffect(() => {
-    getUsers();
+    if (!currentUser) {
+      return;
+    }
+    axios
+      .get('/api/users')
+      .then(response => response.data)
+      .then(users => {
+        setUsers(users);
+        const foundUser = users.find(user => user.email === currentUser.email);
+        setCurrentUserData(foundUser);
+      });
   }, [currentUser]);
-
-  useEffect(() => {
-    saveCurrentUserData();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [users, currentUser]);
 
   return (
     <AppGrid>
@@ -127,26 +131,22 @@ export default function App() {
       {currentUser && <Navigation />}
     </AppGrid>
   );
-  // }
 
   function logout() {
     setCurrentUserData(null);
+    setUsers(null);
   }
 
-  async function getUsers() {
-    setHasError(false);
-    try {
-      const response = await axios.get('/api/users');
-      setUsers(response.data);
-    } catch (error) {
-      console.log('Error:', error.message);
-      setHasError(true);
-    }
-  }
-
-  function saveCurrentUserData() {
-    setCurrentUserData(users?.find(user => user.email === currentUser?.email));
-  }
+  // async function getUsers() {
+  //   setHasError(false);
+  //   try {
+  //     const response = await axios.get('/api/users');
+  //     setUsers(response.data);
+  //   } catch (error) {
+  //     console.log('Error:', error.message);
+  //     setHasError(true);
+  //   }
+  // }
 
   async function getPosts() {
     setHasError(false);
@@ -208,6 +208,7 @@ export default function App() {
 
   function handleEditRedirect(post) {
     setPostToEdit({ ...post });
+    console.log(postToEdit);
     navigate('/edit-request');
   }
 

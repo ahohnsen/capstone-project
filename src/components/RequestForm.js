@@ -18,9 +18,20 @@ export default function RequestForm({
     defaultValues: preloadedValues
       ? {
           destination: preloadedValues.destination,
+          startDate: new Date(preloadedValues.startDate)
+            .toISOString()
+            .split('T')[0],
+          endDate: new Date(preloadedValues.endDate)
+            .toISOString()
+            .split('T')[0],
           description: preloadedValues.description,
         }
-      : { destination: '', description: '' },
+      : {
+          destination: '',
+          startDate: '',
+          endDate: '',
+          description: '',
+        },
   });
 
   const dateToday = new Date().toISOString().substring(0, 10);

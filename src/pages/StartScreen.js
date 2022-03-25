@@ -60,7 +60,7 @@ export default function StartScreen() {
       setError('');
       setLoading(true);
       await signup(data.email, data.password);
-      saveNewUser({ fullname: data.fullname, email: data.email });
+      await saveNewUser({ fullname: data.fullname, email: data.email });
       setLoading(false);
       navigate('/');
     } catch {
@@ -68,9 +68,9 @@ export default function StartScreen() {
     }
   }
 
-  async function saveNewUser(userData) {
+  function saveNewUser(userData) {
     try {
-      await axios.post('/api/users', userData);
+      return axios.post('/api/users', userData);
     } catch (error) {
       console.log('Error', error.messages);
     }
