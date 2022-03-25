@@ -7,8 +7,9 @@ GET {{baseUrl}}/users
 POST {{baseUrl}}/users
 Content-Type: application/json
 
-{
-  "email": "hohnsenandrea@gmail.com"
+{ "_id": "test40@maildee",
+  "fullname": "ID Test",
+  "email": "test40@test.com"
 }
 
 ###

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
-import axios from 'axios';
 import Content from '../components/Content.js';
 import LoginSignupForm from '../components/LoginSignupForm.js';
 import ForgotPasswordForm from '../components/ForgotPasswordForm.js';
@@ -11,10 +9,7 @@ import ScubaMateLogo from '../images/ScubaMateLogo.svg';
 
 export default function StartScreen() {
   const { signin } = useParams();
-  const navigate = useNavigate();
-  const { login, signup } = useAuth();
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const { login, signup, error, buttonIsDeactivated } = useAuth();
 
   return (
     <Container>
@@ -22,59 +17,22 @@ export default function StartScreen() {
       {signin === 'login' && (
         <LoginSignupForm
           status={'login'}
-          onSubmit={onLogin}
+          onSubmit={login}
           error={error}
-          loading={loading}
+          loading={buttonIsDeactivated}
         />
       )}
       {signin === 'signup' && (
         <LoginSignupForm
           status={'signup'}
-          onSubmit={onSignup}
+          onSubmit={signup}
           error={error}
-          loading={loading}
+          loading={buttonIsDeactivated}
         />
       )}
       {signin === 'forgot-password' && <ForgotPasswordForm />}
     </Container>
   );
-
-  async function onLogin(data) {
-    try {
-      setError('');
-      setLoading(true);
-      await login(data.email, data.password);
-      navigate('/');
-    } catch {
-      setError('Failed to log in');
-      setLoading(false);
-    }
-  }
-
-  async function onSignup(data) {
-    if (data.password !== data.passwordConfirmation) {
-      return setError('Passwords do not match');
-    }
-
-    try {
-      setError('');
-      setLoading(true);
-      await signup(data.email, data.password);
-      await saveNewUser({ fullname: data.fullname, email: data.email });
-      setLoading(false);
-      navigate('/');
-    } catch {
-      setError('Failed to create an account');
-    }
-  }
-
-  function saveNewUser(userData) {
-    try {
-      return axios.post('/api/users', userData);
-    } catch (error) {
-      console.log('Error', error.messages);
-    }
-  }
 }
 
 const Container = styled(Content)`

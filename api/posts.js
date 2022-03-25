@@ -18,7 +18,7 @@ export default async function handler(request, response) {
     const post = new Post(request.body);
     try {
       const newPost = await post.save();
-      response.status(201).json(newPost);
+      response.status(200).json(newPost);
     } catch (error) {
       response.status(400).json({ message: error.message });
     }

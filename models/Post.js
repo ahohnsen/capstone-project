@@ -10,7 +10,7 @@ const schema = new Schema(
     endDate: { type: Date, required: true },
     isArchived: { type: Boolean, required: true, default: false },
     isBookmarked: { type: Boolean, required: true, default: false },
-    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    author: { type: String, ref: 'User', required: true },
   },
   {
     versionKey: false,

@@ -18,7 +18,7 @@ export default async function handler(request, response) {
     const user = new User(request.body);
     try {
       const newUser = await user.save();
-      response.status(201).json(newUser);
+      response.status(200).json(newUser);
     } catch (error) {
       response.status(400).json({ message: error.message });
     }
@@ -33,6 +33,16 @@ export default async function handler(request, response) {
       response.json(updatedUser);
     } catch (error) {
       response.status(400).json({ message: error.message });
+    }
+  }
+
+  if (method === 'DELETE') {
+    const { _id } = request.body;
+    try {
+      const deletedUser = await User.findByIdAndDelete(_id);
+      response.json(deletedUser);
+    } catch (error) {
+      response.status(500).json({ message: error.message });
     }
   }
 }

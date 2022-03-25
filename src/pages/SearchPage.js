@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
@@ -22,10 +22,8 @@ export default function SearchPage({
   onToggleCheckmark,
   onEditPost,
   onDeletePost,
-  onLogout,
 }) {
-  const { logout } = useAuth();
-  const [logoutError, setLogoutError] = useState('');
+  const { logout, logoutError } = useAuth();
   const navigate = useNavigate();
 
   const notArchivedPosts = sortedPosts?.filter(
@@ -34,8 +32,8 @@ export default function SearchPage({
 
   useEffect(() => {
     setIsLoading(true);
-    onGetPosts();
-    setTimeout(() => setIsLoading(false), 800);
+    onGetPosts().then(() => setIsLoading(false));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -43,7 +41,7 @@ export default function SearchPage({
     <>
       <Header>
         Find a dive buddy
-        <LogoutButton onClick={handleLogout}>
+        <LogoutButton onClick={logout}>
           <img src={LogoutIcon} alt="logout" />
         </LogoutButton>
       </Header>
@@ -93,18 +91,6 @@ export default function SearchPage({
       </Content>
     </>
   );
-
-  async function handleLogout() {
-    setLogoutError('');
-
-    try {
-      await logout();
-      onLogout();
-      navigate('/login');
-    } catch {
-      setLogoutError('Failed to log out');
-    }
-  }
 }
 
 const Grid = styled.div`

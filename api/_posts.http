@@ -12,7 +12,9 @@ Content-Type: application/json
   "description": "Beautiful, I wanna go again asap!",
   "isBookmarked": false,
   "isArchived": false,
-  "author": "623a3c28210528d3870d2c63" 
+  "author": "test40@maildee",
+  "startDate": "2022-03-23T00:00:00.000Z",
+  "endDate": "2022-03-26T00:00:00.000Z"
 }
 
 ###

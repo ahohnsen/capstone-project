@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './contexts/AuthContext.js';
@@ -13,10 +13,8 @@ import ArchivePage from './pages/ArchivePage.js';
 import StartScreen from './pages/StartScreen.js';
 
 export default function App() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserData, users } = useAuth();
   const [posts, setPosts] = useState(null);
-  const [users, setUsers] = useState(null);
-  const [currentUserData, setCurrentUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
@@ -35,20 +33,6 @@ export default function App() {
   console.log('currentUser from Firebase', currentUser);
   console.log('users', users);
   console.log('currentUserData', currentUserData);
-
-  useEffect(() => {
-    if (!currentUser) {
-      return;
-    }
-    axios
-      .get('/api/users')
-      .then(response => response.data)
-      .then(users => {
-        setUsers(users);
-        const foundUser = users.find(user => user.email === currentUser.email);
-        setCurrentUserData(foundUser);
-      });
-  }, [currentUser]);
 
   return (
     <AppGrid>
@@ -70,7 +54,6 @@ export default function App() {
                 onToggleCheckmark={toggleCheckmark}
                 onEditPost={handleEditRedirect}
                 onDeletePost={handleDeletePost}
-                onLogout={logout}
               />
             </PrivateRoute>
           }
@@ -131,22 +114,6 @@ export default function App() {
       {currentUser && <Navigation />}
     </AppGrid>
   );
-
-  function logout() {
-    setCurrentUserData(null);
-    setUsers(null);
-  }
-
-  // async function getUsers() {
-  //   setHasError(false);
-  //   try {
-  //     const response = await axios.get('/api/users');
-  //     setUsers(response.data);
-  //   } catch (error) {
-  //     console.log('Error:', error.message);
-  //     setHasError(true);
-  //   }
-  // }
 
   async function getPosts() {
     setHasError(false);
