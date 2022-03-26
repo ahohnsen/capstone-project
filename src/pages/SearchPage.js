@@ -76,6 +76,7 @@ const Grid = styled.div`
 `;
 
 const Message = styled.span`
+  display: inline-block;
   text-align: center;
   padding: 0 15px;
 `;
