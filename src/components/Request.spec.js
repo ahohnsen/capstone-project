@@ -16,7 +16,7 @@ jest.mock('firebase/compat/app', () => ({
 describe('Request', () => {
   const author = { fullname: 'John Doe', _id: 'john@doe.com' };
 
-  it('renders a post with the name of the author, date the post was created, a destination, description and travel start and end dates as well as a bookmark and email icon', () => {
+  it('renders a post with the name of the author, date the post was created, a destination, description and travel start and end dates as well as a bookmark icon', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
@@ -43,7 +43,6 @@ describe('Request', () => {
     const buttonBookmark = screen.getByRole('button', {
       name: 'not bookmarked',
     });
-    const buttonEmail = screen.getByRole('img', { name: 'send email' });
 
     expect(nameAuthor).toBeInTheDocument();
     expect(createdDate).toBeInTheDocument();
@@ -52,7 +51,6 @@ describe('Request', () => {
     expect(startDate).toBeInTheDocument();
     expect(endDate).toBeInTheDocument();
     expect(buttonBookmark).toBeInTheDocument();
-    expect(buttonEmail).toBeInTheDocument();
   });
 
   it('calls the function to toggle the bookmark when the bookmark button is clicked', () => {

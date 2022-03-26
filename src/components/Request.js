@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
 import DeleteDialog from './DeleteDialog.js';
 import IconButton from './IconButton.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 import EditIcon from '../images/EditIcon.svg';
-import EmailIcon from '../images/Email.svg';
 import CalendarIcon from '../images/Calendar.svg';
 import LocationIcon from '../images/Location.svg';
 import CheckActiveIcon from '../images/CheckActive.svg';
@@ -42,7 +42,7 @@ export default function Request({
     <Container>
       <Header>
         <TextWrapper>
-          <Name>{author.fullname}</Name>
+          <Name to={`/profile/${author.userId}`}>{author.fullname}</Name>
           <Text>
             {formatedDate} at {formatedTime}
           </Text>
@@ -58,9 +58,6 @@ export default function Request({
           </>
         ) : (
           <>
-            <Email href={`mailto:${author._id}`}>
-              <img src={EmailIcon} alt="send email" />
-            </Email>
             <IconButton onClick={onToggleBookmark}>
               {isBookmarked ? (
                 <img src={Bookmarked} alt="is bookmarked" />
@@ -130,10 +127,11 @@ const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Name = styled.span`
+const Name = styled(Link)`
   font-size: 1rem;
   font-weight: 600;
   color: var(--font-color-heading);
+  text-decoration: none;
 `;
 
 const Text = styled.div`
@@ -159,14 +157,6 @@ const CheckButton = styled(IconButton)`
   bottom: 5px;
 `;
 
-const Email = styled.a`
-  margin: auto 3px;
-
-  img {
-    width: 30px;
-    height: 30px;
-  }
-`;
 const Calendar = styled.img`
   margin: auto 3px;
 `;
