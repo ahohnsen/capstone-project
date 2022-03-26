@@ -48,7 +48,9 @@ export default function SearchPage({
         {isLoading && <LoadingSpinner />}
         {error && <p>{error}</p>}
         {hasError && (
-          <p>Unfortunately, something went wrong. Please refresh this page.</p>
+          <Message>
+            Unfortunately, something went wrong. Please refresh this page.
+          </Message>
         )}
         <Grid>
           {!isLoading &&

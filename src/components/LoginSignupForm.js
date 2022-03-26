@@ -6,11 +6,18 @@ import Button from './Button.js';
 
 export default function LoginSignupForm({ status }) {
   const { login, signup, error, isButtonDeactivated } = useAuth();
-  const { register, handleSubmit } = useForm({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({});
 
   return (
     <>
       {error && <ErrorMessage>{error}</ErrorMessage>}
+      {status === 'signup' && errors.password && (
+        <ErrorMessage>{errors.password.message}</ErrorMessage>
+      )}
       <Form
         onSubmit={handleSubmit(data => {
           status === 'signup' ? signup(data) : login(data);
@@ -30,7 +37,13 @@ export default function LoginSignupForm({ status }) {
           PASSWORD
           <Input
             type="password"
-            {...register('password', { required: true })}
+            {...register('password', {
+              required: true,
+              minLength: {
+                value: 6,
+                message: 'The password needs to be at least 6 characters long.',
+              },
+            })}
           />
         </Label>
         {status === 'signup' && (
@@ -102,11 +115,11 @@ const StyledText = styled.span`
 `;
 
 const ErrorMessage = styled.div`
-  padding: 8px;
+  padding: 4px;
   width: 80%;
   background-color: rgba(255, 255, 255, 70%);
   color: red;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   text-align: center;
   border-radius: 4px;

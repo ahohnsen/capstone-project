@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
 
   async function signup(data) {
     if (data.password !== data.passwordConfirmation) {
-      return setError('Passwords do not match');
+      return setError('The passwords do not match.');
     }
 
     try {
@@ -62,7 +62,9 @@ export function AuthProvider({ children }) {
       await auth.createUserWithEmailAndPassword(data.email, data.password);
       navigate('/');
     } catch {
-      setError('Failed to create an account');
+      setError(
+        'Failed to create an account. Please refresh the page and try again.'
+      );
       axios.delete('/api/users', { data: { _id: data.email } });
     }
     setIsButtonDeactivated(false);
@@ -83,7 +85,7 @@ export function AuthProvider({ children }) {
       await auth.signInWithEmailAndPassword(data.email, data.password);
       navigate('/');
     } catch {
-      setError('Failed to log in');
+      setError('Failed to log in. Please try again.');
     }
     setIsButtonDeactivated(false);
   }
@@ -95,7 +97,7 @@ export function AuthProvider({ children }) {
       await auth.signOut();
       navigate('/login');
     } catch {
-      setError('Failed to log out');
+      setError('Failed to log out. Please try again.');
     }
   }
 
