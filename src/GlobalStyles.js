@@ -16,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
   --bg-color-form: rgba(6, 95, 110, 0.7);
   --font-color-header: #FFFFFF;
   --font-color-heading: #011F26;
+  --font-color-sub-heading: #635D5D;
   --font-color-content: #2C2727;
   --font-color-action: #FFFFFF;
   --font-color-label: #848588;
