@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.js';
 import DeleteDialog from './DeleteDialog.js';
 import IconButton from './IconButton.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
@@ -13,7 +14,6 @@ import BookmarkIconInactive from '../images/BookmarkInactive.svg';
 import BookmarkIconActive from '../images/BookmarkActive.svg';
 
 export default function Request({
-  currentUserData,
   createdDate,
   startDate,
   endDate,
@@ -21,16 +21,16 @@ export default function Request({
   description,
   isBookmarked,
   isArchived,
-  onToggleBookmark,
   author,
+  onToggleBookmark,
   onToggleCheckmark,
   onDeletePost,
   onEditPost,
 }) {
+  const { currentUserData } = useAuth();
   const [showDialog, setShowDialog] = useState(false);
 
   const formatedDate = formatDate(createdDate);
-
   const formatedTime = new Date(createdDate).toLocaleTimeString('en-us', {
     hour: 'numeric',
     minute: 'numeric',

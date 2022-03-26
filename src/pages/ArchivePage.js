@@ -8,7 +8,6 @@ import ArrowBack from '../images/ArrowBack.svg';
 
 export default function ArchivePage({
   archivedPosts,
-  currentUserData,
   onToggleCheckmark,
   onEditPost,
   onDeletePost,
@@ -29,7 +28,6 @@ export default function ArchivePage({
             archivedPosts.map(post => (
               <Request
                 key={post._id}
-                currentUserData={currentUserData}
                 createdDate={post.createdAt}
                 startDate={post.startDate}
                 endDate={post.endDate}

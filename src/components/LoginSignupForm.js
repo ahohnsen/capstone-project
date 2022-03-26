@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext.js';
 import { useForm } from 'react-hook-form';
 import Button from './Button.js';
 
-export default function LoginSignupForm({
-  status,
-  onSubmit,
-  error,
-  isButtonDeactivated,
-}) {
+export default function LoginSignupForm({ status }) {
+  const { login, signup, error, isButtonDeactivated } = useAuth();
   const { register, handleSubmit } = useForm({});
 
   return (
     <>
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      <Form onSubmit={handleSubmit(data => onSubmit(data))}>
+      <Form
+        onSubmit={handleSubmit(data => {
+          status === 'signup' ? signup(data) : login(data);
+        })}
+      >
         {status === 'signup' && (
           <Label>
             FULL NAME

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext.js';
 import Content from '../components/Content.js';
 import LoginSignupForm from '../components/LoginSignupForm.js';
 import ForgotPasswordForm from '../components/ForgotPasswordForm.js';
@@ -9,27 +8,12 @@ import ScubaMateLogo from '../images/ScubaMateLogo.svg';
 
 export default function StartScreen() {
   const { signin } = useParams();
-  const { login, signup, error, isButtonDeactivated } = useAuth();
 
   return (
     <Container>
       <Logo src={ScubaMateLogo} alt="ScubaMate Logo" />
-      {signin === 'login' && (
-        <LoginSignupForm
-          status={'login'}
-          onSubmit={login}
-          error={error}
-          isButtonDeactivated={isButtonDeactivated}
-        />
-      )}
-      {signin === 'signup' && (
-        <LoginSignupForm
-          status={'signup'}
-          onSubmit={signup}
-          error={error}
-          isButtonDeactivated={isButtonDeactivated}
-        />
-      )}
+      {signin === 'login' && <LoginSignupForm status={'login'} />}
+      {signin === 'signup' && <LoginSignupForm status={'signup'} />}
       {signin === 'forgot-password' && <ForgotPasswordForm />}
     </Container>
   );

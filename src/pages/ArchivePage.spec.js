@@ -1,6 +1,16 @@
 import { render, screen } from '@testing-library/react';
+import { AuthProvider } from '../contexts/AuthContext.js';
 import { MemoryRouter } from 'react-router-dom';
 import ArchivePage from './ArchivePage';
+
+jest.mock('firebase/compat/auth');
+jest.mock('firebase/compat/app', () => ({
+  initializeApp: jest.fn().mockReturnValue({
+    auth: jest.fn().mockReturnValue({
+      onAuthStateChanged: jest.fn().mockImplementation(callback => callback()),
+    }),
+  }),
+}));
 
 describe('ArchivePage', () => {
   it('renders a page with the heading "archive" and two archived items', () => {
@@ -21,10 +31,9 @@ describe('ArchivePage', () => {
 
     render(
       <MemoryRouter>
-        <ArchivePage
-          archivedPosts={archivedPosts}
-          currentUserData={{ _id: 'john@doe.com' }}
-        />
+        <AuthProvider>
+          <ArchivePage archivedPosts={archivedPosts} />
+        </AuthProvider>
       </MemoryRouter>
     );
 

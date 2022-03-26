@@ -4,7 +4,6 @@ import Content from '../components/Content.js';
 import Request from '../components/Request.js';
 
 export default function BookmarksPage({
-  currentUserData,
   bookmarkedPosts,
   onToggleBookmark,
   onToggleCheckmark,
@@ -20,7 +19,6 @@ export default function BookmarksPage({
             bookmarkedPosts.map(post => (
               <Request
                 key={post._id}
-                currentUserData={currentUserData}
                 createdDate={post.createdAt}
                 startDate={post.startDate}
                 endDate={post.endDate}

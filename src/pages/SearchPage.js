@@ -13,7 +13,6 @@ import LogoutIcon from '../images/LogoutIcon.svg';
 export default function SearchPage({
   sortedPosts,
   archivedPosts,
-  currentUserData,
   onGetPosts,
   isLoading,
   setIsLoading,
@@ -23,7 +22,7 @@ export default function SearchPage({
   onEditPost,
   onDeletePost,
 }) {
-  const { logout, logoutError } = useAuth();
+  const { logout, error } = useAuth();
   const navigate = useNavigate();
 
   const notArchivedPosts = sortedPosts?.filter(
@@ -47,7 +46,7 @@ export default function SearchPage({
       </Header>
       <Content>
         {isLoading && <LoadingSpinner />}
-        {logoutError && <p>{logoutError}</p>}
+        {error && <p>{error}</p>}
         {hasError && (
           <p>Unfortunately, something went wrong. Please refresh this page.</p>
         )}
@@ -58,7 +57,6 @@ export default function SearchPage({
             notArchivedPosts.map(post => (
               <Request
                 key={post._id}
-                currentUserData={currentUserData}
                 createdDate={post.createdAt}
                 startDate={post.startDate}
                 endDate={post.endDate}

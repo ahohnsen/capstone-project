@@ -13,7 +13,7 @@ import ArchivePage from './pages/ArchivePage.js';
 import StartScreen from './pages/StartScreen.js';
 
 export default function App() {
-  const { currentUser, currentUserData } = useAuth();
+  const { currentUserData } = useAuth();
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -39,7 +39,6 @@ export default function App() {
           element={
             <PrivateRoute>
               <SearchPage
-                currentUserData={currentUserData}
                 sortedPosts={sortedPosts}
                 archivedPosts={archivedPosts}
                 onGetPosts={getPosts}
@@ -59,7 +58,6 @@ export default function App() {
           element={
             <PrivateRoute>
               <BookmarksPage
-                currentUserData={currentUserData}
                 bookmarkedPosts={bookmarkedPosts}
                 onToggleBookmark={toggleBookmark}
                 onToggleCheckmark={toggleCheckmark}
@@ -96,7 +94,6 @@ export default function App() {
                 <Navigate replace to="/" />
               ) : (
                 <ArchivePage
-                  currentUserData={currentUserData}
                   archivedPosts={archivedPosts}
                   onToggleCheckmark={toggleCheckmark}
                   onEditPost={handleEditRedirect}
@@ -107,7 +104,7 @@ export default function App() {
           }
         />
       </Routes>
-      {currentUser && <Navigation />}
+      {currentUserData && <Navigation />}
     </AppGrid>
   );
 
