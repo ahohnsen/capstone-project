@@ -49,9 +49,11 @@ export default function Request({
         </TextWrapper>
         {author._id === currentUserData?._id ? (
           <>
-            <IconButton onClick={onEditPost}>
-              <img src={EditIcon} alt="edit" />
-            </IconButton>
+            {!isArchived && (
+              <IconButton onClick={onEditPost}>
+                <img src={EditIcon} alt="edit" />
+              </IconButton>
+            )}
             <IconButton onClick={() => setShowDialog(true)}>
               <img src={DeleteIcon} alt="delete" />
             </IconButton>

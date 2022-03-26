@@ -12,7 +12,7 @@ import DivingLicenseIcon from '../images/DivingLicense.svg';
 import EmailIcon from '../images/Email.svg';
 import FacebookIcon from '../images/Facebook.svg';
 
-export default function ProfilePage() {
+export default function ProfilePage({ sortedPosts }) {
   const { logout, error, currentUserData, users } = useAuth();
   const navigate = useNavigate();
   const { uid } = useParams();
@@ -21,6 +21,10 @@ export default function ProfilePage() {
     uid !== 'own-profile'
       ? users.find(user => user.userId === uid)
       : currentUserData;
+
+  const userPosts = sortedPosts?.filter(
+    post => post.author.userId === userData?.userId
+  );
 
   return (
     <>
@@ -51,13 +55,18 @@ export default function ProfilePage() {
         <ExperienceContainer>
           <EmailContact
             href={`mailto:${userData._id}`}
-            onlyContact={!userData.facebook ? 'true' : 'false'}
+            onlyContact={!userData.facebook ? true : false}
           >
-            <img src={EmailIcon} alt="send email" />
+            <img src={EmailIcon} alt="send email" width="30" height="30" />
           </EmailContact>
           {userData.facebook && (
-            <FacebookContact href={'https://www.google.de'}>
-              <img src={FacebookIcon} alt="go to Facebook profile" />
+            <FacebookContact href={userData.facebook} target="_blank">
+              <img
+                src={FacebookIcon}
+                alt="go to Facebook profile"
+                width="30"
+                height="30"
+              />
             </FacebookContact>
           )}
           <SectionHeading>DIVING EXPERIENCE</SectionHeading>
@@ -78,22 +87,19 @@ export default function ProfilePage() {
               : '- no profile information added -'}
           </Text>
         </Container>
-        <Container>
-          <SectionHeading>
-            POSTS
-            <ArrowButton
-              onClick={() =>
-                navigate(
-                  uid !== 'own-profile'
-                    ? `/user-requests/${uid}`
-                    : 'user-requests/own-requests'
-                )
-              }
-            >
-              <img src={ArrowForward} alt="see all your posts" />
-            </ArrowButton>
-          </SectionHeading>
-        </Container>
+
+        {userPosts.length > 0 && (
+          <Container>
+            <SectionHeading>
+              POSTS
+              <ArrowButton
+                onClick={() => navigate(`/user-requests/${userData.userId}`)}
+              >
+                <img src={ArrowForward} alt="see all posts" />
+              </ArrowButton>
+            </SectionHeading>
+          </Container>
+        )}
       </Content>
     </>
   );
@@ -143,13 +149,13 @@ const Icon = styled.img`
 
 const EmailContact = styled.a`
   position: absolute;
-  top: -25px;
-  right: ${props => (props.onlyContact ? '10px' : '35px')};
+  top: -35px;
+  right: ${props => (props.onlyContact ? '10px' : '45px')};
 `;
 
 const FacebookContact = styled.a`
   position: absolute;
-  top: -25px;
+  top: -35px;
   right: 10px;
 `;
 
