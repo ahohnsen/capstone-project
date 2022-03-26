@@ -46,10 +46,14 @@ export default function Navigation() {
             <Caption>Request</Caption>
           </figure>
         </StyledLink>
-        <StyledLink to="/profile">
+        <StyledLink to="/profile/own-profile">
           <figure>
             <img
-              src={pathname === 'profile' ? ProfileActive : ProfileInactive}
+              src={
+                pathname === '/profile/own-profile'
+                  ? ProfileActive
+                  : ProfileInactive
+              }
               alt="Profile"
             />
             <Caption>Profile</Caption>
