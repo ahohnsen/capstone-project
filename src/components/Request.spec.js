@@ -3,8 +3,8 @@ import { userEvent } from '@storybook/testing-library';
 import Request from './Request';
 
 describe('Request', () => {
-  const author = { fullname: 'John Doe', email: 'john@doe.com', _id: '1' };
-  const currentUserData = { _id: '1' };
+  const author = { fullname: 'John Doe', _id: 'john@doe.com' };
+  const currentUserData = { _id: 'john@doe.com' };
 
   it('renders a post with the name of the author, date the post was created, a destination, description and travel start and end dates', () => {
     render(
@@ -53,7 +53,12 @@ describe('Request', () => {
   });
 
   it('renders a bookmark button and an email icon if the current user is not the author of the post', () => {
-    render(<Request currentUserData={{ _id: '2' }} author={{ ...author }} />);
+    render(
+      <Request
+        currentUserData={{ _id: 'jane@doe.com' }}
+        author={{ ...author }}
+      />
+    );
 
     const buttonBookmark = screen.getByRole('button', {
       name: 'not bookmarked',
@@ -86,7 +91,7 @@ describe('Request', () => {
       <Request
         onToggleBookmark={toggleBookmark}
         author={{ ...author }}
-        currentUserData={{ _id: '2' }}
+        currentUserData={{ _id: 'jane@doe.com' }}
       />
     );
 

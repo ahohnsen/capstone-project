@@ -9,13 +9,13 @@ describe('ArchivePage', () => {
         _id: '1',
         destination: 'Maldives',
         isArchived: true,
-        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
+        author: { fullname: 'John Doe', _id: 'john@doe.com' },
       },
       {
         _id: '2',
         destination: 'Galapagos Island',
         isArchived: true,
-        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
+        author: { fullname: 'John Doe', _id: 'john@doe.com' },
       },
     ];
 
@@ -23,7 +23,7 @@ describe('ArchivePage', () => {
       <MemoryRouter>
         <ArchivePage
           archivedPosts={archivedPosts}
-          currentUserData={{ _id: '1' }}
+          currentUserData={{ _id: 'john@doe.com' }}
         />
       </MemoryRouter>
     );

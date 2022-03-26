@@ -13,9 +13,8 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [currentUserData, setCurrentUserData] = useState(null);
-  const [buttonIsDeactivated, setButtonIsDeactivated] = useState(false);
+  const [isButtonDeactivated, setIsButtonDeactivated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [logoutError, setLogoutError] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -43,7 +42,7 @@ export function AuthProvider({ children }) {
       .then(response => response.data)
       .then(users => {
         setUsers(users);
-        const foundUser = users.find(user => user.email === currentUser.email);
+        const foundUser = users.find(user => user._id === currentUser.email);
         setCurrentUserData(foundUser);
       });
   }, [currentUser]);
@@ -55,11 +54,10 @@ export function AuthProvider({ children }) {
 
     try {
       setError('');
-      setButtonIsDeactivated(true);
+      setIsButtonDeactivated(true);
       await saveNewUser({
         _id: data.email,
         fullname: data.fullname,
-        email: data.email,
       });
       await auth.createUserWithEmailAndPassword(data.email, data.password);
       navigate('/');
@@ -67,7 +65,7 @@ export function AuthProvider({ children }) {
       setError('Failed to create an account');
       axios.delete('/api/users', { data: { _id: data.email } });
     }
-    setButtonIsDeactivated(false);
+    setIsButtonDeactivated(false);
   }
 
   function saveNewUser(userData) {
@@ -81,23 +79,23 @@ export function AuthProvider({ children }) {
   async function login(data) {
     try {
       setError('');
-      setButtonIsDeactivated(true);
+      setIsButtonDeactivated(true);
       await auth.signInWithEmailAndPassword(data.email, data.password);
       navigate('/');
     } catch {
       setError('Failed to log in');
     }
-    setButtonIsDeactivated(false);
+    setIsButtonDeactivated(false);
   }
 
   async function logout() {
-    setLogoutError('');
+    setError('');
 
     try {
       await auth.signOut();
       navigate('/login');
     } catch {
-      setLogoutError('Failed to log out');
+      setError('Failed to log out');
     }
   }
 
@@ -113,9 +111,8 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     resetPassword,
-    buttonIsDeactivated,
+    isButtonDeactivated,
     error,
-    logoutError,
   };
 
   return (

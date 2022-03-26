@@ -49,16 +49,16 @@ export default function Request({
         </TextWrapper>
         {author._id === currentUserData?._id ? (
           <>
-            <EditButton onClick={onEditPost}>
+            <IconButton onClick={onEditPost}>
               <img src={EditIcon} alt="edit" />
-            </EditButton>
-            <DeleteButton onClick={() => setShowDialog(true)}>
+            </IconButton>
+            <IconButton onClick={() => setShowDialog(true)}>
               <img src={DeleteIcon} alt="delete" />
-            </DeleteButton>
+            </IconButton>
           </>
         ) : (
           <>
-            <Email href={`mailto:${author.email}`}>
+            <Email href={`mailto:${author._id}`}>
               <img src={EmailIcon} alt="send email" />
             </Email>
             <IconButton onClick={onToggleBookmark}>
@@ -157,16 +157,6 @@ const CheckButton = styled(IconButton)`
   position: absolute;
   right: 20px;
   bottom: 5px;
-`;
-
-const EditButton = styled(IconButton)`
-  /* right: 40px;
-  bottom: 0; */
-`;
-
-const DeleteButton = styled(IconButton)`
-  /* right: 10px;
-  bottom: 0; */
 `;
 
 const Email = styled.a`

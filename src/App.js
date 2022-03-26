@@ -13,7 +13,7 @@ import ArchivePage from './pages/ArchivePage.js';
 import StartScreen from './pages/StartScreen.js';
 
 export default function App() {
-  const { currentUser, currentUserData, users } = useAuth();
+  const { currentUser, currentUserData } = useAuth();
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -29,10 +29,6 @@ export default function App() {
   const archivedPosts = sortedPosts?.filter(
     post => post.isArchived === true && post.author._id === currentUserData?._id
   );
-
-  console.log('currentUser from Firebase', currentUser);
-  console.log('users', users);
-  console.log('currentUserData', currentUserData);
 
   return (
     <AppGrid>
@@ -175,7 +171,6 @@ export default function App() {
 
   function handleEditRedirect(post) {
     setPostToEdit({ ...post });
-    console.log(postToEdit);
     navigate('/edit-request');
   }
 

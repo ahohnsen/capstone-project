@@ -72,6 +72,8 @@ describe('RequestForm', () => {
             destination: 'Maldives',
             description:
               'It was so beautiful, I wanna go again as soon as possible!',
+            startDate: '2022-03-23T00:00:00.000Z',
+            endDate: '2022-03-29T00:00:00.000Z',
           }}
         />
       </MemoryRouter>

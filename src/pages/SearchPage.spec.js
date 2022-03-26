@@ -18,17 +18,17 @@ describe('SearchPage', () => {
       _id: '1',
       destination: 'Maldives',
       isArchived: false,
-      author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
+      author: { _id: 'john@doe.com', fullname: 'John Doe' },
     },
     {
       _id: '2',
       destination: 'Lanzarote',
       isArchived: false,
-      author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
+      author: { _id: 'john@doe.com', fullname: 'John Doe' },
     },
   ];
 
-  const onGetPosts = jest.fn();
+  const onGetPosts = jest.fn().mockImplementation(() => Promise.resolve());
   const setIsLoading = jest.fn();
 
   it('renders search page with two posts', () => {
@@ -100,7 +100,7 @@ describe('SearchPage', () => {
         _id: '1',
         destination: 'Maldives',
         isArchived: false,
-        author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
+        author: { _id: 'john@doe.com', fullname: 'John Doe' },
       },
     ];
     const archivedPosts = [
@@ -108,7 +108,7 @@ describe('SearchPage', () => {
         _id: '2',
         destination: 'Lanzarote',
         isArchived: true,
-        author: { _id: '1', fullname: 'John Doe', email: 'john@doe.com' },
+        author: { _id: 'john@doe.com', fullname: 'John Doe' },
       },
     ];
     render(

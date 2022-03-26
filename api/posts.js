@@ -7,7 +7,7 @@ export default async function handler(request, response) {
 
   if (method === 'GET') {
     try {
-      const posts = await Post.find().populate('author', 'fullname email');
+      const posts = await Post.find().populate('author', 'fullname');
       response.json(posts);
     } catch (error) {
       response.status(500).json({ message: error.message });

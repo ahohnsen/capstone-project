@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Button from './Button.js';
 
-export default function LoginSignupForm({ status, onSubmit, error, loading }) {
+export default function LoginSignupForm({
+  status,
+  onSubmit,
+  error,
+  isButtonDeactivated,
+}) {
   const { register, handleSubmit } = useForm({});
 
   return (
@@ -36,7 +41,7 @@ export default function LoginSignupForm({ status, onSubmit, error, loading }) {
             />
           </Label>
         )}
-        <SubmitButton disabled={loading}>
+        <SubmitButton disabled={isButtonDeactivated}>
           {status === 'signup' ? 'SIGN UP' : 'LOGIN'}
         </SubmitButton>
         {status === 'signup' ? (

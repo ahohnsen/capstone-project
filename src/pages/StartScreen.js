@@ -9,7 +9,7 @@ import ScubaMateLogo from '../images/ScubaMateLogo.svg';
 
 export default function StartScreen() {
   const { signin } = useParams();
-  const { login, signup, error, buttonIsDeactivated } = useAuth();
+  const { login, signup, error, isButtonDeactivated } = useAuth();
 
   return (
     <Container>
@@ -19,7 +19,7 @@ export default function StartScreen() {
           status={'login'}
           onSubmit={login}
           error={error}
-          loading={buttonIsDeactivated}
+          isButtonDeactivated={isButtonDeactivated}
         />
       )}
       {signin === 'signup' && (
@@ -27,7 +27,7 @@ export default function StartScreen() {
           status={'signup'}
           onSubmit={signup}
           error={error}
-          loading={buttonIsDeactivated}
+          isButtonDeactivated={isButtonDeactivated}
         />
       )}
       {signin === 'forgot-password' && <ForgotPasswordForm />}

@@ -5,7 +5,6 @@ const schema = new Schema(
   {
     _id: { type: String, required: true },
     fullname: { type: String, required: true },
-    email: { type: String, required: true },
   },
   {
     versionKey: false,

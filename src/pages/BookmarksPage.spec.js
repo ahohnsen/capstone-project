@@ -5,7 +5,7 @@ describe('BookmarksPage', () => {
   it('renders bookmark page with two bookmarked items', () => {
     const currentUserData = [
       {
-        _id: '2',
+        _id: 'jane@doe.com',
       },
     ];
     const bookmarkedPosts = [
@@ -13,13 +13,13 @@ describe('BookmarksPage', () => {
         _id: '1',
         destination: 'Maldives',
         isBookmarked: true,
-        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
+        author: { fullname: 'John Doe', _id: 'john@doe.com' },
       },
       {
         _id: '2',
         destination: 'Galapagos Island',
         isBookmarked: true,
-        author: { fullname: 'John Doe', email: 'john@doe.com', _id: '1' },
+        author: { fullname: 'John Doe', _id: 'john@doe.com' },
       },
     ];
     render(
