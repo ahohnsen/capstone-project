@@ -11,7 +11,7 @@ import LocationIcon from '../images/Location.svg';
 import CheckActiveIcon from '../images/CheckActive.svg';
 import CheckInactiveIcon from '../images/CheckInactive.svg';
 import BookmarkIconInactive from '../images/BookmarkInactive.svg';
-import BookmarkIconActive from '../images/BookmarkActive.svg';
+import Bookmarked from '../images/Bookmarked.svg';
 
 export default function Request({
   createdDate,
@@ -63,7 +63,7 @@ export default function Request({
             </Email>
             <IconButton onClick={onToggleBookmark}>
               {isBookmarked ? (
-                <img src={BookmarkIconActive} alt="is bookmarked" />
+                <img src={Bookmarked} alt="is bookmarked" />
               ) : (
                 <img src={BookmarkIconInactive} alt="not bookmarked" />
               )}
