@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
@@ -11,20 +12,28 @@ import DivesIcon from '../images/Dives.svg';
 import DivingLicenseIcon from '../images/DivingLicense.svg';
 import EmailIcon from '../images/Email.svg';
 import FacebookIcon from '../images/Facebook.svg';
+import { useEffect } from 'react';
 
 export default function ProfilePage({ sortedPosts }) {
   const { logout, error, currentUserData, users } = useAuth();
+  const [userProfileData, setUserProfileData] = useState();
+  const [userPosts, setUserPosts] = useState();
   const navigate = useNavigate();
   const { uid } = useParams();
 
-  const userData =
-    uid !== 'own-profile'
-      ? users.find(user => user.userId === uid)
-      : currentUserData;
-
-  const userPosts = sortedPosts?.filter(
-    post => post.author.userId === userData?.userId
-  );
+  useEffect(() => {
+    if (uid !== 'own-profile') {
+      setUserProfileData(users.find(user => user.userId === uid));
+    } else {
+      setUserProfileData(currentUserData);
+    }
+    setUserPosts(
+      sortedPosts?.filter(
+        post => post.author.userId === userProfileData?.userId
+      )
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uid, currentUserData, users, sortedPosts]);
 
   return (
     <>
@@ -46,21 +55,23 @@ export default function ProfilePage({ sortedPosts }) {
         )}
       </Header>
       <Content>
-        <Username>{userData?.fullname}</Username>
+        <Username>{userProfileData?.fullname}</Username>
         <HomeLocation>
-          {userData.location ? userData.location : '- no home location added -'}
+          {userProfileData?.location
+            ? userProfileData?.location
+            : '- no home location added -'}
         </HomeLocation>
         {error && <Message>{error}</Message>}
 
         <ExperienceContainer>
           <EmailContact
-            href={`mailto:${userData._id}`}
-            onlyContact={!userData.facebook ? true : false}
+            href={`mailto:${userProfileData?._id}`}
+            onlyContact={!userProfileData?.facebook ? true : false}
           >
             <img src={EmailIcon} alt="send email" width="30" height="30" />
           </EmailContact>
-          {userData.facebook && (
-            <FacebookContact href={userData.facebook} target="_blank">
+          {userProfileData?.facebook && (
+            <FacebookContact href={userProfileData?.facebook} target="_blank">
               <img
                 src={FacebookIcon}
                 alt="go to Facebook profile"
@@ -72,28 +83,32 @@ export default function ProfilePage({ sortedPosts }) {
           <SectionHeading>DIVING EXPERIENCE</SectionHeading>
           <Wrapper>
             <img src={DivingLicenseIcon} alt="Diving License" />
-            {userData.license
-              ? userData.license
+            {userProfileData?.license
+              ? userProfileData?.license
               : '- no diving license choosen -'}
             <Icon src={DivesIcon} alt="Number of dives" />
-            {userData.dives ? userData.dives : '- no number of dives added -'}
+            {userProfileData?.dives
+              ? userProfileData?.dives
+              : '- no number of dives added -'}
           </Wrapper>
         </ExperienceContainer>
         <Container>
           <SectionHeading>ABOUT ME</SectionHeading>
           <Text>
-            {userData.about
-              ? userData.about
+            {userProfileData?.about
+              ? userProfileData?.about
               : '- no profile information added -'}
           </Text>
         </Container>
 
-        {userPosts.length > 0 && (
+        {userPosts?.length > 0 && (
           <Container>
             <SectionHeading>
               POSTS
               <ArrowButton
-                onClick={() => navigate(`/user-requests/${userData.userId}`)}
+                onClick={() =>
+                  navigate(`/user-requests/${userProfileData.userId}`)
+                }
               >
                 <img src={ArrowForward} alt="see all posts" />
               </ArrowButton>

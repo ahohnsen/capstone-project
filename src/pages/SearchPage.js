@@ -7,7 +7,6 @@ import Request from '../components/Request.js';
 
 export default function SearchPage({
   sortedPosts,
-  archivedPosts,
   onGetPosts,
   isLoading,
   setIsLoading,

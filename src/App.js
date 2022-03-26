@@ -27,10 +27,6 @@ export default function App() {
     post => post.isBookmarked === true
   );
 
-  const archivedPosts = sortedPosts?.filter(
-    post => post.isArchived === true && post.author._id === currentUserData?._id
-  );
-
   return (
     <AppGrid>
       <Routes>
@@ -41,7 +37,6 @@ export default function App() {
             <PrivateRoute>
               <SearchPage
                 sortedPosts={sortedPosts}
-                archivedPosts={archivedPosts}
                 onGetPosts={getPosts}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
