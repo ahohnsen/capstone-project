@@ -33,7 +33,7 @@ export default function ProfilePage({ sortedPosts }) {
       )
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uid, currentUserData, users, sortedPosts]);
+  }, [uid, userProfileData, currentUserData]);
 
   return (
     <>
