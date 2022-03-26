@@ -1,14 +1,13 @@
-import dbConnect from '../lib/dbConnect.mjs';
-import Post from '../models/Post.mjs';
-
-await dbConnect();
+import dbConnect from '../lib/dbConnect.js';
+import Post from '../models/Post.js';
 
 export default async function handler(request, response) {
+  await dbConnect();
   const { method } = request;
 
   if (method === 'GET') {
     try {
-      const posts = await Post.find();
+      const posts = await Post.find().populate('author', 'fullname');
       response.json(posts);
     } catch (error) {
       response.status(500).json({ message: error.message });
@@ -19,7 +18,7 @@ export default async function handler(request, response) {
     const post = new Post(request.body);
     try {
       const newPost = await post.save();
-      response.status(201).json(newPost);
+      response.status(200).json(newPost);
     } catch (error) {
       response.status(400).json({ message: error.message });
     }

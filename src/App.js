@@ -5,15 +5,15 @@ import axios from 'axios';
 import { useAuth } from './contexts/AuthContext.js';
 import PrivateRoute from './PrivateRoute.js';
 import Navigation from './components/Navigation.js';
-import WishlistPage from './pages/WishlistPage.js';
+import SearchPage from './pages/SearchPage.js';
 import BookmarksPage from './pages/BookmarksPage.js';
-import AddWishPage from './pages/AddWishPage.js';
-import EditWishPage from './pages/EditWishPage.js';
+import AddRequestPage from './pages/AddRequestPage.js';
+import EditRequestPage from './pages/EditRequestPage.js';
 import ArchivePage from './pages/ArchivePage.js';
 import StartScreen from './pages/StartScreen.js';
 
 export default function App() {
-  const { currentUser } = useAuth();
+  const { currentUserData } = useAuth();
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -26,7 +26,9 @@ export default function App() {
     post => post.isBookmarked === true
   );
 
-  const archivedPosts = sortedPosts?.filter(post => post.isArchived === true);
+  const archivedPosts = sortedPosts?.filter(
+    post => post.isArchived === true && post.author._id === currentUserData?._id
+  );
 
   return (
     <AppGrid>
@@ -36,8 +38,9 @@ export default function App() {
           path="/"
           element={
             <PrivateRoute>
-              <WishlistPage
+              <SearchPage
                 sortedPosts={sortedPosts}
+                archivedPosts={archivedPosts}
                 onGetPosts={getPosts}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
@@ -65,18 +68,18 @@ export default function App() {
           }
         />
         <Route
-          path="/add-wish"
+          path="/add-request"
           element={
             <PrivateRoute>
-              <AddWishPage onAddPost={handleAddPost} />
+              <AddRequestPage onAddPost={handleAddPost} />
             </PrivateRoute>
           }
         />
         <Route
-          path="/edit-wish"
+          path="/edit-request"
           element={
             <PrivateRoute>
-              <EditWishPage
+              <EditRequestPage
                 onEditPost={handleEditPost}
                 postToEdit={postToEdit}
               />
@@ -101,10 +104,9 @@ export default function App() {
           }
         />
       </Routes>
-      {currentUser && <Navigation />}
+      {currentUserData && <Navigation />}
     </AppGrid>
   );
-  // }
 
   async function getPosts() {
     setHasError(false);
@@ -117,10 +119,18 @@ export default function App() {
     }
   }
 
-  async function handleAddPost({ destination, notes }) {
+  async function handleAddPost({
+    destination,
+    description,
+    startDate,
+    endDate,
+  }) {
     const newPost = {
       destination: destination,
-      notes: notes,
+      description: description,
+      startDate: startDate,
+      endDate: endDate,
+      author: currentUserData._id,
     };
     try {
       await axios.post('/api/posts', newPost);
@@ -131,12 +141,19 @@ export default function App() {
     navigate('/');
   }
 
-  async function handleEditPost({ destination, notes }) {
+  async function handleEditPost({
+    destination,
+    description,
+    startDate,
+    endDate,
+  }) {
     const newPost = {
       _id: postToEdit._id,
       post: {
         destination,
-        notes,
+        description,
+        startDate,
+        endDate,
       },
     };
     try {
@@ -151,7 +168,7 @@ export default function App() {
 
   function handleEditRedirect(post) {
     setPostToEdit({ ...post });
-    navigate('/edit-wish');
+    navigate('/edit-request');
   }
 
   async function handleDeletePost(_id) {
@@ -164,15 +181,15 @@ export default function App() {
   }
 
   async function toggleBookmark(_id) {
-    const bookmarkStatus = posts.find(post => post._id === _id);
-    const toggleBookmarkPost = {
+    const postToToggle = posts.find(post => post._id === _id);
+    const updatedPost = {
       _id: _id,
       post: {
-        isBookmarked: !bookmarkStatus.isBookmarked,
+        isBookmarked: !postToToggle.isBookmarked,
       },
     };
     try {
-      await axios.put('/api/posts/', toggleBookmarkPost);
+      await axios.put('/api/posts/', updatedPost);
       getPosts();
     } catch (error) {
       console.log('Error:', error.message);

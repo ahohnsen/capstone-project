@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
-import DiveWishForm from '../components/DiveWishForm.js';
+import RequestForm from '../components/RequestForm.js';
 import IconButton from '../components/IconButton.js';
 import AbortIcon from '../images/Abort.svg';
 
-export default function EditWishPage({ onEditPost, postToEdit }) {
+export default function EditRequestPage({ onEditPost, postToEdit }) {
   const navigate = useNavigate();
 
   return (
@@ -15,12 +15,12 @@ export default function EditWishPage({ onEditPost, postToEdit }) {
         <AbortButton onClick={() => navigate(-1)}>
           <img src={AbortIcon} alt="abort editing" />
         </AbortButton>
-        Edit dive destination
+        Edit your post
       </Header>
       <Content>
-        <DiveWishForm
-          formName={'Edit your dive wish'}
-          buttonName={'Save changes'}
+        <RequestForm
+          formName={'Edit your buddy request'}
+          buttonName={'SAVE CHANGES'}
           handlePost={onEditPost}
           preloadedValues={postToEdit}
         />
@@ -30,6 +30,7 @@ export default function EditWishPage({ onEditPost, postToEdit }) {
 }
 
 const AbortButton = styled(IconButton)`
+  position: absolute;
   padding: 5px 10px;
   top: 3px;
   left: 10px;

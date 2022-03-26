@@ -1,15 +1,34 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext.js';
 import { useForm } from 'react-hook-form';
 import Button from './Button.js';
 
-export default function LoginSignupForm({ status, onSubmit, error, loading }) {
-  const { register, handleSubmit } = useForm({});
+export default function LoginSignupForm({ status }) {
+  const { login, signup, error, isButtonDeactivated } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({});
 
   return (
     <>
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      <Form onSubmit={handleSubmit(data => onSubmit(data))}>
+      {status === 'signup' && errors.password && (
+        <ErrorMessage>{errors.password.message}</ErrorMessage>
+      )}
+      <Form
+        onSubmit={handleSubmit(data => {
+          status === 'signup' ? signup(data) : login(data);
+        })}
+      >
+        {status === 'signup' && (
+          <Label>
+            FULL NAME
+            <Input type="text" {...register('fullname', { required: true })} />
+          </Label>
+        )}
         <Label>
           E-MAIL
           <Input type="email" {...register('email', { required: true })} />
@@ -18,7 +37,13 @@ export default function LoginSignupForm({ status, onSubmit, error, loading }) {
           PASSWORD
           <Input
             type="password"
-            {...register('password', { required: true })}
+            {...register('password', {
+              required: true,
+              minLength: {
+                value: 6,
+                message: 'The password needs to be at least 6 characters long.',
+              },
+            })}
           />
         </Label>
         {status === 'signup' && (
@@ -30,7 +55,7 @@ export default function LoginSignupForm({ status, onSubmit, error, loading }) {
             />
           </Label>
         )}
-        <SubmitButton disabled={loading}>
+        <SubmitButton disabled={isButtonDeactivated}>
           {status === 'signup' ? 'SIGN UP' : 'LOGIN'}
         </SubmitButton>
         {status === 'signup' ? (
@@ -90,11 +115,11 @@ const StyledText = styled.span`
 `;
 
 const ErrorMessage = styled.div`
-  padding: 8px;
+  padding: 4px;
   width: 80%;
   background-color: rgba(255, 255, 255, 70%);
   color: red;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   text-align: center;
   border-radius: 4px;

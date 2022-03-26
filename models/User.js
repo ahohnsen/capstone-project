@@ -3,7 +3,8 @@ const { Schema, model } = mongoose;
 
 const schema = new Schema(
   {
-    email: { type: String, required: true },
+    _id: { type: String, required: true },
+    fullname: { type: String, required: true },
   },
   {
     versionKey: false,

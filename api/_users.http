@@ -7,16 +7,24 @@ GET {{baseUrl}}/users
 POST {{baseUrl}}/users
 Content-Type: application/json
 
-{
-  "email": "hohnsenandrea@gmail.com"
+{ "_id": "test50@maildee",
+  "fullname": "ID Test",
 }
 
 ###
 PUT {{baseUrl}}/users
 Content-Type: application/json
 
-{ "_id": "62388bacfb333fc46a975638",
+{ "_id": "test50@maildee",
   "user": {
-  "email": "test@test.com"
+  "fullname": "Test User"
   }
 }
+
+###
+DELETE {{baseUrl}}/users
+Content-Type: application/json
+
+{ "_id": "def@abc.de"
+}
+

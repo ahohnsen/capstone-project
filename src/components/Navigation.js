@@ -5,9 +5,9 @@ export default function Navigation() {
   return (
     <StyledFooter>
       <Nav>
-        <StyledLink to="/">WISHLIST</StyledLink>
+        <StyledLink to="/">SEARCH</StyledLink>
         <StyledLink to="/favorites">FAVORITES</StyledLink>
-        <StyledLink to="/add-wish">ADD WISH</StyledLink>
+        <StyledLink to="/add-request">REQUEST</StyledLink>
       </Nav>
     </StyledFooter>
   );
