@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 :root {
-  --bg-color-main: #FAFCFF;
+  --bg-color-main: #ECF6F6;
   --bg-color-section: #FFFFFF;
   --bg-color-action: #05A6A6;
   --bg-color-header: #071359;

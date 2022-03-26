@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './contexts/AuthContext.js';
 import PrivateRoute from './PrivateRoute.js';
@@ -9,8 +9,9 @@ import SearchPage from './pages/SearchPage.js';
 import BookmarksPage from './pages/BookmarksPage.js';
 import AddRequestPage from './pages/AddRequestPage.js';
 import EditRequestPage from './pages/EditRequestPage.js';
-import ArchivePage from './pages/ArchivePage.js';
+import UserRequestsPage from './pages/UserRequestsPage.js';
 import StartScreen from './pages/StartScreen.js';
+import ProfilePage from './pages/ProfilePage.js';
 
 export default function App() {
   const { currentUserData } = useAuth();
@@ -87,19 +88,23 @@ export default function App() {
           }
         />
         <Route
-          path="/archive"
+          path="/profile/:uid"
           element={
             <PrivateRoute>
-              {archivedPosts?.length === 0 ? (
-                <Navigate replace to="/" />
-              ) : (
-                <ArchivePage
-                  archivedPosts={archivedPosts}
-                  onToggleCheckmark={toggleCheckmark}
-                  onEditPost={handleEditRedirect}
-                  onDeletePost={handleDeletePost}
-                />
-              )}
+              <ProfilePage sortedPosts={sortedPosts} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/user-requests/:uid"
+          element={
+            <PrivateRoute>
+              <UserRequestsPage
+                sortedPosts={sortedPosts}
+                onToggleCheckmark={toggleCheckmark}
+                onEditPost={handleEditRedirect}
+                onDeletePost={handleDeletePost}
+              />
             </PrivateRoute>
           }
         />
