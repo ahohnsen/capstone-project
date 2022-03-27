@@ -69,6 +69,8 @@ export default function EditProfilePage({ currentUserData, onUpdateProfile }) {
               <option value="" disabled hidden>
                 Select your license
               </option>
+              <option value="Diver to be">Diver to be</option>
+              <option value="Snorkeler">Snorkeler</option>
               <option value="Scuba Diver">Scuba Diver</option>
               <option value="Open Water Diver">Open Water Diver</option>
               <option value="Advanced Open Water Diver">
@@ -98,12 +100,12 @@ export default function EditProfilePage({ currentUserData, onUpdateProfile }) {
             <Input
               {...register('facebook', {
                 pattern: {
-                  value:
-                    /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
+                  value: /^https?:\/\/(.*)/,
                   message: 'Please enter a valid Facebook URL',
                 },
               })}
               id="facebook"
+              placeholder="https://..."
               onKeyUp={() => {
                 trigger('facebook');
               }}
