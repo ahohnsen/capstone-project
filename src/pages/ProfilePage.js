@@ -12,6 +12,7 @@ import DivesIcon from '../images/Dives.svg';
 import DivingLicenseIcon from '../images/DivingLicense.svg';
 import EmailIcon from '../images/Email.svg';
 import FacebookIcon from '../images/Facebook.svg';
+import EditIcon from '../images/EditIcon.svg';
 import { useEffect } from 'react';
 
 export default function ProfilePage({ sortedPosts }) {
@@ -54,7 +55,7 @@ export default function ProfilePage({ sortedPosts }) {
           </>
         )}
       </Header>
-      <Content>
+      <StyledContent>
         <Username>{userProfileData?.fullname}</Username>
         <HomeLocation>
           {userProfileData?.location
@@ -62,7 +63,11 @@ export default function ProfilePage({ sortedPosts }) {
             : '- no home location added -'}
         </HomeLocation>
         {error && <Message>{error}</Message>}
-
+        {uid === 'own-profile' && (
+          <EditButton onClick={() => navigate('/edit-profile')}>
+            <img src={EditIcon} alt="edit profile" />
+          </EditButton>
+        )}
         <ExperienceContainer>
           <EmailContact
             href={`mailto:${userProfileData?._id}`}
@@ -115,10 +120,14 @@ export default function ProfilePage({ sortedPosts }) {
             </SectionHeading>
           </Container>
         )}
-      </Content>
+      </StyledContent>
     </>
   );
 }
+
+const StyledContent = styled(Content)`
+  position: relative;
+`;
 
 const Container = styled.section`
   position: relative;
@@ -160,6 +169,12 @@ const Wrapper = styled.div`
 
 const Icon = styled.img`
   padding: 0 4px;
+`;
+
+const EditButton = styled(IconButton)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
 `;
 
 const EmailContact = styled.a`
