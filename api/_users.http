@@ -16,9 +16,11 @@ Content-Type: application/json
 PUT {{baseUrl}}/users
 Content-Type: application/json
 
-{ "_id": "test50@maildee",
+{ "_id": "test@2000.com",
   "user": {
-  "fullname": "Test User"
+  "fullname": "Test Name",
+  "userId": "9sglkk1IuikfICPVPQEnH",
+  "location": "Cologne"
   }
 }
 
