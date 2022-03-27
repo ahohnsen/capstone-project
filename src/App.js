@@ -12,9 +12,10 @@ import EditRequestPage from './pages/EditRequestPage.js';
 import UserRequestsPage from './pages/UserRequestsPage.js';
 import StartScreen from './pages/StartScreen.js';
 import ProfilePage from './pages/ProfilePage.js';
+import EditProfilePage from './pages/EditProfilePage.js';
 
 export default function App() {
-  const { currentUserData } = useAuth();
+  const { currentUserData, setCurrentUserData } = useAuth();
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -87,6 +88,17 @@ export default function App() {
           element={
             <PrivateRoute>
               <ProfilePage sortedPosts={sortedPosts} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <PrivateRoute>
+              <EditProfilePage
+                currentUserData={currentUserData}
+                onUpdateProfile={handleUpdateProfile}
+              />
             </PrivateRoute>
           }
         />
@@ -211,6 +223,20 @@ export default function App() {
     } catch (error) {
       console.log('Error:', error.message);
     }
+  }
+
+  async function handleUpdateProfile(profileData) {
+    const updatedProfileData = {
+      _id: currentUserData._id,
+      user: { ...profileData },
+    };
+    try {
+      const response = await axios.put('/api/users/', updatedProfileData);
+      setCurrentUserData(response.data);
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
+    navigate(-1);
   }
 }
 

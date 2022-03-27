@@ -111,6 +111,7 @@ export function AuthProvider({ children }) {
     currentUser,
     users,
     currentUserData,
+    setCurrentUserData,
     login,
     signup,
     logout,
