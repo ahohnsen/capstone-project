@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { nanoid } from 'nanoid';
 import { auth } from '../firebase.js';
 
 const AuthContext = React.createContext();
@@ -57,6 +58,7 @@ export function AuthProvider({ children }) {
       setIsButtonDeactivated(true);
       await saveNewUser({
         _id: data.email,
+        userId: nanoid(),
         fullname: data.fullname,
       });
       await auth.createUserWithEmailAndPassword(data.email, data.password);

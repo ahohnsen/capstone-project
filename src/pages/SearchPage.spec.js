@@ -52,7 +52,7 @@ describe('SearchPage', () => {
     expect(post2).toBeInTheDocument();
   });
 
-  it('renders a heading with the name "Find a dive buddy" and a logout button', () => {
+  it('renders a heading with the name "Find a dive buddy"', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
@@ -66,10 +66,8 @@ describe('SearchPage', () => {
       </MemoryRouter>
     );
     const heading = screen.getByRole('heading', { name: /Find a dive buddy/i });
-    const buttonLogout = screen.getByRole('button', { name: /logout/i });
 
     expect(heading).toBeInTheDocument();
-    expect(buttonLogout).toBeInTheDocument();
   });
 
   it('renders a message to the user when there are no posts', () => {
@@ -92,46 +90,6 @@ describe('SearchPage', () => {
     );
 
     expect(message).toBeInTheDocument();
-  });
-
-  it('renders a heading and a button to go the archive when there is at least one archived post', () => {
-    const sortedPosts = [
-      {
-        _id: '1',
-        destination: 'Maldives',
-        isArchived: false,
-        author: { _id: 'john@doe.com', fullname: 'John Doe' },
-      },
-    ];
-    const archivedPosts = [
-      {
-        _id: '2',
-        destination: 'Lanzarote',
-        isArchived: true,
-        author: { _id: 'john@doe.com', fullname: 'John Doe' },
-      },
-    ];
-    render(
-      <MemoryRouter>
-        <AuthProvider>
-          <SearchPage
-            sortedPosts={sortedPosts}
-            archivedPosts={archivedPosts}
-            isLoading={false}
-            hasError={false}
-            setIsLoading={setIsLoading}
-            onGetPosts={onGetPosts}
-          />
-        </AuthProvider>
-      </MemoryRouter>
-    );
-    const heading = screen.getByRole('heading', { name: 'Archive' });
-    const buttonArchive = screen.getByRole('button', {
-      name: /go to archive/i,
-    });
-
-    expect(heading).toBeInTheDocument();
-    expect(buttonArchive).toBeInTheDocument();
   });
 
   it('renders a loading spinner while data is fetched from the database', () => {

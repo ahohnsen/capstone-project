@@ -1,18 +1,12 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import LoadingSpinner from '../components/LoadingSpinner.js';
 import Request from '../components/Request.js';
-import IconButton from '../components/IconButton.js';
-import ArrowForward from '../images/ArrowForward.svg';
-import LogoutIcon from '../images/LogoutIcon.svg';
 
 export default function SearchPage({
   sortedPosts,
-  archivedPosts,
   onGetPosts,
   isLoading,
   setIsLoading,
@@ -22,9 +16,6 @@ export default function SearchPage({
   onEditPost,
   onDeletePost,
 }) {
-  const { logout, error } = useAuth();
-  const navigate = useNavigate();
-
   const notArchivedPosts = sortedPosts?.filter(
     post => post.isArchived === false
   );
@@ -38,15 +29,9 @@ export default function SearchPage({
 
   return (
     <>
-      <Header>
-        Find a dive buddy
-        <LogoutButton onClick={logout}>
-          <img src={LogoutIcon} alt="logout" />
-        </LogoutButton>
-      </Header>
+      <Header>Find a dive buddy</Header>
       <Content>
         {isLoading && <LoadingSpinner />}
-        {error && <p>{error}</p>}
         {hasError && (
           <Message>
             Unfortunately, something went wrong. Please refresh this page.
@@ -79,14 +64,6 @@ export default function SearchPage({
               post to look for a dive buddy yourself.
             </Message>
           )}
-          {!isLoading && !hasError && archivedPosts?.length > 0 && (
-            <Container>
-              <Heading>Archive</Heading>
-              <ArrowButton onClick={() => navigate('/archive')}>
-                <img src={ArrowForward} alt="go to archive" />
-              </ArrowButton>
-            </Container>
-          )}
         </Grid>
       </Content>
     </>
@@ -98,34 +75,8 @@ const Grid = styled.div`
   gap: 15px;
 `;
 
-const Message = styled.p`
+const Message = styled.span`
+  display: inline-block;
   text-align: center;
   padding: 0 15px;
-`;
-
-const Container = styled.div`
-  position: relative;
-  padding: 15px 15px;
-  margin-top: 20px;
-  background-color: var(--bg-color-section);
-`;
-
-const Heading = styled.h2`
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--font-color-heading);
-`;
-
-const ArrowButton = styled(IconButton)`
-  position: absolute;
-  padding: 5px 10px;
-  top: 11px;
-  right: 0;
-`;
-
-const LogoutButton = styled(IconButton)`
-  position: absolute;
-  padding: 5px 10px;
-  top: 0;
-  right: 0;
 `;

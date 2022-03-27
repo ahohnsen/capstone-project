@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { AuthProvider } from '../contexts/AuthContext.js';
 import { MemoryRouter } from 'react-router-dom';
-import ArchivePage from './ArchivePage';
+import UserRequestsPage from './UserRequestsPage';
 
 jest.mock('firebase/compat/auth');
 jest.mock('firebase/compat/app', () => ({
@@ -12,37 +12,33 @@ jest.mock('firebase/compat/app', () => ({
   }),
 }));
 
-describe('ArchivePage', () => {
-  it('renders a page with the heading "archive" and two archived items', () => {
-    const archivedPosts = [
+describe('UserRequestsPage', () => {
+  it('renders a page with the heading "Posts"', () => {
+    const sortedPosts = [
       {
         _id: '1',
         destination: 'Maldives',
         isArchived: true,
-        author: { fullname: 'John Doe', _id: 'john@doe.com' },
+        author: { fullname: 'John Doe', _id: 'john@doe.com', userId: '1' },
       },
       {
         _id: '2',
         destination: 'Galapagos Island',
-        isArchived: true,
-        author: { fullname: 'John Doe', _id: 'john@doe.com' },
+        isArchived: false,
+        author: { fullname: 'John Doe', _id: 'john@doe.com', userId: '1' },
       },
     ];
 
     render(
       <MemoryRouter>
         <AuthProvider>
-          <ArchivePage archivedPosts={archivedPosts} />
+          <UserRequestsPage sortedPosts={sortedPosts} />
         </AuthProvider>
       </MemoryRouter>
     );
 
     const heading = screen.getByRole('heading', { level: 1 });
-    const post1 = screen.getByText('Maldives');
-    const post2 = screen.getByText('Galapagos Island');
 
     expect(heading).toBeInTheDocument();
-    expect(post1).toBeInTheDocument();
-    expect(post2).toBeInTheDocument();
   });
 });

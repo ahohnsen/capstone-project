@@ -9,13 +9,14 @@ const GlobalStyles = createGlobalStyle`
 }
 
 :root {
-  --bg-color-main: #FAFCFF;
+  --bg-color-main: #ECF6F6;
   --bg-color-section: #FFFFFF;
   --bg-color-action: #05A6A6;
   --bg-color-header: #071359;
   --bg-color-form: rgba(6, 95, 110, 0.7);
   --font-color-header: #FFFFFF;
   --font-color-heading: #011F26;
+  --font-color-sub-heading: #635D5D;
   --font-color-content: #2C2727;
   --font-color-action: #FFFFFF;
   --font-color-label: #848588;

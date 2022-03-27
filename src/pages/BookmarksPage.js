@@ -50,7 +50,7 @@ const Grid = styled.div`
   gap: 15px;
 `;
 
-const Message = styled.p`
+const Message = styled.span`
   text-align: center;
   padding: 0 15px;
 `;

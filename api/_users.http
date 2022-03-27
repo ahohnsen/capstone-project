@@ -7,8 +7,9 @@ GET {{baseUrl}}/users
 POST {{baseUrl}}/users
 Content-Type: application/json
 
-{ "_id": "test50@maildee",
-  "fullname": "ID Test",
+{ "_id": "test100@mail.de",
+"userId": "6",
+"fullname": "Test User"
 }
 
 ###

@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
 import DeleteDialog from './DeleteDialog.js';
 import IconButton from './IconButton.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 import EditIcon from '../images/EditIcon.svg';
-import EmailIcon from '../images/Email.svg';
 import CalendarIcon from '../images/Calendar.svg';
 import LocationIcon from '../images/Location.svg';
 import CheckActiveIcon from '../images/CheckActive.svg';
 import CheckInactiveIcon from '../images/CheckInactive.svg';
 import BookmarkIconInactive from '../images/BookmarkInactive.svg';
-import BookmarkIconActive from '../images/BookmarkActive.svg';
+import Bookmarked from '../images/Bookmarked.svg';
 
 export default function Request({
   createdDate,
@@ -42,28 +42,27 @@ export default function Request({
     <Container>
       <Header>
         <TextWrapper>
-          <Name>{author.fullname}</Name>
+          <Name to={`/profile/${author.userId}`}>{author.fullname}</Name>
           <Text>
             {formatedDate} at {formatedTime}
           </Text>
         </TextWrapper>
         {author._id === currentUserData?._id ? (
           <>
-            <IconButton onClick={onEditPost}>
-              <img src={EditIcon} alt="edit" />
-            </IconButton>
+            {!isArchived && (
+              <IconButton onClick={onEditPost}>
+                <img src={EditIcon} alt="edit" />
+              </IconButton>
+            )}
             <IconButton onClick={() => setShowDialog(true)}>
               <img src={DeleteIcon} alt="delete" />
             </IconButton>
           </>
         ) : (
           <>
-            <Email href={`mailto:${author._id}`}>
-              <img src={EmailIcon} alt="send email" />
-            </Email>
             <IconButton onClick={onToggleBookmark}>
               {isBookmarked ? (
-                <img src={BookmarkIconActive} alt="is bookmarked" />
+                <img src={Bookmarked} alt="is bookmarked" />
               ) : (
                 <img src={BookmarkIconInactive} alt="not bookmarked" />
               )}
@@ -130,10 +129,11 @@ const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Name = styled.span`
+const Name = styled(Link)`
   font-size: 1rem;
   font-weight: 600;
   color: var(--font-color-heading);
+  text-decoration: none;
 `;
 
 const Text = styled.div`
@@ -159,14 +159,6 @@ const CheckButton = styled(IconButton)`
   bottom: 5px;
 `;
 
-const Email = styled.a`
-  margin: auto 3px;
-
-  img {
-    width: 30px;
-    height: 30px;
-  }
-`;
 const Calendar = styled.img`
   margin: auto 3px;
 `;
