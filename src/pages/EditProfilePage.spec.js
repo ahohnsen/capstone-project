@@ -13,21 +13,23 @@ describe('EditProfilePage', () => {
     about: 'I am an experienced diver',
   };
 
-  it('renders a page with the heading "Edit your profile" and a button to abort the editing process', () => {
+  it('renders a page with two camera icons to upload a background and a profile picture, a form and a button to abort the editing process', () => {
     render(
       <MemoryRouter>
         <EditProfilePage currentUserData={{ ...currentUserData }} />
       </MemoryRouter>
     );
 
-    const heading = screen.getByRole('heading', { level: 1 });
+    const uploadIcons = screen.getAllByRole('img', {
+      name: /camera/i,
+    });
     const abortButton = screen.getByRole('button', { name: /abort/i });
 
-    expect(heading).toBeInTheDocument();
+    expect(uploadIcons).toHaveLength(2);
     expect(abortButton).toBeInTheDocument();
   });
 
-  it('renders a form with 4 input fields, two comboboxes and a button to save all changes', () => {
+  it('the form has 4 input fields, two comboboxes and a button to save all changes', () => {
     render(
       <MemoryRouter>
         <EditProfilePage currentUserData={{ ...currentUserData }} />
