@@ -263,7 +263,7 @@ export default function App() {
         },
       })
       .then(response => {
-        const secureUrl = response.data.url.replace('http', 'https');
+        const secureUrl = response.data.url.replace('http://', 'https://');
         pictureStyle === 'photo'
           ? handleUpdateProfile({ photo: secureUrl })
           : handleUpdateProfile({ background: secureUrl });

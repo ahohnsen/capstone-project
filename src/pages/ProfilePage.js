@@ -136,7 +136,6 @@ const BackgroundImageContainer = styled.header`
   height: 150px;
   width: 100%;
   max-width: 500px;
-  margin-bottom: 50px;
   background: ${props => `url(${props.backgroundImage})`} no-repeat center
     center;
   background-size: cover;
@@ -158,6 +157,8 @@ const ProfileImage = styled.div`
 
 const StyledContent = styled(Content)`
   position: relative;
+  margin-top: 90px;
+  padding-top: 20px;
 `;
 
 const Container = styled.section`
