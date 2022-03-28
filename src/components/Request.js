@@ -42,12 +42,16 @@ export default function Request({
   return (
     <Container>
       <Header>
-        <ProfilePicture
-          src={author.photo ? author.photo : ProfilePlaceholder}
-          alt="user avatar"
-        />
+        <StyledLink to={`/profile/${author.userId}`}>
+          <ProfilePicture
+            src={author.photo ? author.photo : ProfilePlaceholder}
+            alt="user avatar"
+          />
+        </StyledLink>
         <TextWrapper>
-          <Name to={`/profile/${author.userId}`}>{author.fullname}</Name>
+          <StyledLink to={`/profile/${author.userId}`}>
+            {author.fullname}
+          </StyledLink>
           <Text>
             {formatedDate} at {formatedTime}
           </Text>
@@ -144,7 +148,7 @@ const TextWrapper = styled.div`
   flex-direction: column;
   padding: 0 10px;
 `;
-const Name = styled(Link)`
+const StyledLink = styled(Link)`
   font-size: 1rem;
   font-weight: 600;
   color: var(--font-color-heading);
