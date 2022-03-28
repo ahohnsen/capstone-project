@@ -16,7 +16,7 @@ jest.mock('firebase/compat/app', () => ({
 describe('Request', () => {
   const author = { fullname: 'John Doe', _id: 'john@doe.com' };
 
-  it('renders a post with the name of the author, date the post was created, a destination, description and travel start and end dates as well as a bookmark icon', () => {
+  it('renders a post with the name and avatar of the author, date the post was created, a destination, description, travel start and end dates as well as a bookmark icon', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
@@ -32,6 +32,7 @@ describe('Request', () => {
       </MemoryRouter>
     );
 
+    const avatarAuthor = screen.getByRole('img', { name: 'user avatar' });
     const nameAuthor = screen.getByText('John Doe');
     const createdDate = screen.getByText(/Feb 2, 2022/);
     const destination = screen.getByText('Maldives');
@@ -44,6 +45,7 @@ describe('Request', () => {
       name: 'not bookmarked',
     });
 
+    expect(avatarAuthor).toBeInTheDocument();
     expect(nameAuthor).toBeInTheDocument();
     expect(createdDate).toBeInTheDocument();
     expect(destination).toBeInTheDocument();

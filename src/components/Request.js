@@ -12,6 +12,7 @@ import CheckActiveIcon from '../images/CheckActive.svg';
 import CheckInactiveIcon from '../images/CheckInactive.svg';
 import BookmarkIconInactive from '../images/BookmarkInactive.svg';
 import Bookmarked from '../images/Bookmarked.svg';
+import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 
 export default function Request({
   createdDate,
@@ -41,6 +42,10 @@ export default function Request({
   return (
     <Container>
       <Header>
+        <ProfilePicture
+          src={author.photo ? author.photo : ProfilePlaceholder}
+          alt="user avatar"
+        />
         <TextWrapper>
           <Name to={`/profile/${author.userId}`}>{author.fullname}</Name>
           <Text>
@@ -118,16 +123,26 @@ const Container = styled.section`
   position: relative;
   background-color: var(--bg-color-section);
   padding: 10px 15px;
+  box-shadow: 1px 1px 2px var(--color-boxshadow);
 `;
 
 const Header = styled.header`
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+`;
+
+const ProfilePicture = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px var(--color-boxshadow);
 `;
 
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 10px;
 `;
 const Name = styled(Link)`
   font-size: 1rem;
