@@ -2,17 +2,18 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
-import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import IconButton from '../components/IconButton.js';
 import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
-import ArrowBack from '../images/ArrowBack.svg';
+import ArrowBack from '../images/ArrowBackBackground.svg';
 import DivesIcon from '../images/Dives.svg';
 import DivingLicenseIcon from '../images/DivingLicense.svg';
 import EmailIcon from '../images/Email.svg';
 import FacebookIcon from '../images/Facebook.svg';
 import EditIcon from '../images/EditIcon.svg';
+import BackgroundPlaceholder from '../images/BackgroundPlaceholder.jpg';
+import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 import { useEffect } from 'react';
 
 export default function ProfilePage({ sortedPosts }) {
@@ -38,23 +39,33 @@ export default function ProfilePage({ sortedPosts }) {
 
   return (
     <>
-      <Header>
+      <BackgroundImageContainer
+        backgroundImage={
+          userProfileData?.background
+            ? userProfileData?.background
+            : BackgroundPlaceholder
+        }
+      >
+        <ProfileImage
+          profileImage={
+            userProfileData?.photo ? userProfileData?.photo : ProfilePlaceholder
+          }
+        />
         {uid === 'own-profile' ? (
           <>
-            Your profile
             <LogoutButton onClick={logout}>
               <img src={LogoutIcon} alt="logout" />
             </LogoutButton>
+            <EditButton onClick={() => navigate('/edit-profile')}>
+              <img src={EditIcon} alt="edit profile" />
+            </EditButton>
           </>
         ) : (
-          <>
-            <BackButton onClick={() => navigate(-1)}>
-              <img src={ArrowBack} alt="go back" />
-            </BackButton>
-            Profile
-          </>
+          <BackButton onClick={() => navigate(-1)}>
+            <img src={ArrowBack} alt="go back" />
+          </BackButton>
         )}
-      </Header>
+      </BackgroundImageContainer>
       <StyledContent>
         <Username>{userProfileData?.fullname}</Username>
         <HomeLocation>
@@ -63,11 +74,6 @@ export default function ProfilePage({ sortedPosts }) {
             : '- no home location added -'}
         </HomeLocation>
         {error && <Message>{error}</Message>}
-        {uid === 'own-profile' && (
-          <EditButton onClick={() => navigate('/edit-profile')}>
-            <img src={EditIcon} alt="edit profile" />
-          </EditButton>
-        )}
         <ExperienceContainer>
           <EmailContact
             href={`mailto:${userProfileData?._id}`}
@@ -125,6 +131,31 @@ export default function ProfilePage({ sortedPosts }) {
   );
 }
 
+const BackgroundImageContainer = styled.header`
+  position: relative;
+  height: 150px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 50px;
+  background: ${props => `url(${props.backgroundImage})`} no-repeat center
+    center;
+  background-size: cover;
+`;
+
+const ProfileImage = styled.div`
+  position: absolute;
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  border: 3px solid var(--bg-color-section);
+  background: ${props => `url(${props.profileImage})`} no-repeat center center;
+  background-size: cover;
+`;
+
 const StyledContent = styled(Content)`
   position: relative;
 `;
@@ -135,6 +166,7 @@ const Container = styled.section`
   padding: 10px 15px;
   margin: 15px 0;
   color: var(--font-color-heading);
+  box-shadow: 1px 1px 2px var(--color-boxshadow);
 `;
 
 const ExperienceContainer = styled(Container)`
@@ -173,7 +205,7 @@ const Icon = styled.img`
 
 const EditButton = styled(IconButton)`
   position: absolute;
-  top: 5px;
+  bottom: -40px;
   right: 5px;
 `;
 
@@ -202,7 +234,7 @@ const Message = styled.span`
 const LogoutButton = styled(IconButton)`
   position: absolute;
   padding: 5px 10px;
-  top: 0;
+  top: 2px;
   right: 0;
 `;
 
@@ -217,5 +249,5 @@ const BackButton = styled(IconButton)`
   position: absolute;
   padding: 5px 10px;
   top: 2px;
-  left: 5px;
+  left: 0;
 `;
