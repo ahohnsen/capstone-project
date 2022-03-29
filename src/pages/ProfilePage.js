@@ -188,6 +188,7 @@ const Username = styled.h2`
 const HomeLocation = styled(SectionHeading)`
   text-align: center;
   color: var(--font-color-sub-heading);
+  padding: 15px;
 `;
 
 const Wrapper = styled.div`

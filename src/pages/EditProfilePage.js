@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '../components/MapboxGeocoderStyles.css';
 import Content from '../components/Content.js';
 import Button from '../components/Button.js';
 import IconButton from '../components/IconButton.js';
 import ArrowBack from '../images/ArrowBackBackground.svg';
 import CameraIcon from '../images/Camera.svg';
+import DeleteIcon from '../images/DeleteIcon.svg';
 import BackgroundPlaceholder from '../images/BackgroundPlaceholder.jpg';
 import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 
@@ -15,21 +20,44 @@ export default function EditProfilePage({
   onUploadImage,
 }) {
   const navigate = useNavigate();
+
+  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESSTOKEN;
+
+  const [geocoderLocation, setGeocoderLocation] = useState(
+    currentUserData?.location ? currentUserData?.location : null
+  );
+
   const {
     register,
     handleSubmit,
     trigger,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       fullname: currentUserData.fullname,
-      location: currentUserData.location,
       license: currentUserData.license,
       dives: currentUserData.dives,
       facebook: currentUserData.facebook,
       about: currentUserData.about,
     },
   });
+
+  useEffect(() => {
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      types: 'country,region,place',
+      limit: 5,
+      clearOnBlur: true,
+    });
+
+    geocoder.addTo('#geocoderlocation');
+
+    geocoder.on('result', e => {
+      setGeocoderLocation(e.result.place_name);
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -76,13 +104,18 @@ export default function EditProfilePage({
       <Content>
         <Form
           aria-label="edit your profile"
-          onSubmit={handleSubmit(data => onUpdateProfile(data))}
+          onSubmit={handleSubmit(data =>
+            onUpdateProfile(data, geocoderLocation)
+          )}
         >
+          <RequiredNote>
+            Please note that all fields marked with asterisks (*) are required.
+          </RequiredNote>
           <Container>
-            <Label htmlFor="fullname">FULL NAME</Label>
+            <Label htmlFor="fullname">FULL NAME*</Label>
             <Input
               {...register('fullname', {
-                required: 'A full name is required.',
+                required: true,
               })}
               id="fullname"
               onKeyUp={() => {
@@ -91,18 +124,24 @@ export default function EditProfilePage({
             />
           </Container>
           <Container>
-            <Label htmlFor="location">HOME LOCATION</Label>
-            <Input
-              {...register('location', {
-                required: ' A home location is required.',
-              })}
-              id="location"
-              onKeyUp={() => {
-                trigger('location');
-              }}
-            />
+            <Label htmlFor="location">HOME LOCATION*</Label>
+            <DeleteButton
+              type="button"
+              onClick={() => setGeocoderLocation(null)}
+              hidden={!geocoderLocation}
+            >
+              <img src={DeleteIcon} alt="delete location" />
+            </DeleteButton>
+            {geocoderLocation && (
+              <LocationInput
+                id="location"
+                readonly
+                disabled
+                value={geocoderLocation ? geocoderLocation : ''}
+              />
+            )}
+            <div id={'geocoderlocation'} hidden={geocoderLocation} />
           </Container>
-
           <Container>
             <Label htmlFor="license">DIVING LICENSE</Label>
             <StyledSelect id="license" {...register('license')} defaultValue="">
@@ -141,7 +180,8 @@ export default function EditProfilePage({
               {...register('facebook', {
                 pattern: {
                   value: /^https?:\/\/(.*)/,
-                  message: 'Please enter a valid Facebook URL',
+                  message:
+                    'Please enter a valid Facebook URL, starting with "https:// ..."',
                 },
               })}
               id="facebook"
@@ -155,23 +195,22 @@ export default function EditProfilePage({
             <Label htmlFor="about">ABOUT ME</Label>
             <Textarea
               {...register('about', {
-                maxLength: {
-                  value: 300,
-                  message:
-                    'Your profile text is too long. Please shorten it a bit.',
-                },
+                maxLength: 300,
               })}
               id="about"
+              maxLength="300"
               onKeyUp={() => {
                 trigger('about');
               }}
             />
           </Container>
-          <Button type="submit">SAVE CHANGES</Button>
+          <SubmitButton
+            type="submit"
+            disabled={geocoderLocation && isValid ? false : true}
+          >
+            SAVE CHANGES
+          </SubmitButton>
           <ErrorMessage>
-            <p>{errors.fullname && errors.fullname.message}</p>
-            <p>{errors.location && errors.location.message}</p>
-            <p>{errors.about && errors.about.message}</p>
             <p>{errors.facebook && errors.facebook.message}</p>
           </ErrorMessage>
         </Form>
@@ -239,6 +278,11 @@ const Form = styled.form`
   padding: 0 15px;
 `;
 
+const RequiredNote = styled.span`
+  padding: 0 5px;
+  font-size: 0.9rem;
+`;
+
 const Label = styled.label`
   position: absolute;
   top: -13px;
@@ -250,11 +294,28 @@ const Label = styled.label`
 const Input = styled.input`
   padding: 2px;
   border: 0;
+
+  &:focus {
+    outline: thin dotted var(--bg-color-action);
+  }
+`;
+
+const LocationInput = styled(Input)`
+  padding-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const DeleteButton = styled(IconButton)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
 `;
 
 const Container = styled.div`
   position: relative;
-  padding: 10px;
+  padding: 12px 10px 8px;
   border-radius: 4px;
   background-color: var(--bg-color-section);
   box-shadow: 1px 1px 4px var(--color-boxshadow);
@@ -264,16 +325,28 @@ const StyledSelect = styled.select`
   padding: 5px 2px;
   border: 0;
   background-color: var(--bg-color-section);
+
+  &:focus {
+    outline: thin dotted var(--bg-color-action);
+  }
 `;
 
 const Textarea = styled.textarea`
   height: 170px;
   padding: 2px;
   border: 0;
+
+  &:focus {
+    outline: thin dotted var(--bg-color-action);
+  }
 `;
 
 const ErrorMessage = styled.div`
   text-align: center;
   color: red;
   font-size: 0.8rem;
+`;
+
+const SubmitButton = styled(Button)`
+  opacity: ${props => (props.disabled ? '0.5' : '1')};
 `;
