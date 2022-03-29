@@ -81,23 +81,23 @@ export default function Request({
       </Header>
 
       <Description>{description}</Description>
-      {author._id === currentUserData?._id && (
-        <CheckButton onClick={onToggleCheckmark}>
-          {isArchived ? (
-            <img src={CheckActiveIcon} alt="is archived" />
-          ) : (
-            <img src={CheckInactiveIcon} alt="not archived" />
-          )}
-        </CheckButton>
-      )}
 
       <Footer>
         <Calendar src={CalendarIcon} alt="calendar icon" />
-        <Text>
+        <TextDate>
           {travelStartDate} - {travelEndDate}
-        </Text>
-        <img src={LocationIcon} alt="location icon" />
-        <Text>{destination}</Text>
+        </TextDate>
+        {author._id === currentUserData?._id && (
+          <CheckButton onClick={onToggleCheckmark}>
+            {isArchived ? (
+              <img src={CheckActiveIcon} alt="is archived" />
+            ) : (
+              <img src={CheckInactiveIcon} alt="not archived" />
+            )}
+          </CheckButton>
+        )}
+        <Location src={LocationIcon} alt="location icon" />
+        <TextLocation>{destination}</TextLocation>
       </Footer>
       {showDialog && (
         <DeleteDialog
@@ -161,6 +161,16 @@ const Text = styled.div`
   padding: 2px 0;
 `;
 
+const TextDate = styled(Text)`
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+`;
+
+const TextLocation = styled(Text)`
+  grid-column: 2 / 3;
+  grid-row: 2/ 3;
+`;
+
 const Description = styled.p`
   padding: 10px 0 40px 0;
   color: var(--font-color-content);
@@ -168,16 +178,23 @@ const Description = styled.p`
 
 const Footer = styled.footer`
   display: grid;
-  grid-template-columns: 35px 1fr;
+  grid-template-columns: 35px 1fr 35px;
   grid-template-rows: 1fr 1fr;
 `;
 
 const CheckButton = styled(IconButton)`
-  position: absolute;
-  right: 20px;
-  bottom: 5px;
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+  padding: 10px;
 `;
 
 const Calendar = styled.img`
   margin: auto 3px;
+  grid-column: 1;
+  grid-row: 1 / 2;
+`;
+
+const Location = styled.img`
+  grid-column: 1;
+  grid-row: 2 / 3;
 `;
