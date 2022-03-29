@@ -11,6 +11,8 @@ const schema = new Schema(
     dives: { type: String },
     facebook: { type: String },
     about: { type: String },
+    photo: { type: String },
+    background: { type: String },
   },
   {
     versionKey: false,

@@ -14,6 +14,9 @@ import StartScreen from './pages/StartScreen.js';
 import ProfilePage from './pages/ProfilePage.js';
 import EditProfilePage from './pages/EditProfilePage.js';
 
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
+
 export default function App() {
   const { currentUserData, setCurrentUserData } = useAuth();
   const [posts, setPosts] = useState(null);
@@ -98,6 +101,7 @@ export default function App() {
               <EditProfilePage
                 currentUserData={currentUserData}
                 onUpdateProfile={handleUpdateProfile}
+                onUploadImage={uploadImage}
               />
             </PrivateRoute>
           }
@@ -236,7 +240,35 @@ export default function App() {
     } catch (error) {
       console.log('Error:', error.message);
     }
-    navigate(-1);
+    if (
+      !(
+        profileData.hasOwnProperty('photo') ||
+        profileData.hasOwnProperty('background')
+      )
+    ) {
+      navigate(-1);
+    }
+  }
+
+  function uploadImage(pictureStyle, event) {
+    const data = new FormData();
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
+    data.append('file', event.target.files[0]);
+    data.append('upload_preset', PRESET);
+
+    axios
+      .post(url, data, {
+        headers: {
+          'Content-type': 'multipart/data',
+        },
+      })
+      .then(response => {
+        const secureUrl = response.data.url.replace('http://', 'https://');
+        pictureStyle === 'photo'
+          ? handleUpdateProfile({ photo: secureUrl })
+          : handleUpdateProfile({ background: secureUrl });
+      })
+      .catch(error => console.log(error));
   }
 }
 
