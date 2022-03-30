@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import Request from '../components/Request.js';
-import IconButton from '../components/IconButton.js';
+import { IconButton } from '../components/Button.js';
 import ArrowBack from '../images/ArrowBack.svg';
 
 export default function UserRequestsPage({

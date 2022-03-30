@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
-import Button from './Button.js';
+import { DefaultButton } from './Button.js';
 
 export default function ForgotPasswordForm() {
   const { register, handleSubmit } = useForm({});
@@ -71,7 +71,7 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-const ResetButton = styled(Button)`
+const ResetButton = styled(DefaultButton)`
   width: 100%;
   margin-top: 10px;
 `;

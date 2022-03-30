@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '../components/IconButton.js';
+import { IconButton } from './Button.js';
 import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 import ArrowForward from '../images/ArrowForward.svg';
 

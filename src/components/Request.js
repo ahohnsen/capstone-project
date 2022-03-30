@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
 import DeleteDialog from './DeleteDialog.js';
-import IconButton from './IconButton.js';
+import { IconButton } from './Button.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 import EditIcon from '../images/EditIcon.svg';
 import CalendarIcon from '../images/Calendar.svg';

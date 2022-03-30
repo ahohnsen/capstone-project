@@ -6,8 +6,7 @@ import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../components/MapboxGeocoderStyles.css';
 import Content from '../components/Content.js';
-import Button from '../components/Button.js';
-import IconButton from '../components/IconButton.js';
+import { DefaultButton, IconButton } from '../components/Button.js';
 import ArrowBack from '../images/ArrowBackBackground.svg';
 import CameraIcon from '../images/Camera.svg';
 import DeleteIcon from '../images/DeleteIcon.svg';
@@ -347,6 +346,6 @@ const ErrorMessage = styled.div`
   font-size: 0.8rem;
 `;
 
-const SubmitButton = styled(Button)`
+const SubmitButton = styled(DefaultButton)`
   opacity: ${props => (props.disabled ? '0.5' : '1')};
 `;

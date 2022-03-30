@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
 import Content from '../components/Content.js';
-import IconButton from '../components/IconButton.js';
+import { IconButton } from '../components/Button.js';
 import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 import ArrowBack from '../images/ArrowBackBackground.svg';

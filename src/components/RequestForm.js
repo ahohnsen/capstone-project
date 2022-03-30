@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import './MapboxGeocoderStyles.css';
-import Button from './Button.js';
-import IconButton from './IconButton.js';
+import { DefaultButton, IconButton } from './Button.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 
 export default function RequestForm({
@@ -228,6 +227,6 @@ const Textarea = styled.textarea`
   }
 `;
 
-const SubmitButton = styled(Button)`
+const SubmitButton = styled(DefaultButton)`
   opacity: ${props => (props.disabled ? '0.5' : '1')};
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from './Button.js';
+import { DefaultButton } from './Button.js';
 
 export default function DeleteDialog({
   onConfirmDeletePost,
@@ -9,8 +9,8 @@ export default function DeleteDialog({
     <Dialog>
       Do you really want to delete this post?
       <Wrapper>
-        <Button onClick={onConfirmDeletePost}>Yes, delete</Button>
-        <Button onClick={onCancelDeletePost}>Cancel</Button>
+        <DefaultButton onClick={onConfirmDeletePost}>Yes, delete</DefaultButton>
+        <DefaultButton onClick={onCancelDeletePost}>Cancel</DefaultButton>
       </Wrapper>
     </Dialog>
   );

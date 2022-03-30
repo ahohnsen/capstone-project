@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
 import { useForm } from 'react-hook-form';
-import Button from './Button.js';
+import { DefaultButton } from './Button.js';
 
 export default function LoginSignupForm({ status }) {
   const { login, signup, error, isButtonDeactivated } = useAuth();
@@ -99,7 +99,7 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-const SubmitButton = styled(Button)`
+const SubmitButton = styled(DefaultButton)`
   width: 100%;
   margin-top: 10px;
 `;
