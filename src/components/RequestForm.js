@@ -203,6 +203,7 @@ const DeleteButton = styled(IconButton)`
 `;
 
 const DateInputStart = styled.input`
+  background-color: var(--bg-color-section);
   padding: 2px;
   border: 0;
   width: 49%;
