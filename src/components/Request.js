@@ -44,8 +44,8 @@ export default function Request({
       <Header>
         <StyledLink to={`/profile/${author.userId}`}>
           <ProfilePicture
-            src={author.photo ? author.photo : ProfilePlaceholder}
-            alt="user avatar"
+            data-testid="user avatar"
+            profileImage={author.photo ? author.photo : ProfilePlaceholder}
           />
         </StyledLink>
         <TextWrapper>
@@ -136,11 +136,13 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const ProfilePicture = styled.img`
+const ProfilePicture = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  box-shadow: 1px 1px 2px var(--color-boxshadow);
+  box-shadow: 1px 1px 4px 1px var(--color-boxshadow);
+  background: ${props => `url(${props.profileImage})`} no-repeat center center;
+  background-size: cover;
 `;
 
 const TextWrapper = styled.div`

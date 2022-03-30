@@ -31,6 +31,31 @@ describe('SearchPage', () => {
   const onGetPosts = jest.fn().mockImplementation(() => Promise.resolve());
   const setIsLoading = jest.fn();
 
+  it('renders a header with a searchbar and a subheader to switch between searching for destinations or buddies"', () => {
+    render(
+      <MemoryRouter>
+        <AuthProvider>
+          <SearchPage
+            sortedPosts={[...sortedPosts]}
+            isLoading={false}
+            setIsLoading={setIsLoading}
+            onGetPosts={onGetPosts}
+          />
+        </AuthProvider>
+      </MemoryRouter>
+    );
+    const searchbar = screen.getByLabelText('Search');
+    const searchCategoryDestination = screen.getByRole('button', {
+      name: /destination/i,
+    });
+    const searchCategoryBuddies = screen.getByRole('button', {
+      name: /buddies/i,
+    });
+
+    expect(searchbar).toBeInTheDocument();
+    expect(searchCategoryDestination).toBeInTheDocument();
+    expect(searchCategoryBuddies).toBeInTheDocument();
+  });
   it('renders search page with two posts', () => {
     render(
       <MemoryRouter>
@@ -50,24 +75,6 @@ describe('SearchPage', () => {
 
     expect(post1).toBeInTheDocument();
     expect(post2).toBeInTheDocument();
-  });
-
-  it('renders a heading with the name "Find a dive buddy"', () => {
-    render(
-      <MemoryRouter>
-        <AuthProvider>
-          <SearchPage
-            sortedPosts={[...sortedPosts]}
-            isLoading={false}
-            setIsLoading={setIsLoading}
-            onGetPosts={onGetPosts}
-          />
-        </AuthProvider>
-      </MemoryRouter>
-    );
-    const heading = screen.getByRole('heading', { name: /Find a dive buddy/i });
-
-    expect(heading).toBeInTheDocument();
   });
 
   it('renders a message to the user when there are no posts', () => {

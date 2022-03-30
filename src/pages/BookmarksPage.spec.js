@@ -13,7 +13,7 @@ jest.mock('firebase/compat/app', () => ({
 }));
 
 describe('BookmarksPage', () => {
-  it('renders bookmark page with two bookmarked items', () => {
+  it('renders two bookmarked items', () => {
     const bookmarkedPosts = [
       {
         _id: '1',
@@ -31,7 +31,7 @@ describe('BookmarksPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <BookmarksPage bookmarkedPosts={bookmarkedPosts} />
+          <BookmarksPage bookmarkedPosts={bookmarkedPosts} searchValue="" />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -49,7 +49,7 @@ describe('BookmarksPage', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <BookmarksPage bookmarkedPosts={bookmarkedPosts} />
+          <BookmarksPage bookmarkedPosts={bookmarkedPosts} searchValue="" />
         </AuthProvider>
       </MemoryRouter>
     );

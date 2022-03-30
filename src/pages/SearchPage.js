@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.js';
 import Header from '../components/Header.js';
+import SubHeader from '../components/SubHeader.js';
 import Content from '../components/Content.js';
 import LoadingSpinner from '../components/LoadingSpinner.js';
-import Request from '../components/Request.js';
+import Searchbar from '../components/Searchbar.js';
+import RequestsList from '../components/RequestsList.js';
+import BuddiesList from '../components/BuddiesList.js';
 
 export default function SearchPage({
   sortedPosts,
@@ -16,6 +20,10 @@ export default function SearchPage({
   onEditPost,
   onDeletePost,
 }) {
+  const { users } = useAuth();
+  const [searchValue, setSearchValue] = useState('');
+  const [searchCategory, setSearchCategory] = useState('destination');
+
   const notArchivedPosts = sortedPosts?.filter(
     post => post.isArchived === false
   );
@@ -29,8 +37,17 @@ export default function SearchPage({
 
   return (
     <>
-      <Header>Find a dive buddy</Header>
-      <Content>
+      <Header>
+        <Searchbar
+          searchValue={searchValue}
+          onHandleSearchValue={handleSearchValue}
+        />
+      </Header>
+      <StyledContent>
+        <SubHeader
+          searchCategory={searchCategory}
+          onSwitchSearchCategory={switchSearchCategory}
+        />
         {isLoading && <LoadingSpinner />}
         {hasError && (
           <Message>
@@ -40,39 +57,50 @@ export default function SearchPage({
         <Grid>
           {!isLoading &&
             !hasError &&
-            notArchivedPosts?.length > 0 &&
-            notArchivedPosts.map(post => (
-              <Request
-                key={post._id}
-                createdDate={post.createdAt}
-                startDate={post.startDate}
-                endDate={post.endDate}
-                destination={post.destination}
-                description={post.description}
-                isBookmarked={post.isBookmarked}
-                isArchived={post.isArchived}
-                author={post.author}
-                onToggleBookmark={() => onToggleBookmark(post._id)}
-                onToggleCheckmark={() => onToggleCheckmark(post._id)}
-                onEditPost={() => onEditPost(post)}
-                onDeletePost={() => onDeletePost(post._id)}
+            searchCategory === 'destination' &&
+            (notArchivedPosts?.length > 0 ? (
+              <RequestsList
+                posts={notArchivedPosts}
+                searchValue={searchValue}
+                onToggleBookmark={onToggleBookmark}
+                onToggleCheckmark={onToggleCheckmark}
+                onEditPost={onEditPost}
+                onDeletePost={onDeletePost}
               />
+            ) : (
+              <Message>
+                There is currently nobody looking for a dive buddy. You can add
+                a post to look for a dive buddy yourself.
+              </Message>
             ))}
-          {!isLoading && !hasError && notArchivedPosts?.length === 0 && (
-            <Message>
-              There is currently nobody looking for a dive buddy. You can add a
-              post to look for a dive buddy yourself.
-            </Message>
-          )}
+          {!isLoading &&
+            !hasError &&
+            searchCategory === 'buddies' &&
+            users?.length > 0 && (
+              <BuddiesList users={users} searchValue={searchValue} />
+            )}
         </Grid>
-      </Content>
+      </StyledContent>
     </>
   );
+
+  function handleSearchValue(event) {
+    setSearchValue(event.target.value);
+  }
+
+  function switchSearchCategory(category) {
+    setSearchCategory(category);
+    setSearchValue('');
+  }
 }
+
+const StyledContent = styled(Content)`
+  margin-top: 45px;
+`;
 
 const Grid = styled.div`
   display: grid;
-  gap: 15px;
+  gap: 10px;
 `;
 
 const Message = styled.span`

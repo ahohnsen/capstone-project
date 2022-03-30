@@ -32,7 +32,7 @@ describe('Request', () => {
       </MemoryRouter>
     );
 
-    const avatarAuthor = screen.getByRole('img', { name: 'user avatar' });
+    const avatarAuthor = screen.getByTestId('user avatar');
     const nameAuthor = screen.getByText('John Doe');
     const createdDate = screen.getByText(/Feb 2, 2022/);
     const destination = screen.getByText('Maldives');
