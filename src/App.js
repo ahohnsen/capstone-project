@@ -229,10 +229,10 @@ export default function App() {
     }
   }
 
-  async function handleUpdateProfile(profileData) {
+  async function handleUpdateProfile(profileData, geocoderLocation) {
     const updatedProfileData = {
       _id: currentUserData._id,
-      user: { ...profileData },
+      user: { ...profileData, location: geocoderLocation },
     };
     try {
       const response = await axios.put('/api/users/', updatedProfileData);

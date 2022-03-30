@@ -21,5 +21,7 @@ EditRequestForm.args = {
   preloadedValues: {
     destination: 'Maldives',
     description: 'It was so beautiful. Cannot wait to go again!',
+    startDate: '2022-03-28T00:00:00.000+00:00',
+    endDate: '2022-04-09T00:00:00.000+00:00',
   },
 };

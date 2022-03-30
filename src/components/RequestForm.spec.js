@@ -10,7 +10,7 @@ describe('RequestForm', () => {
       </MemoryRouter>
     );
 
-    const destinationInput = screen.getByLabelText(/destination/i);
+    const destinationInput = screen.getByPlaceholderText(/search/i);
     const startDateInput = screen.getByLabelText(/start/i);
     const endDateInput = screen.getByLabelText('END DATE');
     const descriptionTextarea = screen.getByLabelText(/description/i);
