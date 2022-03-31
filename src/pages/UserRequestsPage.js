@@ -83,14 +83,14 @@ const Grid = styled.div`
 `;
 
 const Heading = styled.h2`
+  padding: 0 10px;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 0 10px;
 `;
 
 const BackButton = styled(IconButton)`
-  position: absolute;
   padding: 5px 10px;
+  position: absolute;
   top: 2px;
   left: 5px;
 `;

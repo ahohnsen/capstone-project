@@ -22,14 +22,16 @@ export default function ForgotPasswordForm() {
           <Input type="email" {...register('email', { required: true })} />
         </Label>
         <ResetButton disabled={loading}>RESET PASSWORD</ResetButton>
-        <Text>
-          Remember your password again?
-          <StyledLink to="/login"> Log in.</StyledLink>
-        </Text>
-        <Text>
-          Need an account?
-          <StyledLink to="/signup"> Create one.</StyledLink>
-        </Text>
+        <Container>
+          <Text>
+            Remember your password again?
+            <StyledLink to="/login"> Log in.</StyledLink>
+          </Text>
+          <Text>
+            Need an account?
+            <StyledLink to="/signup"> Create one.</StyledLink>
+          </Text>
+        </Container>
       </Form>
     </>
   );
@@ -51,48 +53,54 @@ export default function ForgotPasswordForm() {
 
 const Form = styled.form`
   display: grid;
-  gap: 4px;
-  width: 80%;
+  gap: 10px;
   padding: 15px;
+  width: 80%;
+  border-radius: 4px;
   background-color: var(--bg-color-form);
   box-shadow: 2px 2px 4px var(--bg-color-boxshadow);
-  border-radius: 4px;
 `;
 
 const Label = styled.label`
-  color: var(--font-color-action);
   font-weight: 400;
+  color: var(--font-color-action);
 `;
 
 const Input = styled.input`
-  width: 100%;
   padding: 7px;
+  width: 100%;
   border: 0;
   border-radius: 4px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const ResetButton = styled(DefaultButton)`
   width: 100%;
-  margin-top: 10px;
+`;
+
+const Container = styled.div`
+  text-align: center;
+  color: var(--font-color-action);
 `;
 
 const StyledLink = styled(Link)`
   color: var(--font-color-action);
-  text-align: center;
 `;
 
 const Text = styled.span`
-  color: var(--font-color-action);
-  text-align: center;
+  display: block;
 `;
 
 const Alert = styled.div`
-  padding: 8px;
+  padding: 4px;
   width: 80%;
-  background-color: rgba(255, 255, 255, 70%);
-  color: ${props => (props.type === 'error' ? 'red' : 'green')};
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: center;
   border-radius: 4px;
+  background-color: rgba(255, 255, 255, 70%);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${props => (props.type === 'error' ? 'red' : 'green')};
 `;

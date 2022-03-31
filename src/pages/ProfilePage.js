@@ -39,19 +39,23 @@ export default function ProfilePage({ sortedPosts }) {
 
   return (
     <>
-      <BackgroundImageContainer
-        backgroundImage={
-          userProfileData?.background
-            ? userProfileData?.background
-            : BackgroundPlaceholder
-        }
-      >
-        <ProfileImage
-          profileImage={
-            userProfileData?.photo ? userProfileData?.photo : ProfilePlaceholder
+      <Header>
+        <BackgroundImageContainer
+          backgroundImage={
+            userProfileData?.background
+              ? userProfileData?.background
+              : BackgroundPlaceholder
           }
-        />
-        {uid === 'own-profile' ? (
+        >
+          <ProfileImage
+            profileImage={
+              userProfileData?.photo
+                ? userProfileData?.photo
+                : ProfilePlaceholder
+            }
+          />
+        </BackgroundImageContainer>
+        {currentUserData?._id === userProfileData?._id ? (
           <>
             <LogoutButton onClick={logout}>
               <img src={LogoutIcon} alt="logout" />
@@ -65,8 +69,8 @@ export default function ProfilePage({ sortedPosts }) {
             <img src={ArrowBack} alt="go back" />
           </BackButton>
         )}
-      </BackgroundImageContainer>
-      <StyledContent>
+      </Header>
+      <Content>
         <Username>{userProfileData?.fullname}</Username>
         <HomeLocation>
           {userProfileData?.location
@@ -92,7 +96,7 @@ export default function ProfilePage({ sortedPosts }) {
             </FacebookContact>
           )}
           <SectionHeading>DIVING EXPERIENCE</SectionHeading>
-          <Wrapper>
+          <GridContainer>
             <img src={DivingLicenseIcon} alt="Diving License" />
             {userProfileData?.license
               ? userProfileData?.license
@@ -101,7 +105,7 @@ export default function ProfilePage({ sortedPosts }) {
             {userProfileData?.dives
               ? userProfileData?.dives
               : '- no number of dives added -'}
-          </Wrapper>
+          </GridContainer>
         </ExperienceContainer>
         <Container>
           <SectionHeading>ABOUT ME</SectionHeading>
@@ -126,16 +130,22 @@ export default function ProfilePage({ sortedPosts }) {
             </SectionHeading>
           </Container>
         )}
-      </StyledContent>
+      </Content>
     </>
   );
 }
 
-const BackgroundImageContainer = styled.header`
+const Header = styled.header`
   position: relative;
-  height: 150px;
   width: 100%;
-  max-width: 500px;
+  height: 230px;
+  background-color: var(--bg-color-main);
+`;
+
+const BackgroundImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 150px;
   background: ${props => `url(${props.backgroundImage})`} no-repeat center
     center;
   background-size: cover;
@@ -153,31 +163,46 @@ const ProfileImage = styled.div`
   border: 3px solid var(--bg-color-section);
   background: ${props => `url(${props.profileImage})`} no-repeat center center;
   background-size: cover;
+  z-index: 1;
 `;
 
-const StyledContent = styled(Content)`
-  position: relative;
-  margin-top: 90px;
-  padding-top: 20px;
+const EditButton = styled(IconButton)`
+  position: absolute;
+  bottom: 40px;
+  right: 5px;
+`;
+
+const LogoutButton = styled(IconButton)`
+  position: absolute;
+  padding: 5px 10px;
+  top: 2px;
+  right: 0;
+`;
+
+const BackButton = styled(IconButton)`
+  position: absolute;
+  padding: 5px 10px;
+  top: 2px;
+  left: 0;
 `;
 
 const Container = styled.section`
+  margin: 15px 0;
+  padding: 10px 15px;
   position: relative;
   background-color: var(--bg-color-section);
-  padding: 10px 15px;
-  margin: 15px 0;
-  color: var(--font-color-heading);
   box-shadow: 1px 1px 2px var(--color-boxshadow);
+  color: var(--font-color-heading);
 `;
 
 const ExperienceContainer = styled(Container)`
-  margin-top: 40px;
+  margin-top: 50px;
 `;
 
 const SectionHeading = styled.h3`
+  padding: 5px 0;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 5px 0;
 `;
 
 const Username = styled.h2`
@@ -186,29 +211,23 @@ const Username = styled.h2`
 `;
 
 const HomeLocation = styled(SectionHeading)`
+  padding: 10px;
   text-align: center;
   color: var(--font-color-sub-heading);
-  padding: 15px;
 `;
 
-const Wrapper = styled.div`
+const GridContainer = styled.div`
+  padding: 5px 0;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: auto 1fr;
   gap: 8px;
   place-items: center;
   justify-items: start;
-  padding: 5px 0;
 `;
 
 const Icon = styled.img`
   padding: 0 4px;
-`;
-
-const EditButton = styled(IconButton)`
-  position: absolute;
-  bottom: -40px;
-  right: 5px;
 `;
 
 const EmailContact = styled.a`
@@ -228,28 +247,14 @@ const Text = styled.p`
 `;
 
 const Message = styled.span`
+  padding: 0 15px;
   display: inline-block;
   text-align: center;
-  padding: 0 15px;
-`;
-
-const LogoutButton = styled(IconButton)`
-  position: absolute;
-  padding: 5px 10px;
-  top: 2px;
-  right: 0;
 `;
 
 const ArrowButton = styled(IconButton)`
-  position: absolute;
   padding: 5px 10px;
+  position: absolute;
   top: 9px;
   right: 0;
-`;
-
-const BackButton = styled(IconButton)`
-  position: absolute;
-  padding: 5px 10px;
-  top: 2px;
-  left: 0;
 `;

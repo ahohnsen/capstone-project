@@ -42,6 +42,6 @@ const Grid = styled.div`
 `;
 
 const Message = styled.span`
-  text-align: center;
   padding: 0 15px;
+  text-align: center;
 `;

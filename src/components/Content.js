@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 const Content = styled.main`
+  padding: 20px 0;
   width: 100%;
-  max-width: 500px;
-  padding: 20px 0 20px;
+  background-color: var(--bg-color-main);
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 0 auto;
 `;
 
 export default Content;

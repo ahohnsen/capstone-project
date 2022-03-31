@@ -125,8 +125,8 @@ export default function Request({
 
 const Container = styled.section`
   position: relative;
-  background-color: var(--bg-color-section);
   padding: 10px 15px;
+  background-color: var(--bg-color-section);
   box-shadow: 1px 1px 2px var(--color-boxshadow);
 `;
 
@@ -140,15 +140,15 @@ const ProfilePicture = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  box-shadow: 1px 1px 4px 1px var(--color-boxshadow);
   background: ${props => `url(${props.profileImage})`} no-repeat center center;
   background-size: cover;
+  box-shadow: 1px 1px 4px 1px var(--color-boxshadow);
 `;
 
 const TextWrapper = styled.div`
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
 `;
 const StyledLink = styled(Link)`
   font-size: 1rem;
@@ -158,19 +158,9 @@ const StyledLink = styled(Link)`
 `;
 
 const Text = styled.div`
+  padding: 2px 0;
   font-size: 0.9rem;
   color: var(--font-color-label);
-  padding: 2px 0;
-`;
-
-const TextDate = styled(Text)`
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-`;
-
-const TextLocation = styled(Text)`
-  grid-column: 2 / 3;
-  grid-row: 2/ 3;
 `;
 
 const Description = styled.p`
@@ -184,12 +174,6 @@ const Footer = styled.footer`
   grid-template-rows: 1fr 1fr;
 `;
 
-const CheckButton = styled(IconButton)`
-  grid-column: 3 / 4;
-  grid-row: 1 / 3;
-  padding: 10px;
-`;
-
 const Calendar = styled.img`
   margin: auto 3px;
   grid-column: 1;
@@ -199,4 +183,20 @@ const Calendar = styled.img`
 const Location = styled.img`
   grid-column: 1;
   grid-row: 2 / 3;
+`;
+
+const TextDate = styled(Text)`
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+`;
+
+const TextLocation = styled(Text)`
+  grid-column: 2 / 3;
+  grid-row: 2/ 3;
+`;
+
+const CheckButton = styled(IconButton)`
+  padding: 10px;
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
 `;

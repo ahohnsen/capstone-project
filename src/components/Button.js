@@ -13,9 +13,9 @@ const DefaultButton = styled(Button)`
   border-radius: 6px;
   background-color: var(--bg-color-action);
   box-shadow: 2px 2px 4px var(--color-boxshadow);
-  color: var(--font-color-action);
-  font-weight: 500;
   font-size: 1rem;
+  font-weight: 500;
+  color: var(--font-color-action);
 `;
 
 export { DefaultButton };

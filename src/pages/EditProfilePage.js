@@ -60,46 +60,50 @@ export default function EditProfilePage({
 
   return (
     <>
-      <BackgroundImageContainer
-        backgroundImage={
-          currentUserData.background
-            ? currentUserData.background
-            : BackgroundPlaceholder
-        }
-      >
-        <AbortButton onClick={() => navigate(-1)}>
-          <img src={ArrowBack} alt="abort editing" width="30" height="30" />
-        </AbortButton>
-        <BackgroundPictureUpload htmlFor="uploadBackgroundImage">
-          <img src={CameraIcon} alt="camera icon" width="30" height="30" />
-          <input
-            id="uploadBackgroundImage"
-            name="uploadBackgroundImage"
-            type="file"
-            accept="image/png, image/jpeg"
-            onChange={event => onUploadImage('background', event)}
-            hidden
-          />
-        </BackgroundPictureUpload>
-        <ProfileImageContainer>
-          <ProfileImage
-            profileImage={
-              currentUserData.photo ? currentUserData.photo : ProfilePlaceholder
-            }
-          />
-          <ProfilePictureUpload htmlFor="uploadProfileImage">
+      <Header>
+        <BackgroundImageContainer
+          backgroundImage={
+            currentUserData.background
+              ? currentUserData.background
+              : BackgroundPlaceholder
+          }
+        >
+          <AbortButton onClick={() => navigate(-1)}>
+            <img src={ArrowBack} alt="abort editing" width="30" height="30" />
+          </AbortButton>
+          <BackgroundPictureUpload htmlFor="uploadBackgroundImage">
             <img src={CameraIcon} alt="camera icon" width="30" height="30" />
             <input
-              id="uploadProfileImage"
-              name="uploadProfileImage"
+              id="uploadBackgroundImage"
+              name="uploadBackgroundImage"
               type="file"
               accept="image/png, image/jpeg"
-              onChange={event => onUploadImage('photo', event)}
+              onChange={event => onUploadImage('background', event)}
               hidden
             />
-          </ProfilePictureUpload>
-        </ProfileImageContainer>
-      </BackgroundImageContainer>
+          </BackgroundPictureUpload>
+          <ProfileImageContainer>
+            <ProfileImage
+              profileImage={
+                currentUserData.photo
+                  ? currentUserData.photo
+                  : ProfilePlaceholder
+              }
+            />
+            <ProfilePictureUpload htmlFor="uploadProfileImage">
+              <img src={CameraIcon} alt="camera icon" width="30" height="30" />
+              <input
+                id="uploadProfileImage"
+                name="uploadProfileImage"
+                type="file"
+                accept="image/png, image/jpeg"
+                onChange={event => onUploadImage('photo', event)}
+                hidden
+              />
+            </ProfilePictureUpload>
+          </ProfileImageContainer>
+        </BackgroundImageContainer>
+      </Header>
       <Content>
         <Form
           aria-label="edit your profile"
@@ -218,12 +222,17 @@ export default function EditProfilePage({
   );
 }
 
-const BackgroundImageContainer = styled.header`
+const Header = styled.header`
   position: relative;
-  height: 150px;
   width: 100%;
-  max-width: 500px;
-  margin-bottom: 90px;
+  height: 230px;
+  background-color: var(--bg-color-main);
+`;
+
+const BackgroundImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 150px;
   background: ${props => `url(${props.backgroundImage})`} no-repeat center
     center;
   background-size: cover;
@@ -245,19 +254,12 @@ const AbortButton = styled(IconButton)`
 
 const ProfileImageContainer = styled.div`
   position: absolute;
+  margin-bottom: 20px;
   width: 150px;
   height: 150px;
   top: 50%;
   left: 50%;
   transform: translate(-50%);
-`;
-
-const ProfilePictureUpload = styled.label`
-  position: absolute;
-  padding: 5px 10px;
-  bottom: 50%;
-  right: 0;
-  transform: translate(0, +50%);
 `;
 
 const ProfileImage = styled.div`
@@ -269,6 +271,14 @@ const ProfileImage = styled.div`
   border: 3px solid var(--bg-color-section);
   background: ${props => `url(${props.profileImage})`} no-repeat center center;
   background-size: cover;
+`;
+
+const ProfilePictureUpload = styled.label`
+  position: absolute;
+  padding: 5px 10px;
+  bottom: 50%;
+  right: 0;
+  transform: translate(0, +50%);
 `;
 
 const Form = styled.form`
