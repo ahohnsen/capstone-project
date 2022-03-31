@@ -89,8 +89,8 @@ const Heading = styled.h2`
 `;
 
 const BackButton = styled(IconButton)`
-  padding: 5px 10px;
+  padding: 10px;
   position: absolute;
-  top: 2px;
+  top: 5px;
   left: 5px;
 `;
