@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../components/MapboxGeocoderStyles.css';
+import ProfileHeader from '../components/ProfileHeader.js';
 import Content from '../components/Content.js';
 import { DefaultButton, IconButton } from '../components/Button.js';
 import ArrowBack from '../images/ArrowBackBackground.svg';
 import CameraIcon from '../images/Camera.svg';
 import DeleteIcon from '../images/DeleteIcon.svg';
-import BackgroundPlaceholder from '../images/BackgroundPlaceholder.jpg';
 import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 
 export default function EditProfilePage({
@@ -60,50 +60,40 @@ export default function EditProfilePage({
 
   return (
     <>
-      <Header>
-        <BackgroundImageContainer
-          backgroundImage={
-            currentUserData.background
-              ? currentUserData.background
-              : BackgroundPlaceholder
-          }
-        >
-          <AbortButton onClick={() => navigate(-1)}>
-            <img src={ArrowBack} alt="abort editing" width="30" height="30" />
-          </AbortButton>
-          <BackgroundPictureUpload htmlFor="uploadBackgroundImage">
+      <ProfileHeader backgroundImage={currentUserData?.background}>
+        <AbortButton onClick={() => navigate(-1)}>
+          <img src={ArrowBack} alt="abort editing" width="30" height="30" />
+        </AbortButton>
+        <BackgroundPictureUpload htmlFor="uploadBackgroundImage">
+          <img src={CameraIcon} alt="camera icon" width="30" height="30" />
+          <input
+            id="uploadBackgroundImage"
+            name="uploadBackgroundImage"
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={event => onUploadImage('background', event)}
+            hidden
+          />
+        </BackgroundPictureUpload>
+        <ProfileImageContainer>
+          <ProfileImage
+            profileImage={
+              currentUserData.photo ? currentUserData.photo : ProfilePlaceholder
+            }
+          />
+          <ProfilePictureUpload htmlFor="uploadProfileImage">
             <img src={CameraIcon} alt="camera icon" width="30" height="30" />
             <input
-              id="uploadBackgroundImage"
-              name="uploadBackgroundImage"
+              id="uploadProfileImage"
+              name="uploadProfileImage"
               type="file"
               accept="image/png, image/jpeg"
-              onChange={event => onUploadImage('background', event)}
+              onChange={event => onUploadImage('photo', event)}
               hidden
             />
-          </BackgroundPictureUpload>
-          <ProfileImageContainer>
-            <ProfileImage
-              profileImage={
-                currentUserData.photo
-                  ? currentUserData.photo
-                  : ProfilePlaceholder
-              }
-            />
-            <ProfilePictureUpload htmlFor="uploadProfileImage">
-              <img src={CameraIcon} alt="camera icon" width="30" height="30" />
-              <input
-                id="uploadProfileImage"
-                name="uploadProfileImage"
-                type="file"
-                accept="image/png, image/jpeg"
-                onChange={event => onUploadImage('photo', event)}
-                hidden
-              />
-            </ProfilePictureUpload>
-          </ProfileImageContainer>
-        </BackgroundImageContainer>
-      </Header>
+          </ProfilePictureUpload>
+        </ProfileImageContainer>
+      </ProfileHeader>
       <Content>
         <Form
           aria-label="edit your profile"
@@ -221,22 +211,6 @@ export default function EditProfilePage({
     </>
   );
 }
-
-const Header = styled.header`
-  position: relative;
-  width: 100%;
-  height: 230px;
-  background-color: var(--bg-color-main);
-`;
-
-const BackgroundImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 150px;
-  background: ${props => `url(${props.backgroundImage})`} no-repeat center
-    center;
-  background-size: cover;
-`;
 
 const BackgroundPictureUpload = styled.label`
   position: absolute;

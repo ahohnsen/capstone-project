@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
+import ProfileHeader from '../components/ProfileHeader.js';
 import Content from '../components/Content.js';
-import { IconButton } from '../components/Button.js';
 import Message from '../components/Message.js';
+import { IconButton } from '../components/Button.js';
 import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 import ArrowBack from '../images/ArrowBackBackground.svg';
@@ -13,7 +14,6 @@ import DivingLicenseIcon from '../images/DivingLicense.svg';
 import EmailIcon from '../images/Email.svg';
 import FacebookIcon from '../images/Facebook.svg';
 import EditIcon from '../images/EditIcon.svg';
-import BackgroundPlaceholder from '../images/BackgroundPlaceholder.jpg';
 import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 import { useEffect } from 'react';
 
@@ -40,22 +40,12 @@ export default function ProfilePage({ sortedPosts }) {
 
   return (
     <>
-      <Header>
-        <BackgroundImageContainer
-          backgroundImage={
-            userProfileData?.background
-              ? userProfileData?.background
-              : BackgroundPlaceholder
+      <ProfileHeader backgroundImage={userProfileData?.background}>
+        <ProfileImage
+          profileImage={
+            userProfileData?.photo ? userProfileData?.photo : ProfilePlaceholder
           }
-        >
-          <ProfileImage
-            profileImage={
-              userProfileData?.photo
-                ? userProfileData?.photo
-                : ProfilePlaceholder
-            }
-          />
-        </BackgroundImageContainer>
+        />
         {currentUserData?._id === userProfileData?._id ? (
           <>
             <LogoutButton onClick={logout}>
@@ -70,7 +60,7 @@ export default function ProfilePage({ sortedPosts }) {
             <img src={ArrowBack} alt="go back" />
           </BackButton>
         )}
-      </Header>
+      </ProfileHeader>
       <Content>
         <Username>{userProfileData?.fullname}</Username>
         <HomeLocation>
@@ -136,22 +126,6 @@ export default function ProfilePage({ sortedPosts }) {
   );
 }
 
-const Header = styled.header`
-  position: relative;
-  width: 100%;
-  height: 230px;
-  background-color: var(--bg-color-main);
-`;
-
-const BackgroundImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 150px;
-  background: ${props => `url(${props.backgroundImage})`} no-repeat center
-    center;
-  background-size: cover;
-`;
-
 const ProfileImage = styled.div`
   position: absolute;
   background-color: white;
@@ -169,7 +143,7 @@ const ProfileImage = styled.div`
 
 const EditButton = styled(IconButton)`
   position: absolute;
-  bottom: 40px;
+  bottom: -40px;
   right: 5px;
 `;
 
