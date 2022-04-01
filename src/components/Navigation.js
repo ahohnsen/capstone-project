@@ -70,7 +70,6 @@ const Nav = styled.nav`
 const StyledLink = styled(NavLink)`
   padding: 3px 0;
   width: 100%;
-  border-bottom: 3px solid var(--bg-color-section);
   text-align: center;
   text-decoration: none;
 `;

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
 import Content from '../components/Content.js';
 import { IconButton } from '../components/Button.js';
+import Message from '../components/Message.js';
 import ArrowForward from '../images/ArrowForward.svg';
 import LogoutIcon from '../images/LogoutIcon.svg';
 import ArrowBack from '../images/ArrowBackBackground.svg';
@@ -244,12 +245,6 @@ const FacebookContact = styled.a`
 
 const Text = styled.p`
   padding-bottom: 10px;
-`;
-
-const Message = styled.span`
-  padding: 0 15px;
-  display: inline-block;
-  text-align: center;
 `;
 
 const ArrowButton = styled(IconButton)`

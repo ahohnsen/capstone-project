@@ -7,6 +7,7 @@ import LoadingSpinner from '../components/LoadingSpinner.js';
 import Searchbar from '../components/Searchbar.js';
 import RequestsList from '../components/RequestsList.js';
 import BuddiesList from '../components/BuddiesList.js';
+import Message from '../components/Message.js';
 
 export default function SearchPage({
   sortedPosts,
@@ -102,10 +103,4 @@ const Header = styled.header`
 const Grid = styled.div`
   display: grid;
   gap: 10px;
-`;
-
-const Message = styled.span`
-  display: inline-block;
-  text-align: center;
-  padding: 0 15px;
 `;
