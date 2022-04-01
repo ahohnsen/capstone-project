@@ -9,6 +9,10 @@ No matter if you are an absolute beginner or an experienced diver, ScubaMate hel
 
 Have a look at the hosted version on Vercel: [ScubaMate Demo](https://capstone-project-ahohnsen.vercel.app/)
 
+
+![Screenshots_ScubaMate](https://user-images.githubusercontent.com/94636438/161307598-1471ff96-1ebe-4aba-975c-a744829e4dbb.jpg)
+
+
 ## Tech Stack
 
 - [React](https://reactjs.org)
