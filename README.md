@@ -9,9 +9,7 @@ No matter if you are an absolute beginner or an experienced diver, ScubaMate hel
 
 Have a look at the hosted version on Vercel: [ScubaMate Demo](https://capstone-project-ahohnsen.vercel.app/)
 
-
 ![Screenshots_ScubaMate](https://user-images.githubusercontent.com/94636438/161307598-1471ff96-1ebe-4aba-975c-a744829e4dbb.jpg)
-
 
 ## Tech Stack
 
@@ -26,7 +24,7 @@ Have a look at the hosted version on Vercel: [ScubaMate Demo](https://capstone-p
 - [MongoDB](https://cloud.mongodb.com)
 - [Vercel (serverless functions)](https://vercel.com/)
 - [Axios](https://www.npmjs.com/package/axios)
-- [Authentication with Firebase](https://firebase.google.com/firebase/authentication)
+- [Authentication with Firebase](https://firebase.google.com/docs/auth)
 - [Cloudinary](https://cloudinary.com)
 - [Mapbox Geocoder](https://www.mapbox.com/)
 
@@ -34,7 +32,7 @@ Have a look at the hosted version on Vercel: [ScubaMate Demo](https://capstone-p
 
 - Clone this repository
 - Install dependencies: `$ npm install`
-- Create a [Firebase](https://firebase.google.com/firebase/authentication) project
+- Create a [Firebase](https://firebase.google.com/docs/auth) project
 - Create a [MongoDB Atlas](https://cloud.mongodb.com) account and a new cluster
 - Create a [Cloudinary](https://cloudinary.com) account
 - Create a [Mapbox](https://www.mapbox.com/) account
