@@ -5,13 +5,12 @@ import { useForm } from 'react-hook-form';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../components/MapboxGeocoderStyles.css';
+import ProfileHeader from '../components/ProfileHeader.js';
 import Content from '../components/Content.js';
-import Button from '../components/Button.js';
-import IconButton from '../components/IconButton.js';
+import { DefaultButton, IconButton } from '../components/Button.js';
 import ArrowBack from '../images/ArrowBackBackground.svg';
 import CameraIcon from '../images/Camera.svg';
 import DeleteIcon from '../images/DeleteIcon.svg';
-import BackgroundPlaceholder from '../images/BackgroundPlaceholder.jpg';
 import ProfilePlaceholder from '../images/ProfilePlaceholder.jpg';
 
 export default function EditProfilePage({
@@ -61,13 +60,7 @@ export default function EditProfilePage({
 
   return (
     <>
-      <BackgroundImageContainer
-        backgroundImage={
-          currentUserData.background
-            ? currentUserData.background
-            : BackgroundPlaceholder
-        }
-      >
+      <ProfileHeader backgroundImage={currentUserData?.background}>
         <AbortButton onClick={() => navigate(-1)}>
           <img src={ArrowBack} alt="abort editing" width="30" height="30" />
         </AbortButton>
@@ -100,7 +93,7 @@ export default function EditProfilePage({
             />
           </ProfilePictureUpload>
         </ProfileImageContainer>
-      </BackgroundImageContainer>
+      </ProfileHeader>
       <Content>
         <Form
           aria-label="edit your profile"
@@ -219,17 +212,6 @@ export default function EditProfilePage({
   );
 }
 
-const BackgroundImageContainer = styled.header`
-  position: relative;
-  height: 150px;
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 90px;
-  background: ${props => `url(${props.backgroundImage})`} no-repeat center
-    center;
-  background-size: cover;
-`;
-
 const BackgroundPictureUpload = styled.label`
   position: absolute;
   padding: 5px 10px;
@@ -246,19 +228,12 @@ const AbortButton = styled(IconButton)`
 
 const ProfileImageContainer = styled.div`
   position: absolute;
+  margin-bottom: 20px;
   width: 150px;
   height: 150px;
   top: 50%;
   left: 50%;
   transform: translate(-50%);
-`;
-
-const ProfilePictureUpload = styled.label`
-  position: absolute;
-  padding: 5px 10px;
-  bottom: 50%;
-  right: 0;
-  transform: translate(0, +50%);
 `;
 
 const ProfileImage = styled.div`
@@ -270,6 +245,14 @@ const ProfileImage = styled.div`
   border: 3px solid var(--bg-color-section);
   background: ${props => `url(${props.profileImage})`} no-repeat center center;
   background-size: cover;
+`;
+
+const ProfilePictureUpload = styled.label`
+  position: absolute;
+  padding: 5px 10px;
+  bottom: 50%;
+  right: 0;
+  transform: translate(0, +50%);
 `;
 
 const Form = styled.form`
@@ -347,6 +330,6 @@ const ErrorMessage = styled.div`
   font-size: 0.8rem;
 `;
 
-const SubmitButton = styled(Button)`
+const SubmitButton = styled(DefaultButton)`
   opacity: ${props => (props.disabled ? '0.5' : '1')};
 `;

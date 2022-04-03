@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import './MapboxGeocoderStyles.css';
-import Button from './Button.js';
-import IconButton from './IconButton.js';
+import { DefaultButton, IconButton } from './Button.js';
 import DeleteIcon from '../images/DeleteIcon.svg';
 
 export default function RequestForm({
@@ -161,9 +160,9 @@ export default function RequestForm({
 }
 
 const Form = styled.form`
+  padding: 0 15px;
   display: grid;
   gap: 25px;
-  padding: 0 15px;
 `;
 
 const Container = styled.div`
@@ -183,8 +182,8 @@ const Label = styled.label`
   position: absolute;
   top: -13px;
   left: 15px;
-  color: var(--font-color-label);
   font-weight: 500;
+  color: var(--font-color-label);
 `;
 
 const Input = styled.input`
@@ -218,8 +217,7 @@ const DateInputEnd = styled(DateInputStart)`
 `;
 
 const Textarea = styled.textarea`
-  width: 100%;
-  height: 300px;
+  height: 235px;
   padding: 2px;
   border: 0;
 
@@ -228,6 +226,6 @@ const Textarea = styled.textarea`
   }
 `;
 
-const SubmitButton = styled(Button)`
+const SubmitButton = styled(DefaultButton)`
   opacity: ${props => (props.disabled ? '0.5' : '1')};
 `;

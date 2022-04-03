@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import RequestForm from '../components/RequestForm.js';
-import IconButton from '../components/IconButton.js';
+import { IconButton } from '../components/Button.js';
 import AbortIcon from '../images/Abort.svg';
 
 export default function EditRequestPage({ onEditPost, postToEdit }) {
@@ -31,7 +31,7 @@ export default function EditRequestPage({ onEditPost, postToEdit }) {
 
 const AbortButton = styled(IconButton)`
   position: absolute;
-  padding: 5px 10px;
-  top: 3px;
-  left: 10px;
+  padding: 10px;
+  top: 7px;
+  left: 13px;
 `;

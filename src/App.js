@@ -273,8 +273,11 @@ export default function App() {
 }
 
 const AppGrid = styled.div`
-  height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   justify-items: center;
+  height: 100vh;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 `;

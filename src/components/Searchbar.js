@@ -28,29 +28,32 @@ export default function Searchbar({ searchValue, onHandleSearchValue }) {
 
 const SearchbarContainer = styled.div`
   position: relative;
-`;
-const SearchIcon = styled.img`
-  position: absolute;
-  top: 7px;
-  left: 20px;
+  padding: 10px 20px;
+  width: 100%;
+  background-color: var(--bg-color-header);
 `;
 
 const Input = styled.input`
-  width: 90%;
-  margin: 0 20px;
-  padding: 0 2px 2px 30px;
-  font-size: 1.2rem;
-  font-weight: 300;
+  padding: 0 2px 2px 35px;
+  background-color: transparent;
   border: none;
   border-bottom: 1px solid white;
-  background-color: transparent;
+  font-size: 1.2rem;
+  font-weight: 300;
   color: var(--font-color-action);
 
   ::placeholder {
+    color: var(--font-color-action);
     opacity: 1;
   }
 
   &:focus {
     outline: none;
   }
+`;
+
+const SearchIcon = styled.img`
+  position: absolute;
+  top: 14px;
+  left: 25px;
 `;

@@ -20,12 +20,12 @@ export default function StartScreen() {
 }
 
 const Container = styled(Content)`
+  padding: 5px 5px 30px;
   display: grid;
-  gap: 5px;
   grid-template-rows: 1fr auto;
+  gap: 5px;
   justify-items: center;
   height: 100vh;
-  padding: 5px 5px 30px;
   background: url(${BackgroundImage}) no-repeat center center;
   background-size: cover;
 `;

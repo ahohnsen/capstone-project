@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
 import { useForm } from 'react-hook-form';
-import Button from './Button.js';
+import { DefaultButton } from './Button.js';
 
 export default function LoginSignupForm({ status }) {
   const { login, signup, error, isButtonDeactivated } = useAuth();
@@ -59,16 +59,16 @@ export default function LoginSignupForm({ status }) {
           {status === 'signup' ? 'SIGN UP' : 'LOGIN'}
         </SubmitButton>
         {status === 'signup' ? (
-          <StyledText>
+          <Text>
             Already have an account?
             <StyledLink to="/login"> Log in.</StyledLink>
-          </StyledText>
+          </Text>
         ) : (
           <>
-            <StyledText>
+            <Text>
               Need an account?
               <StyledLink to="/signup"> Create one.</StyledLink>
-            </StyledText>
+            </Text>
             <StyledLink to="/forgot-password">Forgot password?</StyledLink>
           </>
         )}
@@ -80,47 +80,51 @@ export default function LoginSignupForm({ status }) {
 const Form = styled.form`
   display: grid;
   gap: 4px;
-  width: 80%;
   padding: 15px;
+  width: 80%;
+  border-radius: 4px;
   background-color: var(--bg-color-form);
   box-shadow: 2px 2px 4px var(--bg-color-boxshadow);
-  border-radius: 4px;
 `;
 
 const Label = styled.label`
-  color: var(--font-color-action);
   font-weight: 400;
+  color: var(--font-color-action);
 `;
 
 const Input = styled.input`
-  width: 100%;
   padding: 7px;
+  width: 100%;
   border: 0;
   border-radius: 4px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
-const SubmitButton = styled(Button)`
-  width: 100%;
+const SubmitButton = styled(DefaultButton)`
   margin-top: 10px;
+  width: 100%;
 `;
 
 const StyledLink = styled(Link)`
-  color: var(--font-color-action);
   text-align: center;
+  color: var(--font-color-action);
 `;
 
-const StyledText = styled.span`
-  color: var(--font-color-action);
+const Text = styled.span`
   text-align: center;
+  color: var(--font-color-action);
 `;
 
 const ErrorMessage = styled.div`
   padding: 4px;
   width: 80%;
+  border-radius: 4px;
   background-color: rgba(255, 255, 255, 70%);
-  color: red;
+  text-align: center;
   font-size: 1rem;
   font-weight: 500;
-  text-align: center;
-  border-radius: 4px;
+  color: red;
 `;

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import Request from '../components/Request.js';
-import IconButton from '../components/IconButton.js';
+import { IconButton } from '../components/Button.js';
 import ArrowBack from '../images/ArrowBack.svg';
 
 export default function UserRequestsPage({
@@ -83,14 +83,14 @@ const Grid = styled.div`
 `;
 
 const Heading = styled.h2`
+  padding: 0 10px;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 0 10px;
 `;
 
 const BackButton = styled(IconButton)`
+  padding: 10px;
   position: absolute;
-  padding: 5px 10px;
-  top: 2px;
+  top: 5px;
   left: 5px;
 `;

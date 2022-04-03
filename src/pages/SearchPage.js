@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.js';
-import Header from '../components/Header.js';
 import SubHeader from '../components/SubHeader.js';
 import Content from '../components/Content.js';
 import LoadingSpinner from '../components/LoadingSpinner.js';
 import Searchbar from '../components/Searchbar.js';
 import RequestsList from '../components/RequestsList.js';
 import BuddiesList from '../components/BuddiesList.js';
+import Message from '../components/Message.js';
 
 export default function SearchPage({
   sortedPosts,
@@ -42,12 +42,12 @@ export default function SearchPage({
           searchValue={searchValue}
           onHandleSearchValue={handleSearchValue}
         />
-      </Header>
-      <StyledContent>
         <SubHeader
           searchCategory={searchCategory}
           onSwitchSearchCategory={switchSearchCategory}
         />
+      </Header>
+      <Content>
         {isLoading && <LoadingSpinner />}
         {hasError && (
           <Message>
@@ -80,7 +80,7 @@ export default function SearchPage({
               <BuddiesList users={users} searchValue={searchValue} />
             )}
         </Grid>
-      </StyledContent>
+      </Content>
     </>
   );
 
@@ -94,17 +94,13 @@ export default function SearchPage({
   }
 }
 
-const StyledContent = styled(Content)`
-  margin-top: 45px;
+const Header = styled.header`
+  width: 100%;
+  box-shadow: 0px 4px 4px var(--color-boxshadow);
+  z-index: 1;
 `;
 
 const Grid = styled.div`
   display: grid;
   gap: 10px;
-`;
-
-const Message = styled.span`
-  display: inline-block;
-  text-align: center;
-  padding: 0 15px;
 `;

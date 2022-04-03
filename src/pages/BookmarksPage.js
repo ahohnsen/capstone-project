@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Header from '../components/Header.js';
 import Content from '../components/Content.js';
 import RequestsList from '../components/RequestsList.js';
+import Message from '../components/Message.js';
 
 export default function BookmarksPage({
   bookmarkedPosts,
@@ -39,9 +40,4 @@ export default function BookmarksPage({
 const Grid = styled.div`
   display: grid;
   gap: 15px;
-`;
-
-const Message = styled.span`
-  text-align: center;
-  padding: 0 15px;
 `;

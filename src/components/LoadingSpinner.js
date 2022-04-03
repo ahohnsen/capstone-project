@@ -41,8 +41,8 @@ const SpinnerContainer = styled.div`
     position: absolute;
     width: 6px;
     height: 6px;
-    background: var(--bg-color-action);
     border-radius: 50%;
+    background: var(--bg-color-action);
     animation: ${Animation} 1.2s linear infinite;
   }
   div:nth-child(1) {
