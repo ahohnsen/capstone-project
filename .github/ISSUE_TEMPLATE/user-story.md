@@ -4,6 +4,7 @@ about: A classical user story template
 title: ''
 labels: enhancement
 assignees: ''
+
 ---
 
 ## Value Proposition
